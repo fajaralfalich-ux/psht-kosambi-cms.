@@ -221,19 +221,31 @@ export default function Home() {
         .modal-enter { animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
         @media (max-width: 768px) {
-          .hero-section { padding: 3rem 1.25rem !important; flex-direction: column !important; gap: 2rem !important; text-align: center !important; }
+          .hero-section { padding: 2.5rem 1rem !important; flex-direction: column !important; gap: 1.5rem !important; text-align: center !important; }
           .hero-content { text-align: center !important; max-width: 100% !important; }
-          .hero-title { font-size: 1.85rem !important; text-align: center !important; line-height: 1.2 !important; }
-          .hero-desc { font-size: 0.95rem !important; text-align: center !important; }
-          .hero-badges { justify-content: center !important; }
-          .btn-group { justify-content: center !important; }
-          .hero-image-wrapper { width: 100% !important; }
-          .hero-card-badge { padding: 2rem !important; }
-          .logo-image { width: 160px !important; height: 160px !important; }
-          .cards-grid { grid-template-columns: 1fr !important; }
-          .gallery-grid-4 { grid-template-columns: 1fr !important; }
-          .section-dark, .section-dark-alt { padding: 3rem 1.25rem !important; }
-          .section-title-light { font-size: 1.75rem !important; }
+          .hero-title { font-size: 1.65rem !important; text-align: center !important; line-height: 1.2 !important; }
+          .hero-desc { font-size: 0.9rem !important; text-align: center !important; margin-bottom: 1.25rem !important; }
+          .hero-badges { justify-content: center !important; margin-bottom: 1.25rem !important; gap: 0.5rem !important; }
+          .badge { padding: 0.35rem 0.75rem !important; font-size: 0.75rem !important; }
+          .btn-group { justify-content: center !important; gap: 0.75rem !important; }
+          .btnPrimary, .btnSecondary { padding: 0.7rem 1.25rem !important; font-size: 0.85rem !important; }
+          .hero-image-wrapper { width: 100% !important; margin-top: 0.5rem !important; }
+          .hero-card-badge { padding: 1.5rem !important; }
+          .logo-image { width: 130px !important; height: 130px !important; }
+          
+          /* Membuat grid kartu pilar & galeri lebih kompak/rapat di HP */
+          .cards-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
+          .cardDark { padding: 1rem !important; border-radius: 12px !important; }
+          .cardIcon { width: 38px !important; height: 38px !important; margin-bottom: 0.75rem !important; border-radius: 8px !important; }
+          .cardTitleLight { font-size: 0.95rem !important; margin-bottom: 0.3rem !important; }
+          .cardTextLight { font-size: 0.75rem !important; line-height: 1.4 !important; margin-bottom: 0.75rem !important; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+          .cardLinkText { font-size: 0.75rem !important; }
+
+          .gallery-grid-4 { grid-template-columns: 1fr !important; gap: 1rem !important; }
+          .section-dark, .section-dark-alt { padding: 2.5rem 1rem !important; }
+          .section-title-light { font-size: 1.4rem !important; }
+          .section-descLight { font-size: 0.9rem !important; }
+          .sectionHeader { margin-bottom: 1.75rem !important; }
           .gallery-header-flex { flex-direction: column !important; align-items: flex-start !important; gap: 1rem !important; }
         }
       `}</style>
@@ -255,10 +267,10 @@ export default function Home() {
             <span style={styles.badge} className="badge-pulse">📜 Bersertifikat</span>
           </div>
           <div style={styles.btnGroup} className="hero-btns-anim btn-group">
-            <button onClick={() => navigate('/pendaftaran')} style={styles.btnPrimary} className="btn-hover-effect">
+            <button onClick={() => navigate('/pendaftaran')} style={styles.btnPrimary} className="btn-hover-effect btnPrimary">
               Daftar <ArrowRight size={16} />
             </button>
-            <button onClick={() => navigate('/kegiatan')} style={styles.btnSecondary} className="btn-hover-effect">
+            <button onClick={() => navigate('/kegiatan')} style={styles.btnSecondary} className="btn-hover-effect btnSecondary">
               Jadwal
             </button>
           </div>
@@ -273,10 +285,10 @@ export default function Home() {
       {/* 2. TENTANG ORGANISASI */}
       <section id="profil" style={styles.sectionDark} className="section-dark">
         <div style={styles.sectionInner}>
-          <div style={styles.sectionHeader}>
+          <div style={styles.sectionHeader} className="sectionHeader">
             <span style={styles.sectionTagLight}>PILIHAN PENDIDIKAN & AJARAN</span>
             <h2 style={styles.sectionTitleLight} className="section-title-light">Nilai Luhur dan Karakter Utama PSHT</h2>
-            <p style={styles.sectionDescLight}>
+            <p style={styles.sectionDescLight} className="section-descLight">
               PSHT tidak hanya membangun ketangkasan fisik, tetapi juga membentuk mental berjiwa ksatria. Klik pada kartu di bawah untuk mengeksplorasi penjelasan mendalam setiap pilar.
             </p>
           </div>
@@ -287,15 +299,15 @@ export default function Home() {
                 <div 
                   key={key} 
                   style={styles.cardDark} 
-                  className="card-hover"
+                  className="card-hover cardDark"
                   onClick={() => setSelectedCard(item)}
                 >
-                  <div style={{ ...styles.cardIcon, backgroundColor: item.bg, color: item.color }}>
+                  <div style={{ ...styles.cardIcon, backgroundColor: item.bg, color: item.color }} className="cardIcon">
                     {item.icon}
                   </div>
-                  <h3 style={styles.cardTitleLight}>{item.title}</h3>
-                  <p style={styles.cardTextLight}>{item.desc}</p>
-                  <div style={styles.cardLinkText}>
+                  <h3 style={styles.cardTitleLight} className="cardTitleLight">{item.title}</h3>
+                  <p style={styles.cardTextLight} className="cardTextLight">{item.desc}</p>
+                  <div style={styles.cardLinkText} className="cardLinkText">
                     <span>Selengkapnya</span>
                     <ArrowRight size={14} />
                   </div>
@@ -313,7 +325,7 @@ export default function Home() {
             <div>
               <span style={styles.sectionTagLight}>DOKUMENTASI KEGIATAN</span>
               <h2 style={styles.sectionTitleLight} className="section-title-light">Galeri Aktivitas Ranting Kosambi</h2>
-              <p style={styles.sectionDescLight}>
+              <p style={styles.sectionDescLight} className="section-descLight">
                 Momen kebersamaan, latihan fisik, ujian kenaikan tingkat, hingga kejuaraan pencak silat.
               </p>
             </div>
@@ -385,10 +397,10 @@ export default function Home() {
       {/* 4. FAQ */}
       <section style={styles.sectionDark} className="section-dark">
         <div style={styles.sectionInner}>
-          <div style={styles.sectionHeader}>
+          <div style={styles.sectionHeader} className="sectionHeader">
             <span style={styles.sectionTagLight}>FAQ (TANYA JAWAB)</span>
             <h2 style={styles.sectionTitleLight} className="section-title-light">Pertanyaan yang Sering Diajukan</h2>
-            <p style={styles.sectionDescLight}>Temukan informasi penting seputar prosedur pendaftaran dan ketentuan latihan di ranting kami.</p>
+            <p style={styles.sectionDescLight} className="section-descLight">Temukan informasi penting seputar prosedur pendaftaran dan ketentuan latihan di ranting kami.</p>
           </div>
           <div style={styles.accordionContainer}>
             {[
@@ -706,7 +718,7 @@ const styles = {
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContext: 'center',
     cursor: 'pointer',
     zIndex: 10
   },
