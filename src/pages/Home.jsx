@@ -153,60 +153,60 @@ export default function Home() {
       <style>{`
         @keyframes floatEnhanced {
           0% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-10px) rotate(0.5deg); }
+          50% { transform: translateY(-8px) rotate(0.5deg); }
           100% { transform: translateY(0px) rotate(0deg); }
         }
         @keyframes pulseGlow {
-          0% { box-shadow: 0 15px 35px rgba(30, 58, 95, 0.4); }
-          50% { box-shadow: 0 20px 50px rgba(249, 115, 22, 0.2); }
-          100% { box-shadow: 0 15px 35px rgba(30, 58, 95, 0.4); }
+          0% { box-shadow: 0 10px 25px rgba(30, 58, 95, 0.4); }
+          50% { box-shadow: 0 15px 35px rgba(249, 115, 22, 0.2); }
+          100% { box-shadow: 0 10px 25px rgba(30, 58, 95, 0.4); }
         }
         @keyframes fadeInUp {
-          0% { opacity: 0; transform: translateY(25px); }
+          0% { opacity: 0; transform: translateY(20px); }
           100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes fadeInScale {
           0% { opacity: 0; transform: scale(0.96); }
           100% { opacity: 1; transform: scale(1); }
         }
-        .hero-title-anim { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .hero-desc-anim { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards; opacity: 0; }
-        .hero-badges-anim { animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
-        .hero-btns-anim { animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards; opacity: 0; }
+        .hero-title-anim { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .hero-desc-anim { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+        .hero-badges-anim { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; }
+        .hero-btns-anim { animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
         .logo-floating-box {
-          animation: floatEnhanced 4.5s ease-in-out infinite, pulseGlow 4.5s ease-in-out infinite;
+          animation: floatEnhanced 4s ease-in-out infinite, pulseGlow 4s ease-in-out infinite;
         }
-        .btn-hover-effect { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-hover-effect { transition: all 0.25s ease; }
         .btn-hover-effect:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 12px 25px rgba(249, 115, 22, 0.4);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
         }
         .card-hover {
-          transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: all 0.3s ease;
           border: 1px solid #1e3a5f;
         }
         .card-hover:hover {
-          transform: translateY(-6px);
+          transform: translateY(-4px);
           border-color: rgba(249, 115, 22, 0.6) !important;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
         .gallery-card {
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: all 0.3s ease;
           overflow: hidden;
           cursor: pointer;
           background-color: #162f4f;
-          border-radius: 20px;
+          border-radius: 16px;
           border: 1px solid #1e3a5f;
           display: flex;
           flex-direction: column;
           width: 100%;
         }
-        .gallery-card:hover img, .gallery-card:hover video { transform: scale(1.08); }
+        .gallery-card:hover img, .gallery-card:hover video { transform: scale(1.05); }
         .gallery-card:hover .gallery-overlay { opacity: 1; }
         .badge-pulse { 
-          transition: all 0.25s ease; 
+          transition: all 0.2s ease; 
           background: rgba(30, 58, 95, 0.6);
-          backdrop-filter: blur(8px);
+          backdrop-filter: blur(6px);
           border: 1px solid #1e3a5f;
           color: #e2e8f0;
         }
@@ -214,39 +214,40 @@ export default function Home() {
           background-color: #f97316 !important;
           color: #ffffff !important;
           border-color: #f97316 !important;
-          transform: translateY(-2px);
         }
-        .filter-btn { transition: all 0.25s ease; }
+        .filter-btn { transition: all 0.2s ease; }
         .filter-btn:hover { background-color: #1e3a5f; color: #ffffff; }
-        .modal-enter { animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .modal-enter { animation: fadeInScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
         @media (max-width: 768px) {
-          .hero-section { padding: 2.5rem 1rem !important; flex-direction: column !important; gap: 1.5rem !important; text-align: center !important; }
+          .hero-section { padding: 2rem 1rem !important; flex-direction: column !important; gap: 1.5rem !important; text-align: center !important; }
           .hero-content { text-align: center !important; max-width: 100% !important; }
-          .hero-title { font-size: 1.65rem !important; text-align: center !important; line-height: 1.2 !important; }
-          .hero-desc { font-size: 0.9rem !important; text-align: center !important; margin-bottom: 1.25rem !important; }
-          .hero-badges { justify-content: center !important; margin-bottom: 1.25rem !important; gap: 0.5rem !important; }
-          .badge { padding: 0.35rem 0.75rem !important; font-size: 0.75rem !important; }
-          .btn-group { justify-content: center !important; gap: 0.75rem !important; }
-          .btnPrimary, .btnSecondary { padding: 0.7rem 1.25rem !important; font-size: 0.85rem !important; }
-          .hero-image-wrapper { width: 100% !important; margin-top: 0.5rem !important; }
-          .hero-card-badge { padding: 1.5rem !important; }
-          .logo-image { width: 130px !important; height: 130px !important; }
+          .hero-title { font-size: 1.5rem !important; text-align: center !important; line-height: 1.25 !important; margin-bottom: 0.75rem !important; }
+          .hero-desc { font-size: 0.85rem !important; text-align: center !important; margin-bottom: 1rem !important; line-height: 1.5 !important; }
+          .hero-badges { justify-content: center !important; margin-bottom: 1rem !important; gap: 0.4rem !important; }
+          .badge { padding: 0.3rem 0.6rem !important; font-size: 0.7rem !important; }
+          .btn-group { justify-content: center !important; gap: 0.5rem !important; }
+          .btnPrimary, .btnSecondary { padding: 0.6rem 1.1rem !important; font-size: 0.8rem !important; }
           
-          /* Membuat grid kartu pilar & galeri lebih kompak/rapat di HP */
-          .cards-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
-          .cardDark { padding: 1rem !important; border-radius: 12px !important; }
-          .cardIcon { width: 38px !important; height: 38px !important; margin-bottom: 0.75rem !important; border-radius: 8px !important; }
-          .cardTitleLight { font-size: 0.95rem !important; margin-bottom: 0.3rem !important; }
-          .cardTextLight { font-size: 0.75rem !important; line-height: 1.4 !important; margin-bottom: 0.75rem !important; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-          .cardLinkText { font-size: 0.75rem !important; }
+          /* Pengaturan Logo Hero agar proporsional dan tidak memanjang ke bawah */
+          .hero-image-wrapper { width: 100% !important; display: flex !important; justify-content: center !important; margin-top: 0.2rem !important; }
+          .hero-card-badge { padding: 1rem !important; border-radius: 20px !important; max-width: 140px !important; margin: 0 auto !important; }
+          .logo-image { width: 100px !important; height: 100px !important; }
+          
+          /* Grid Kartu Pilar ringkas 2 kolom di HP */
+          .cards-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.6rem !important; }
+          .cardDark { padding: 0.85rem !important; border-radius: 12px !important; }
+          .cardIcon { width: 32px !important; height: 32px !important; margin-bottom: 0.5rem !important; border-radius: 6px !important; }
+          .cardTitleLight { font-size: 0.85rem !important; margin-bottom: 0.25rem !important; }
+          .cardTextLight { font-size: 0.7rem !important; line-height: 1.3 !important; margin-bottom: 0.5rem !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+          .cardLinkText { font-size: 0.7rem !important; }
 
           .gallery-grid-4 { grid-template-columns: 1fr !important; gap: 1rem !important; }
-          .section-dark, .section-dark-alt { padding: 2.5rem 1rem !important; }
-          .section-title-light { font-size: 1.4rem !important; }
-          .section-descLight { font-size: 0.9rem !important; }
-          .sectionHeader { margin-bottom: 1.75rem !important; }
-          .gallery-header-flex { flex-direction: column !important; align-items: flex-start !important; gap: 1rem !important; }
+          .section-dark, .section-dark-alt { padding: 2rem 1rem !important; }
+          .section-title-light { font-size: 1.25rem !important; }
+          .section-descLight { font-size: 0.85rem !important; }
+          .sectionHeader { margin-bottom: 1.25rem !important; }
+          .gallery-header-flex { flex-direction: column !important; align-items: flex-start !important; gap: 0.75rem !important; }
         }
       `}</style>
 
@@ -254,7 +255,7 @@ export default function Home() {
       <header id="beranda" style={styles.hero} className="hero-section">
         <div style={styles.heroContent} className="hero-content">
           <div style={styles.subHeadingWrapper}>
-            <Sparkles size={14} color="#fb923c" />
+            <Sparkles size={13} color="#fb923c" />
             <span style={styles.heroSubTag}>Situs Resmi PSHT Ranting Kosambi</span>
           </div>
           <h1 style={styles.heroTitle} className="hero-title-anim hero-title">Persaudaraan Setia Hati Terate</h1>
@@ -268,7 +269,7 @@ export default function Home() {
           </div>
           <div style={styles.btnGroup} className="hero-btns-anim btn-group">
             <button onClick={() => navigate('/pendaftaran')} style={styles.btnPrimary} className="btn-hover-effect btnPrimary">
-              Daftar <ArrowRight size={16} />
+              Daftar <ArrowRight size={15} />
             </button>
             <button onClick={() => navigate('/kegiatan')} style={styles.btnSecondary} className="btn-hover-effect btnSecondary">
               Jadwal
@@ -309,7 +310,7 @@ export default function Home() {
                   <p style={styles.cardTextLight} className="cardTextLight">{item.desc}</p>
                   <div style={styles.cardLinkText} className="cardLinkText">
                     <span>Selengkapnya</span>
-                    <ArrowRight size={14} />
+                    <ArrowRight size={13} />
                   </div>
                 </div>
               );
@@ -369,13 +370,13 @@ export default function Home() {
                       />
                     ) : (
                       <div style={styles.emptyCardPlaceholder}>
-                        <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Media belum tersedia</p>
+                        <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>Media belum tersedia</p>
                       </div>
                     )}
                     
                     <div className="gallery-overlay" style={styles.galleryOverlay}>
                       <div style={styles.playIconBadge}>
-                        {media.type === 'video' ? <Play size={24} fill="white" /> : <Eye size={24} />}
+                        {media.type === 'video' ? <Play size={22} fill="white" /> : <Eye size={22} />}
                       </div>
                     </div>
                     <span style={styles.mediaTypeTag}>
@@ -412,7 +413,7 @@ export default function Home() {
                 <div style={styles.accordionHeaderDark} onClick={() => toggleFaq(idx)}>
                   <span>{item.q}</span>
                   <div style={styles.chevronWrapper}>
-                    {activeFaq === idx ? <ChevronUp size={18} color="#fb923c" /> : <ChevronDown size={18} color="#94a3b8" />}
+                    {activeFaq === idx ? <ChevronUp size={16} color="#fb923c" /> : <ChevronDown size={16} color="#94a3b8" />}
                   </div>
                 </div>
                 {activeFaq === idx && <div style={styles.accordionBodyDark}>{item.a}</div>}
@@ -431,7 +432,7 @@ export default function Home() {
                 {selectedCard.icon}
               </div>
               <button onClick={() => setSelectedCard(null)} style={styles.closeIconButton}>
-                <X size={20} />
+                <X size={18} />
               </button>
             </div>
             <h2 style={styles.modalTitle}>{selectedCard.title}</h2>
@@ -452,7 +453,7 @@ export default function Home() {
             <div style={styles.mediaModalHeader}>
               <span style={styles.mediaModalCategory}>{selectedMedia.category}</span>
               <button onClick={() => setSelectedMedia(null)} style={styles.closeIconButton}>
-                <X size={20} />
+                <X size={18} />
               </button>
             </div>
             <h3 style={styles.mediaModalTitle}>{selectedMedia.title}</h3>
@@ -471,10 +472,10 @@ export default function Home() {
                   {selectedMedia.urls.length > 1 && (
                     <>
                       <button onClick={prevMediaItem} style={styles.sliderBtnLeft}>
-                        <ChevronLeft size={24} />
+                        <ChevronLeft size={22} />
                       </button>
                       <button onClick={nextMediaItem} style={styles.sliderBtnRight}>
-                        <ChevronRight size={24} />
+                        <ChevronRight size={22} />
                       </button>
                       <div style={styles.sliderCounter}>
                         {currentImageIndex + 1} / {selectedMedia.urls.length}
@@ -492,10 +493,10 @@ export default function Home() {
                   {selectedMedia.images.length > 1 && (
                     <>
                       <button onClick={prevMediaItem} style={styles.sliderBtnLeft}>
-                        <ChevronLeft size={24} />
+                        <ChevronLeft size={22} />
                       </button>
                       <button onClick={nextMediaItem} style={styles.sliderBtnRight}>
-                        <ChevronRight size={24} />
+                        <ChevronRight size={22} />
                       </button>
                       <div style={styles.sliderCounter}>
                         {currentImageIndex + 1} / {selectedMedia.images.length}
@@ -517,85 +518,85 @@ const styles = {
   container: { width: '100%', boxSizing: 'border-box' },
   hero: {
     background: 'linear-gradient(135deg, #09182c 0%, #0f2744 100%)',
-    padding: '6rem 4rem',
+    padding: '5rem 4rem',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexWrap: 'wrap',
-    gap: '3rem',
+    gap: '2.5rem',
     width: '100%',
     boxSizing: 'border-box',
     overflow: 'hidden',
     position: 'relative',
     borderBottom: '1px solid #1e3a5f'
   },
-  heroContent: { maxWidth: '750px', flex: 1 },
-  subHeadingWrapper: { display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' },
-  heroSubTag: { fontSize: '0.85rem', fontWeight: '700', color: '#fb923c', textTransform: 'uppercase', letterSpacing: '1px' },
-  heroTitle: { fontSize: '2.6rem', color: '#ffffff', fontWeight: '800', lineHeight: '1.2', marginBottom: '1.25rem' },
-  heroDesc: { color: '#94a3b8', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '2rem' },
-  heroBadges: { display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '2.25rem' },
-  badge: { padding: '0.5rem 1rem', borderRadius: '30px', fontSize: '0.85rem', fontWeight: '600', cursor: 'default' },
-  btnGroup: { display: 'flex', gap: '1rem', flexWrap: 'wrap' },
+  heroContent: { maxWidth: '720px', flex: 1 },
+  subHeadingWrapper: { display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.75rem' },
+  heroSubTag: { fontSize: '0.8rem', fontWeight: '700', color: '#fb923c', textTransform: 'uppercase', letterSpacing: '1px' },
+  heroTitle: { fontSize: '2.4rem', color: '#ffffff', fontWeight: '800', lineHeight: '1.2', marginBottom: '1rem' },
+  heroDesc: { color: '#94a3b8', fontSize: '1.05rem', lineHeight: '1.6', marginBottom: '1.75rem' },
+  heroBadges: { display: 'flex', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '1.75rem' },
+  badge: { padding: '0.4rem 0.9rem', borderRadius: '30px', fontSize: '0.8rem', fontWeight: '600', cursor: 'default' },
+  btnGroup: { display: 'flex', gap: '0.85rem', flexWrap: 'wrap' },
   btnPrimary: { 
     backgroundColor: '#c2410c', 
     color: 'white', 
-    padding: '0.85rem 1.75rem', 
+    padding: '0.75rem 1.5rem', 
     borderRadius: '10px', 
     fontWeight: '600', 
     border: 'none',
     cursor: 'pointer',
     display: 'inline-flex',
     alignItems: 'center',
-    gap: '0.5rem',
-    fontSize: '0.95rem',
-    boxShadow: '0 8px 20px rgba(194, 65, 12, 0.3)'
+    gap: '0.4rem',
+    fontSize: '0.9rem',
+    boxShadow: '0 6px 15px rgba(194, 65, 12, 0.3)'
   },
   btnSecondary: { 
     backgroundColor: '#162f4f', 
     color: '#ffffff', 
     border: '1px solid #1e3a5f', 
-    padding: '0.85rem 1.75rem', 
+    padding: '0.75rem 1.5rem', 
     borderRadius: '10px', 
     fontWeight: '600', 
     cursor: 'pointer',
     display: 'inline-block',
-    fontSize: '0.95rem'
+    fontSize: '0.9rem'
   },
   heroImageWrapper: { display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 },
   heroCardBadge: { 
     backgroundColor: '#162f4f', 
-    padding: '3.5rem', 
-    borderRadius: '30px', 
+    padding: '2.5rem', 
+    borderRadius: '24px', 
     display: 'flex', 
     justifyContent: 'center', 
     alignItems: 'center',
     border: '1px solid #1e3a5f',
-    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)'
+    boxShadow: '0 15px 35px rgba(0, 0, 0, 0.4)'
   },
-  logoImage: { width: '240px', height: '240px', objectFit: 'contain' },
-  sectionDark: { padding: '6rem 4rem', width: '100%', boxSizing: 'border-box', backgroundColor: '#0f2744' },
-  sectionDarkAlt: { padding: '6rem 4rem', width: '100%', boxSizing: 'border-box', backgroundColor: '#09182c', borderTop: '1px solid #1e3a5f', borderBottom: '1px solid #1e3a5f' },
+  logoImage: { width: '180px', height: '180px', objectFit: 'contain' },
+  sectionDark: { padding: '5rem 4rem', width: '100%', boxSizing: 'border-box', backgroundColor: '#0f2744' },
+  sectionDarkAlt: { padding: '5rem 4rem', width: '100%', boxSizing: 'border-box', backgroundColor: '#09182c', borderTop: '1px solid #1e3a5f', borderBottom: '1px solid #1e3a5f' },
   sectionInner: { maxWidth: '1300px', margin: '0 auto', width: '100%' },
-  sectionHeader: { marginBottom: '3rem', textAlign: 'left' },
-  sectionTagLight: { color: '#fb923c', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.5rem', display: 'block', letterSpacing: '1.5px' },
-  sectionTitleLight: { fontSize: '2.5rem', color: '#ffffff', fontWeight: '800', marginBottom: '0.75rem', lineHeight: '1.2' },
-  sectionDescLight: { color: '#94a3b8', fontSize: '1.05rem', maxWidth: '800px', lineHeight: '1.6' },
-  galleryHeaderFlex: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1.5rem' },
-  filterWrapper: { display: 'flex', gap: '0.5rem', backgroundColor: '#0f2744', padding: '0.35rem', borderRadius: '12px', border: '1px solid #1e3a5f' },
-  filterBtn: { backgroundColor: 'transparent', border: 'none', color: '#94a3b8', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '600', cursor: 'pointer' },
+  sectionHeader: { marginBottom: '2.5rem', textAlign: 'left' },
+  sectionTagLight: { color: '#fb923c', fontWeight: '700', fontSize: '0.75rem', marginBottom: '0.4rem', display: 'block', letterSpacing: '1.5px' },
+  sectionTitleLight: { fontSize: '2.2rem', color: '#ffffff', fontWeight: '800', marginBottom: '0.6rem', lineHeight: '1.2' },
+  sectionDescLight: { color: '#94a3b8', fontSize: '1rem', maxWidth: '750px', lineHeight: '1.6' },
+  galleryHeaderFlex: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1.25rem' },
+  filterWrapper: { display: 'flex', gap: '0.4rem', backgroundColor: '#0f2744', padding: '0.3rem', borderRadius: '10px', border: '1px solid #1e3a5f' },
+  filterBtn: { backgroundColor: 'transparent', border: 'none', color: '#94a3b8', padding: '0.4rem 0.9rem', borderRadius: '8px', fontSize: '0.8rem', fontWeight: '600', cursor: 'pointer' },
   filterBtnActive: { backgroundColor: '#c2410c', color: '#ffffff' },
-  cardsGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', width: '100%' },
-  galleryGrid4: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', width: '100%' },
-  cardDark: { backgroundColor: '#162f4f', borderRadius: '16px', padding: '2rem', cursor: 'pointer', display: 'flex', flexDirection: 'column' },
-  cardIcon: { width: '52px', height: '52px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' },
-  cardTitleLight: { fontSize: '1.2rem', color: '#ffffff', fontWeight: '700', marginBottom: '0.5rem' },
-  cardTextLight: { color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.6', flex: 1, marginBottom: '1.25rem' },
-  cardLinkText: { display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#fb923c', fontSize: '0.85rem', fontWeight: '600' },
+  cardsGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem', width: '100%' },
+  galleryGrid4: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.25rem', width: '100%' },
+  cardDark: { backgroundColor: '#162f4f', borderRadius: '14px', padding: '1.75rem', cursor: 'pointer', display: 'flex', flexDirection: 'column' },
+  cardIcon: { width: '46px', height: '46px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' },
+  cardTitleLight: { fontSize: '1.1rem', color: '#ffffff', fontWeight: '700', marginBottom: '0.4rem' },
+  cardTextLight: { color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.5', flex: 1, marginBottom: '1rem' },
+  cardLinkText: { display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#fb923c', fontSize: '0.8rem', fontWeight: '600' },
   galleryMediaWrapper: { 
     position: 'relative', 
     width: '100%', 
-    height: '240px', 
+    height: '220px', 
     overflow: 'hidden', 
     backgroundColor: '#070f1e' 
   },
@@ -603,7 +604,7 @@ const styles = {
     width: '100%', 
     height: '100%', 
     objectFit: 'cover', 
-    transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)' 
+    transition: 'transform 0.4s ease' 
   },
   emptyCardPlaceholder: {
     width: '100%',
@@ -614,18 +615,18 @@ const styles = {
     backgroundColor: '#070f1e',
     color: '#94a3b8'
   },
-  galleryOverlay: { position: 'absolute', inset: 0, backgroundColor: 'rgba(15, 23, 42, 0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0, transition: 'opacity 0.3s ease' },
-  playIconBadge: { width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#c2410c', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(194, 65, 12, 0.4)' },
-  mediaTypeTag: { position: 'absolute', top: '14px', left: '14px', backgroundColor: 'rgba(15, 23, 42, 0.8)', color: 'white', padding: '0.3rem 0.85rem', borderRadius: '20px', fontSize: '0.7rem', fontWeight: '600', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)' },
-  galleryMeta: { padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 },
-  galleryCategory: { color: '#fb923c', fontSize: '0.75rem', fontWeight: '700', marginBottom: '0.3rem', textTransform: 'uppercase', letterSpacing: '0.5px' },
-  galleryTitle: { fontSize: '1.1rem', color: '#ffffff', fontWeight: '800', marginBottom: '0.5rem' },
-  galleryDesc: { color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 },
-  accordionContainer: { display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', maxWidth: '900px' },
-  accordionItemDark: { backgroundColor: '#162f4f', borderRadius: '12px', overflow: 'hidden' },
-  accordionHeaderDark: { padding: '1.25rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontWeight: '700', color: '#ffffff', fontSize: '1rem' },
-  chevronWrapper: { backgroundColor: '#0f2744', padding: '6px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  accordionBodyDark: { padding: '0 1.5rem 1.25rem 1.5rem', color: '#94a3b8', fontSize: '0.95rem', lineHeight: '1.6' },
+  galleryOverlay: { position: 'absolute', inset: 0, backgroundColor: 'rgba(15, 23, 42, 0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0, transition: 'opacity 0.25s ease' },
+  playIconBadge: { width: '42px', height: '42px', borderRadius: '50%', backgroundColor: '#c2410c', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(194, 65, 12, 0.4)' },
+  mediaTypeTag: { position: 'absolute', top: '12px', left: '12px', backgroundColor: 'rgba(15, 23, 42, 0.8)', color: 'white', padding: '0.25rem 0.75rem', borderRadius: '20px', fontSize: '0.65rem', fontWeight: '600', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)' },
+  galleryMeta: { padding: '1.25rem', display: 'flex', flexDirection: 'column', flex: 1 },
+  galleryCategory: { color: '#fb923c', fontSize: '0.7rem', fontWeight: '700', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.5px' },
+  galleryTitle: { fontSize: '1rem', color: '#ffffff', fontWeight: '800', marginBottom: '0.4rem' },
+  galleryDesc: { color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.4', margin: 0 },
+  accordionContainer: { display: 'flex', flexDirection: 'column', gap: '0.85rem', width: '100%', maxWidth: '850px' },
+  accordionItemDark: { backgroundColor: '#162f4f', borderRadius: '10px', overflow: 'hidden' },
+  accordionHeaderDark: { padding: '1.1rem 1.35rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontWeight: '700', color: '#ffffff', fontSize: '0.95rem' },
+  chevronWrapper: { backgroundColor: '#0f2744', padding: '5px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  accordionBodyDark: { padding: '0 1.35rem 1.1rem 1.35rem', color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5' },
   modalOverlay: {
     position: 'fixed',
     top: 0,
@@ -642,9 +643,9 @@ const styles = {
   },
   modalContent: {
     backgroundColor: '#162f4f',
-    borderRadius: '20px',
-    padding: '2.5rem',
-    maxWidth: '700px',
+    borderRadius: '18px',
+    padding: '2rem',
+    maxWidth: '650px',
     width: '100%',
     maxHeight: '85vh',
     display: 'flex',
@@ -654,19 +655,19 @@ const styles = {
     border: '1px solid #1e3a5f',
     color: '#ffffff'
   },
-  modalHeaderTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' },
-  modalIconBox: { width: '56px', height: '56px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  closeIconButton: { backgroundColor: '#0f2744', border: '1px solid #1e3a5f', color: '#94a3b8', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' },
-  modalTitle: { fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', marginBottom: '1rem' },
-  modalTextScroll: { overflowY: 'auto', flex: 1, paddingRight: '0.5rem', marginBottom: '1.5rem' },
-  modalText: { color: '#cbd5e1', fontSize: '0.95rem', lineHeight: '1.8', whiteSpace: 'pre-line', margin: 0 },
-  modalActions: { display: 'flex', justifyContent: 'flex-end', paddingTop: '1rem', borderTop: '1px solid #1e3a5f' },
-  modalCloseBtn: { backgroundColor: '#c2410c', color: '#ffffff', border: 'none', padding: '0.65rem 1.5rem', borderRadius: '10px', fontWeight: '700', fontSize: '0.9rem', cursor: 'pointer' },
+  modalHeaderTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' },
+  modalIconBox: { width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  closeIconButton: { backgroundColor: '#0f2744', border: '1px solid #1e3a5f', color: '#94a3b8', width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' },
+  modalTitle: { fontSize: '1.35rem', fontWeight: '800', color: '#ffffff', marginBottom: '0.75rem' },
+  modalTextScroll: { overflowY: 'auto', flex: 1, paddingRight: '0.4rem', marginBottom: '1.25rem' },
+  modalText: { color: '#cbd5e1', fontSize: '0.9rem', lineHeight: '1.7', whiteSpace: 'pre-line', margin: 0 },
+  modalActions: { display: 'flex', justifyContent: 'flex-end', paddingTop: '0.85rem', borderTop: '1px solid #1e3a5f' },
+  modalCloseBtn: { backgroundColor: '#c2410c', color: '#ffffff', border: 'none', padding: '0.55rem 1.25rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer' },
   modalMediaContent: {
     backgroundColor: '#09182c',
-    borderRadius: '20px',
-    padding: '1.75rem',
-    maxWidth: '850px',
+    borderRadius: '18px',
+    padding: '1.5rem',
+    maxWidth: '800px',
     width: '100%',
     maxHeight: '90vh',
     display: 'flex',
@@ -675,31 +676,31 @@ const styles = {
     boxSizing: 'border-box',
     border: '1px solid #1e3a5f'
   },
-  mediaModalHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' },
-  mediaModalCategory: { fontSize: '0.75rem', fontWeight: '700', color: '#fb923c', textTransform: 'uppercase', letterSpacing: '1px' },
-  mediaModalTitle: { fontSize: '1.2rem', fontWeight: '800', color: '#ffffff', marginBottom: '1rem' },
+  mediaModalHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' },
+  mediaModalCategory: { fontSize: '0.7rem', fontWeight: '700', color: '#fb923c', textTransform: 'uppercase', letterSpacing: '1px' },
+  mediaModalTitle: { fontSize: '1.1rem', fontWeight: '800', color: '#ffffff', marginBottom: '0.75rem' },
   mediaDisplayWrapper: {
     position: 'relative',
     width: '100%',
-    height: '380px',
+    height: '340px',
     backgroundColor: '#000000',
-    borderRadius: '12px',
+    borderRadius: '10px',
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: '1rem'
+    marginBottom: '0.85rem'
   },
   modalFullImage: { maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' },
   modalVideoPlayer: { width: '100%', height: '100%', outline: 'none' },
   sliderBtnLeft: {
     position: 'absolute',
-    left: '12px',
+    left: '10px',
     backgroundColor: 'rgba(15, 23, 42, 0.7)',
     color: '#ffffff',
     border: '1px solid rgba(255, 255, 255, 0.1)',
-    width: '40px',
-    height: '40px',
+    width: '36px',
+    height: '36px',
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
@@ -709,29 +710,29 @@ const styles = {
   },
   sliderBtnRight: {
     position: 'absolute',
-    right: '12px',
+    right: '10px',
     backgroundColor: 'rgba(15, 23, 42, 0.7)',
     color: '#ffffff',
     border: '1px solid rgba(255, 255, 255, 0.1)',
-    width: '40px',
-    height: '40px',
+    width: '36px',
+    height: '36px',
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
-    justifyContext: 'center',
+    justifyContent: 'center',
     cursor: 'pointer',
     zIndex: 10
   },
   sliderCounter: {
     position: 'absolute',
-    bottom: '12px',
+    bottom: '10px',
     backgroundColor: 'rgba(15, 23, 42, 0.8)',
     color: '#ffffff',
-    padding: '0.3rem 0.75rem',
+    padding: '0.25rem 0.6rem',
     borderRadius: '20px',
-    fontSize: '0.75rem',
+    fontSize: '0.7rem',
     fontWeight: '600',
     border: '1px solid rgba(255, 255, 255, 0.1)'
   },
-  mediaModalDesc: { color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }
+  mediaModalDesc: { color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.4', margin: 0 }
 };
