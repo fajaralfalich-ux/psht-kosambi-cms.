@@ -55,7 +55,7 @@ export default function RegisterCMS() {
       id: Date.now(),
       name: formData.name,
       email: formData.email,
-      password: formData.password, // Simpan password (untuk kebutuhan CMS lokal)
+      password: formData.password,
       role: 'Admin Ranting',
       jabatan: 'Pelatih / Pengurus',
       status: 'Aktif',
@@ -76,40 +76,44 @@ export default function RegisterCMS() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a1b2a] flex flex-col justify-center items-center p-4 font-sans antialiased text-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 flex flex-col justify-center items-center p-4 font-sans antialiased text-slate-100 relative overflow-hidden">
       
+      {/* Efek Cahaya Latar Belakang Gradasi */}
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
       {/* Tombol Kembali ke Halaman Login */}
-      <div className="absolute top-6 left-6">
+      <div className="absolute top-6 left-6 z-10">
         <button 
           onClick={() => navigate('/admin/login')} 
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/80 text-slate-300 hover:bg-slate-800 hover:text-white border border-slate-800 transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-semibold bg-slate-900/80 text-slate-300 hover:bg-slate-800 hover:text-white border border-slate-800 transition-all cursor-pointer shadow-lg"
         >
-          <ArrowLeft size={15} className="text-[#c2410c]" />
+          <ArrowLeft size={15} className="text-orange-500" />
           <span>Kembali ke Login</span>
         </button>
       </div>
 
-      <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl p-8 relative overflow-hidden">
+      <div className="w-full max-w-md bg-slate-900/80 backdrop-blur-xl border border-slate-800/80 rounded-3xl shadow-2xl shadow-black/50 p-8 relative overflow-hidden z-10">
         
         {/* Aksen Gradien Atas */}
-        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#0a1b2a] via-[#c2410c] to-amber-500"></div>
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-orange-600 via-amber-500 to-indigo-600"></div>
 
         <div className="text-center mb-6 mt-2">
-          <div className="w-16 h-16 bg-[#c2410c] text-white rounded-2xl mx-auto flex items-center justify-center shadow-lg shadow-orange-950/50 mb-3">
+          <div className="w-16 h-16 bg-gradient-to-tr from-orange-600 to-amber-500 text-white rounded-2xl mx-auto flex items-center justify-center shadow-lg shadow-orange-950/50 mb-3 ring-4 ring-orange-500/20">
             <Shield size={32} />
           </div>
-          <h1 className="text-xl font-black tracking-wide text-white">PENDAFTARAN ADMIN CMS</h1>
-          <p className="text-xs text-slate-400 mt-1">PSHT Ranting Kosambi — Cabang Kota Tangerang</p>
+          <h1 className="text-xl font-extrabold tracking-wide text-white">PENDAFTARAN ADMIN CMS</h1>
+          <p className="text-xs text-slate-400 mt-1 font-medium">PSHT Ranting Kosambi — Cabang Kota Tangerang</p>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 text-red-400 text-xs rounded-xl text-center font-medium leading-relaxed">
+          <div className="mb-4 p-3.5 bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs rounded-2xl text-center font-semibold leading-relaxed">
             {error}
           </div>
         )}
 
         {success && (
-          <div className="mb-4 p-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs rounded-xl text-center font-medium flex items-center justify-center gap-2">
+          <div className="mb-4 p-3.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs rounded-2xl text-center font-semibold flex items-center justify-center gap-2">
             <CheckCircle2 size={16} /> Akun berhasil didaftarkan! Mengalihkan ke halaman login...
           </div>
         )}
@@ -122,7 +126,7 @@ export default function RegisterCMS() {
                 type="text" 
                 value={formData.name} 
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
-                className="w-full p-3.5 pl-10 rounded-xl text-sm bg-slate-950 border border-slate-700 text-white focus:outline-none focus:border-[#c2410c] transition-all" 
+                className="w-full p-3.5 pl-10 rounded-2xl text-sm bg-slate-950/60 border border-slate-700/80 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all shadow-inner" 
                 placeholder="Fajar Alfalich"
                 required 
               />
@@ -137,7 +141,7 @@ export default function RegisterCMS() {
                 type="email" 
                 value={formData.email} 
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
-                className="w-full p-3.5 pl-10 rounded-xl text-sm bg-slate-950 border border-slate-700 text-white focus:outline-none focus:border-[#c2410c] transition-all" 
+                className="w-full p-3.5 pl-10 rounded-2xl text-sm bg-slate-950/60 border border-slate-700/80 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all shadow-inner" 
                 placeholder="nama@psht.org"
                 required 
               />
@@ -152,7 +156,7 @@ export default function RegisterCMS() {
                 type={showPassword ? "text" : "password"} 
                 value={formData.password} 
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })} 
-                className="w-full p-3.5 pl-10 pr-10 rounded-xl text-sm bg-slate-950 border border-slate-700 text-white focus:outline-none focus:border-[#c2410c] transition-all" 
+                className="w-full p-3.5 pl-10 pr-10 rounded-2xl text-sm bg-slate-950/60 border border-slate-700/80 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all shadow-inner" 
                 placeholder="fajar@1922" 
                 required 
               />
@@ -165,7 +169,7 @@ export default function RegisterCMS() {
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
-            <p className="text-[10px] text-slate-400 mt-1">Harus mengandung huruf, angka, dan simbol (contoh: @, !, #, dll).</p>
+            <p className="text-[10px] text-slate-400 mt-1 font-medium">Harus mengandung huruf, angka, dan simbol (contoh: @, !, #, dll).</p>
           </div>
 
           <div>
@@ -175,7 +179,7 @@ export default function RegisterCMS() {
                 type={showConfirmPassword ? "text" : "password"} 
                 value={formData.confirmPassword} 
                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })} 
-                className="w-full p-3.5 pl-10 pr-10 rounded-xl text-sm bg-slate-950 border border-slate-700 text-white focus:outline-none focus:border-[#c2410c] transition-all" 
+                className="w-full p-3.5 pl-10 pr-10 rounded-2xl text-sm bg-slate-950/60 border border-slate-700/80 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all shadow-inner" 
                 placeholder="fajar@1922" 
                 required 
               />
@@ -193,7 +197,7 @@ export default function RegisterCMS() {
           <div className="pt-2">
             <button 
               type="submit" 
-              className="w-full bg-[#c2410c] hover:bg-orange-700 text-white font-bold p-3.5 rounded-xl cursor-pointer shadow-lg shadow-orange-950/50 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2 text-sm"
+              className="w-full bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-bold p-3.5 rounded-2xl cursor-pointer shadow-lg shadow-orange-950/50 hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-2 text-sm"
             >
               <CheckCircle2 size={18} /> Daftar Akun Admin
             </button>
