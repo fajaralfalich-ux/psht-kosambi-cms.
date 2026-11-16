@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import pshtLogo from '/flower.png';
 
 export default function Navbar() {
   const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const menuItems = [
     { path: '/', label: 'Beranda' },
@@ -51,6 +53,24 @@ export default function Navbar() {
               background-color: #ffffff !important;
               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
             }
+
+            /* Responsive Media Queries untuk Navbar */
+            @media (max-width: 900px) {
+              .desktop-menu-wrapper {
+                display: none !important;
+              }
+              .hamburger-btn {
+                display: flex !important;
+              }
+            }
+            @media (min-width: 901px) {
+              .desktop-menu-wrapper {
+                display: flex !important;
+              }
+              .hamburger-btn {
+                display: none !important;
+              }
+            }
           `}</style>
           
           <div className="marquee-wrapper">
@@ -91,7 +111,8 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div style={styles.menuWrapper}>
+          {/* Menu Desktop */}
+          <div className="desktop-menu-wrapper" style={styles.menuWrapper}>
             <ul style={styles.navMenu}>
               {menuItems.map((item, index) => {
                 const isActive = location.pathname === item.path;
@@ -108,8 +129,56 @@ export default function Navbar() {
               })}
             </ul>
           </div>
+
+          {/* Tombol Hamburger Mobile */}
+          <button 
+            className="hamburger-btn" 
+            onClick={() => setIsMobileMenuOpen(true)} 
+            style={styles.hamburgerBtn}
+            aria-label="Buka Menu"
+          >
+            <Menu size={24} color="#0f172a" />
+          </button>
         </div>
       </nav>
+
+      {/* Mobile Drawer Overlay & Sidebar */}
+      {isMobileMenuOpen && (
+        <div style={styles.mobileDrawerOverlay} onClick={() => setIsMobileMenuOpen(false)}>
+          <div style={styles.mobileDrawerContent} onClick={(e) => e.stopPropagation()}>
+            <div style={styles.mobileDrawerHeader}>
+              <div style={styles.brand}>
+                <div style={styles.logoWrapper}>
+                  <img src={pshtLogo} alt="Logo" style={styles.brandLogoImg} />
+                </div>
+                <div style={styles.brandText}>
+                  <span style={styles.brandTitle}>Menu Navigasi</span>
+                  <span style={styles.brandSub}>PSHT Ranting Kosambi</span>
+                </div>
+              </div>
+              <button onClick={() => setIsMobileMenuOpen(false)} style={styles.closeIconButton}>
+                <X size={20} color="#334155" />
+              </button>
+            </div>
+
+            <div style={styles.mobileDrawerLinks}>
+              {menuItems.map((item, index) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link 
+                    key={index}
+                    to={item.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    style={isActive ? { ...styles.mobileLink, ...styles.mobileLinkActive } : styles.mobileLink}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
@@ -163,7 +232,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '0.5rem 2.5rem',
+    padding: '0.5rem 1.5rem',
     maxWidth: '1500px',
     margin: '0 auto',
     width: '100%',
@@ -245,5 +314,77 @@ const styles = {
   },
   activeLink: {
     color: '#c2410c'
+  },
+  hamburgerBtn: {
+    display: 'none',
+    backgroundColor: '#f8fafc',
+    border: '1px solid #e2e8f0',
+    padding: '0.5rem',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  mobileDrawerOverlay: {
+    position: 'fixed',
+    inset: 0,
+    backgroundColor: 'rgba(15, 23, 42, 0.6)',
+    backdropFilter: 'blur(4px)',
+    zIndex: 2000,
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
+  mobileDrawerContent: {
+    width: '280px',
+    height: '100%',
+    backgroundColor: '#ffffff',
+    boxShadow: '-10px 0 30px rgba(0,0,0,0.1)',
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '1.25rem',
+    boxSizing: 'border-box'
+  },
+  mobileDrawerHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '1.5rem',
+    paddingBottom: '1rem',
+    borderBottom: '1px solid #e2e8f0'
+  },
+  closeIconButton: {
+    backgroundColor: '#f8fafc',
+    border: '1px solid #e2e8f0',
+    width: '34px',
+    height: '34px',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer'
+  },
+  mobileDrawerLinks: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+    flex: 1,
+    overflowY: 'auto'
+  },
+  mobileLink: {
+    textDecoration: 'none',
+    color: '#334155',
+    fontSize: '0.9rem',
+    fontWeight: '600',
+    padding: '0.75rem 1rem',
+    borderRadius: '8px',
+    backgroundColor: '#f8fafc',
+    border: '1px solid #e2e8f0',
+    transition: 'all 0.2s ease'
+  },
+  mobileLinkActive: {
+    backgroundColor: '#fff7ed',
+    color: '#c2410c',
+    borderColor: '#fed7aa',
+    fontWeight: '700'
   }
 };
