@@ -224,34 +224,54 @@ export default function Home() {
           transform: translateY(-2px);
         }
 
-        .filter-btn {
-          transition: all 0.25s ease;
-        }
-        .filter-btn:hover {
-          background-color: #1e3a5f;
-          color: #ffffff;
-        }
+        .filter-btn { transition: all 0.25s ease; }
+        .filter-btn:hover { background-color: #1e3a5f; color: #ffffff; }
 
         .modal-enter { animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* RESPONSIVE MEDIA QUERIES UNTUK HP & TABLET */
+        @media (max-width: 1024px) {
+          .hero-section { padding: 4rem 2rem !important; }
+          .hero-title { font-size: 2.2rem !important; white-space: normal !important; }
+          .gallery-grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+          .section-dark, .section-dark-alt { padding: 4rem 2rem !important; }
+        }
+
+        @media (max-width: 768px) {
+          .hero-section { padding: 3rem 1.25rem !important; flex-direction: column-reverse !important; text-align: center; }
+          .hero-content { maxWidth: 100% !important; }
+          .hero-title { font-size: 1.8rem !important; white-space: normal !important; }
+          .hero-desc { font-size: 1rem !important; }
+          .hero-badges { justify-content: center !important; }
+          .btn-group { justify-content: center !important; }
+          .hero-card-badge { padding: 2rem !important; margin-bottom: 1rem; }
+          .logo-image { width: 160px !important; height: 160px !important; }
+          .gallery-grid-4 { grid-template-columns: 1fr !important; }
+          .section-dark, .section-dark-alt { padding: 3rem 1.25rem !important; }
+          .section-title-light { font-size: 1.8rem !important; }
+          .gallery-header-flex { flex-direction: column; align-items: flex-start !important; }
+          .modal-content, .modal-media-content { padding: 1.5rem !important; margin: 1rem; width: 95% !important; }
+          .media-display-wrapper { height: 35vh !important; }
+        }
       `}</style>
 
       {/* 1. HERO SECTION */}
-      <header style={styles.hero}>
-        <div style={styles.heroContent}>
+      <header style={styles.hero} className="hero-section">
+        <div style={styles.heroContent} className="hero-content">
           <div style={styles.subHeadingWrapper}>
             <Sparkles size={16} color="#fb923c" />
             <span style={styles.heroSubTag}>Situs Resmi PSHT Ranting Kosambi</span>
           </div>
-          <h1 style={styles.heroTitle} className="hero-title-anim">Persaudaraan Setia Hati Terate</h1>
-          <p style={styles.heroDesc} className="hero-desc-anim">
+          <h1 style={styles.heroTitle} className="hero-title-anim hero-title">Persaudaraan Setia Hati Terate</h1>
+          <p style={styles.heroDesc} className="hero-desc-anim hero-desc">
             Mendidik manusia berbudi luhur, tahu benar dan salah, serta melestarikan seni bela diri tradisional pencak silat dengan semangat kekeluargaan yang tinggi.
           </p>
-          <div style={styles.heroBadges} className="hero-badges-anim">
+          <div style={styles.heroBadges} className="hero-badges-anim hero-badges">
             <span style={styles.badge} className="badge-pulse">✨ Terbuka untuk Umum</span>
             <span style={styles.badge} className="badge-pulse">🥋 Latihan Rutin 2x Seminggu</span>
             <span style={styles.badge} className="badge-pulse">📜 Pelatih Bersertifikat</span>
           </div>
-          <div style={styles.btnGroup} className="hero-btns-anim">
+          <div style={styles.btnGroup} className="hero-btns-anim btn-group">
             <a href="/pendaftaran" style={styles.btnPrimary} className="btn-hover-effect">
               Daftar Latihan Sekarang <ArrowRight size={18} />
             </a>
@@ -262,18 +282,18 @@ export default function Home() {
         </div>
 
         <div style={styles.heroImageWrapper}>
-          <div style={styles.heroCardBadge} className="logo-floating-box">
-            <img src={flowerLogo} alt="Logo Bunga PSHT" style={styles.logoImage} />
+          <div style={styles.heroCardBadge} className="logo-floating-box hero-card-badge">
+            <img src={flowerLogo} alt="Logo Bunga PSHT" style={styles.logoImage} className="logo-image" />
           </div>
         </div>
       </header>
 
       {/* 2. TENTANG ORGANISASI */}
-      <section style={styles.sectionDark}>
+      <section style={styles.sectionDark} className="section-dark">
         <div style={styles.sectionInner}>
           <div style={styles.sectionHeader}>
             <span style={styles.sectionTagLight}>PILIHAN PENDIDIKAN & AJARAN</span>
-            <h2 style={styles.sectionTitleLight}>Nilai Luhur dan Karakter Utama PSHT</h2>
+            <h2 style={styles.sectionTitleLight} className="section-title-light">Nilai Luhur dan Karakter Utama PSHT</h2>
             <p style={styles.sectionDescLight}>
               PSHT tidak hanya membangun ketangkasan fisik, tetapi juga membentuk mental berjiwa ksatria. Klik pada kartu di bawah untuk mengeksplorasi penjelasan mendalam setiap pilar.
             </p>
@@ -306,12 +326,12 @@ export default function Home() {
       </section>
 
       {/* 3. GALERI FOTO & VIDEO KEGIATAN */}
-      <section style={styles.sectionDarkAlt}>
+      <section style={styles.sectionDarkAlt} className="section-dark-alt">
         <div style={styles.sectionInner}>
-          <div style={styles.galleryHeaderFlex}>
+          <div style={styles.galleryHeaderFlex} className="gallery-header-flex">
             <div>
               <span style={styles.sectionTagLight}>DOKUMENTASI KEGIATAN</span>
-              <h2 style={styles.sectionTitleLight}>Galeri Aktivitas Ranting Kosambi</h2>
+              <h2 style={styles.sectionTitleLight} className="section-title-light">Galeri Aktivitas Ranting Kosambi</h2>
               <p style={styles.sectionDescLight}>
                 Momen kebersamaan, latihan fisik, ujian kenaikan tingkat, hingga kejuaraan pencak silat.
               </p>
@@ -335,7 +355,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div style={styles.galleryGrid4}>
+          <div style={styles.galleryGrid4} className="gallery-grid-4">
             {filteredGallery.map((media) => {
               const hasImages = media.type === 'photo' && media.images && media.images.length > 0;
               const hasVideos = media.type === 'video' && media.urls && media.urls.length > 0;
@@ -386,11 +406,11 @@ export default function Home() {
       </section>
 
       {/* 4. FAQ */}
-      <section style={styles.sectionDark}>
+      <section style={styles.sectionDark} className="section-dark">
         <div style={styles.sectionInner}>
           <div style={styles.sectionHeader}>
             <span style={styles.sectionTagLight}>FAQ (TANYA JAWAB)</span>
-            <h2 style={styles.sectionTitleLight}>Pertanyaan yang Sering Diajukan</h2>
+            <h2 style={styles.sectionTitleLight} className="section-title-light">Pertanyaan yang Sering Diajukan</h2>
             <p style={styles.sectionDescLight}>Temukan informasi penting seputar prosedur pendaftaran dan ketentuan latihan di ranting kami.</p>
           </div>
 
@@ -450,7 +470,7 @@ export default function Home() {
 
             <h3 style={styles.mediaModalTitle}>{selectedMedia.title}</h3>
 
-            <div style={styles.mediaDisplayWrapper}>
+            <div style={styles.mediaDisplayWrapper} className="media-display-wrapper">
               {selectedMedia.type === 'video' ? (
                 <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <video 
@@ -688,47 +708,8 @@ const styles = {
   mediaDisplayWrapper: { width: '100%', height: '50vh', backgroundColor: '#070f1e', borderRadius: '12px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', border: '1px solid #1e3a5f', position: 'relative' },
   modalFullImage: { width: '100%', height: '100%', objectFit: 'contain' },
   modalVideoPlayer: { width: '100%', height: '100%', maxHeight: '50vh', outline: 'none', objectFit: 'contain' },
-  mediaModalDesc: { fontSize: '0.95rem', color: '#94a3b8', lineHeight: '1.6', margin: 0 },
-  
-  sliderBtnLeft: {
-    position: 'absolute',
-    left: '12px',
-    backgroundColor: 'rgba(15, 23, 42, 0.8)',
-    color: '#ffffff',
-    border: '1px solid rgba(255,255,255,0.1)',
-    borderRadius: '50%',
-    width: '40px',
-    height: '40px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    zIndex: 10
-  },
-  sliderBtnRight: {
-    position: 'absolute',
-    right: '12px',
-    backgroundColor: 'rgba(15, 23, 42, 0.8)',
-    color: '#ffffff',
-    border: '1px solid rgba(255,255,255,0.1)',
-    borderRadius: '50%',
-    width: '40px',
-    height: '40px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    zIndex: 10
-  },
-  sliderCounter: {
-    position: 'absolute',
-    bottom: '12px',
-    backgroundColor: 'rgba(15, 23, 42, 0.85)',
-    color: '#ffffff',
-    padding: '0.25rem 0.75rem',
-    borderRadius: '20px',
-    fontSize: '0.75rem',
-    fontWeight: '600',
-    border: '1px solid rgba(255,255,255,0.1)'
-  }
+  mediaModalDesc: { color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 },
+  sliderBtnLeft: { position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', backgroundColor: 'rgba(15, 23, 42, 0.7)', border: '1px solid #1e3a5f', color: '#ffffff', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 10, backdropFilter: 'blur(4px)' },
+  sliderBtnRight: { position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', backgroundColor: 'rgba(15, 23, 42, 0.7)', border: '1px solid #1e3a5f', color: '#ffffff', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 10, backdropFilter: 'blur(4px)' },
+  sliderCounter: { position: 'absolute', bottom: '12px', right: '12px', backgroundColor: 'rgba(15, 23, 42, 0.8)', color: '#ffffff', padding: '0.25rem 0.75rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '600', backdropFilter: 'blur(4px)', border: '1px solid #1e3a5f' }
 };
