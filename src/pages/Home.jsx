@@ -220,8 +220,7 @@ export default function Home() {
         .modal-enter { animation: fadeInScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
         @media (max-width: 768px) {
-          /* Membalik urutan flex agar logo berada di paling atas khusus untuk HP */
-          .hero-section { padding: 2rem 1rem !important; flex-direction: column-reverse !important; gap: 1.5rem !important; text-align: left !important; }
+          .hero-section { padding: 2rem 1rem !important; flex-direction: column !important; gap: 1.25rem !important; text-align: left !important; }
           .hero-content { text-align: left !important; max-width: 100% !important; }
           .hero-title { font-size: 1.6rem !important; text-align: left !important; line-height: 1.2 !important; margin-bottom: 0.75rem !important; }
           .hero-desc { font-size: 0.9rem !important; text-align: left !important; margin-bottom: 1rem !important; line-height: 1.5 !important; }
@@ -230,10 +229,9 @@ export default function Home() {
           .btn-group { justify-content: flex-start !important; gap: 0.6rem !important; }
           .btnPrimary, .btnSecondary { padding: 0.65rem 1.25rem !important; font-size: 0.85rem !important; width: 48% !important; text-align: center !important; justify-content: center !important; }
           
-          /* Ukuran dan posisi logo di HP */
-          .hero-image-wrapper { width: 100% !important; display: flex !important; justify-content: center !important; margin-bottom: 0.5rem !important; }
-          .hero-card-badge { padding: 1.25rem !important; border-radius: 20px !important; max-width: 150px !important; margin: 0 auto !important; }
-          .logo-image { width: 100px !important; height: 100px !important; }
+          .hero-image-wrapper { width: 100% !important; display: flex !important; justify-content: center !important; margin-bottom: 0.2rem !important; }
+          .hero-card-badge { padding: 1.2rem !important; border-radius: 20px !important; max-width: 140px !important; margin: 0 auto !important; }
+          .logo-image { width: 95px !important; height: 95px !important; }
           
           .cards-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
           .cardDark { padding: 1rem !important; border-radius: 12px !important; }
@@ -251,7 +249,7 @@ export default function Home() {
         }
       `}</style>
 
-      {/* 1. HERO SECTION */}
+      {/* 1. HERO SECTION (Logo diletakkan di atas teks secara struktur HTML agar tampil paling atas di HP) */}
       <header id="beranda" style={styles.hero} className="hero-section">
         <div style={styles.heroImageWrapper} className="hero-image-wrapper">
           <div style={styles.heroCardBadge} className="logo-floating-box hero-card-badge">
