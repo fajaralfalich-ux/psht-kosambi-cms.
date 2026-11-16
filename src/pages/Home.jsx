@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Users, Shield, Award, ChevronDown, ChevronUp, Play, X, Eye, ArrowRight, Sparkles, ChevronLeft, ChevronRight, Menu } from 'lucide-react';
+import { BookOpen, Users, Shield, Award, ChevronDown, ChevronUp, Play, X, Eye, ArrowRight, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import flowerLogo from '/psht1.png';
 
 export default function Home() {
@@ -10,7 +10,6 @@ export default function Home() {
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [activeFilter, setActiveFilter] = useState('photo');
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleFaq = (index) => {
     setActiveFaq(activeFaq === index ? null : index);
@@ -64,8 +63,8 @@ export default function Home() {
     {
       id: 6,
       type: 'video',
-      title: 'Kegitan Latihan Gabungan & Silaturahim',
-      category: 'Kegitan Latihan Gabungan',
+      title: 'Kegiatan Latihan Gabungan & Silaturahim',
+      category: 'Kegiatan Latihan Gabungan',
       urls: ['/video2.mp4'], 
       desc: 'Kebersamaan anggota dan kontingen PSHT Ranting Kosambi dalam berbagai momentum kegiatan.'
     },
@@ -157,38 +156,31 @@ export default function Home() {
           50% { transform: translateY(-10px) rotate(0.5deg); }
           100% { transform: translateY(0px) rotate(0deg); }
         }
-
         @keyframes pulseGlow {
           0% { box-shadow: 0 15px 35px rgba(30, 58, 95, 0.4); }
           50% { box-shadow: 0 20px 50px rgba(249, 115, 22, 0.2); }
           100% { box-shadow: 0 15px 35px rgba(30, 58, 95, 0.4); }
         }
-
         @keyframes fadeInUp {
           0% { opacity: 0; transform: translateY(25px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeInScale {
           0% { opacity: 0; transform: scale(0.96); }
           100% { opacity: 1; transform: scale(1); }
         }
-
         .hero-title-anim { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .hero-desc-anim { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards; opacity: 0; }
         .hero-badges-anim { animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
         .hero-btns-anim { animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards; opacity: 0; }
-
         .logo-floating-box {
           animation: floatEnhanced 4.5s ease-in-out infinite, pulseGlow 4.5s ease-in-out infinite;
         }
-
         .btn-hover-effect { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .btn-hover-effect:hover {
           transform: translateY(-3px);
           box-shadow: 0 12px 25px rgba(249, 115, 22, 0.4);
         }
-
         .card-hover {
           transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
           border: 1px solid #1e3a5f;
@@ -198,7 +190,6 @@ export default function Home() {
           border-color: rgba(249, 115, 22, 0.6) !important;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
-
         .gallery-card {
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           overflow: hidden;
@@ -212,7 +203,6 @@ export default function Home() {
         }
         .gallery-card:hover img, .gallery-card:hover video { transform: scale(1.08); }
         .gallery-card:hover .gallery-overlay { opacity: 1; }
-
         .badge-pulse { 
           transition: all 0.25s ease; 
           background: rgba(30, 58, 95, 0.6);
@@ -226,99 +216,27 @@ export default function Home() {
           border-color: #f97316 !important;
           transform: translateY(-2px);
         }
-
         .filter-btn { transition: all 0.25s ease; }
         .filter-btn:hover { background-color: #1e3a5f; color: #ffffff; }
-
         .modal-enter { animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-
+        
         @media (max-width: 768px) {
           .hero-section { padding: 3rem 1.25rem !important; flex-direction: column !important; gap: 2rem !important; text-align: center !important; }
           .hero-content { text-align: center !important; max-width: 100% !important; }
-          .hero-title { font-size: 2rem !important; text-align: center !important; }
+          .hero-title { font-size: 1.85rem !important; text-align: center !important; line-height: 1.2 !important; }
           .hero-desc { font-size: 0.95rem !important; text-align: center !important; }
           .hero-badges { justify-content: center !important; }
           .btn-group { justify-content: center !important; }
           .hero-image-wrapper { width: 100% !important; }
           .hero-card-badge { padding: 2rem !important; }
           .logo-image { width: 160px !important; height: 160px !important; }
-
           .cards-grid { grid-template-columns: 1fr !important; }
           .gallery-grid-4 { grid-template-columns: 1fr !important; }
-          
           .section-dark, .section-dark-alt { padding: 3rem 1.25rem !important; }
           .section-title-light { font-size: 1.75rem !important; }
-          
           .gallery-header-flex { flex-direction: column !important; align-items: flex-start !important; gap: 1rem !important; }
-          
-          .desktop-menu { display: none !important; }
-          .hamburger-btn { display: flex !important; }
-        }
-        
-        @media (min-width: 769px) {
-          .desktop-menu { display: flex !important; }
-          .hamburger-btn { display: none !important; }
         }
       `}</style>
-
-      {/* 0. NAVBAR UTAMA */}
-      <nav style={styles.navbar}>
-        <div style={styles.navInner}>
-          <div style={styles.navBrand}>
-            <div style={styles.navBrandLogo}>
-              <Shield size={18} color="#ffffff" />
-            </div>
-            <div>
-              <span style={styles.navTitle}>PSHT Ranting Kosambi</span>
-              <span style={styles.navSubtitle}>Cabang Kota Tangerang</span>
-            </div>
-          </div>
-
-          <div className="desktop-menu" style={{ alignItems: 'center', gap: '1.5rem' }}>
-            <a href="#beranda" style={styles.navLink}>Beranda</a>
-            <a href="#profil" style={styles.navLink}>Profil</a>
-            <a href="#struktur" style={styles.navLink}>Struktur</a>
-            <a href="#kegiatan" style={styles.navLink}>Jadwal</a>
-            <button onClick={() => navigate('/admin/login')} style={styles.navLoginBtn}>
-              Login CMS
-            </button>
-          </div>
-
-          <button onClick={() => setIsMobileMenuOpen(true)} className="hamburger-btn" style={styles.hamburgerBtn}>
-            <Menu size={22} color="#ffffff" />
-          </button>
-        </div>
-      </nav>
-
-      {/* DRAWER MOBILE */}
-      {isMobileMenuOpen && (
-        <div style={styles.mobileDrawerOverlay} onClick={() => setIsMobileMenuOpen(false)}>
-          <div style={styles.mobileDrawerContent} onClick={(e) => e.stopPropagation()}>
-            <div style={styles.mobileDrawerHeader}>
-              <div style={styles.navBrand}>
-                <div style={styles.navBrandLogo}>
-                  <Shield size={16} color="#ffffff" />
-                </div>
-                <span style={styles.navTitle}>Menu Navigasi</span>
-              </div>
-              <button onClick={() => setIsMobileMenuOpen(false)} style={styles.closeIconButton}>
-                <X size={20} color="#ffffff" />
-              </button>
-            </div>
-            <div style={styles.mobileDrawerLinks}>
-              <a href="#beranda" onClick={() => setIsMobileMenuOpen(false)} style={styles.mobileLink}>Beranda</a>
-              <a href="#profil" onClick={() => setIsMobileMenuOpen(false)} style={styles.mobileLink}>Profil Organisasi</a>
-              <a href="#struktur" onClick={() => setIsMobileMenuOpen(false)} style={styles.mobileLink}>Struktur Kepengurusan</a>
-              <a href="#kegiatan" onClick={() => setIsMobileMenuOpen(false)} style={styles.mobileLink}>Jadwal Latihan</a>
-            </div>
-            <div style={styles.mobileDrawerFooter}>
-              <button onClick={() => { setIsMobileMenuOpen(false); navigate('/admin/login'); }} style={styles.mobileLoginBtn}>
-                Login CMS Admin
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* 1. HERO SECTION */}
       <header id="beranda" style={styles.hero} className="hero-section">
@@ -337,15 +255,14 @@ export default function Home() {
             <span style={styles.badge} className="badge-pulse">📜 Bersertifikat</span>
           </div>
           <div style={styles.btnGroup} className="hero-btns-anim btn-group">
-            <a href="/pendaftaran" style={styles.btnPrimary} className="btn-hover-effect btn-primary">
+            <button onClick={() => navigate('/pendaftaran')} style={styles.btnPrimary} className="btn-hover-effect">
               Daftar <ArrowRight size={16} />
-            </a>
-            <a href="/kegiatan" style={styles.btnSecondary} className="btn-hover-effect btn-secondary">
+            </button>
+            <button onClick={() => navigate('/kegiatan')} style={styles.btnSecondary} className="btn-hover-effect">
               Jadwal
-            </a>
+            </button>
           </div>
         </div>
-
         <div style={styles.heroImageWrapper} className="hero-image-wrapper">
           <div style={styles.heroCardBadge} className="logo-floating-box hero-card-badge">
             <img src={flowerLogo} alt="Logo Bunga PSHT" style={styles.logoImage} className="logo-image" />
@@ -363,7 +280,6 @@ export default function Home() {
               PSHT tidak hanya membangun ketangkasan fisik, tetapi juga membentuk mental berjiwa ksatria. Klik pada kartu di bawah untuk mengeksplorasi penjelasan mendalam setiap pilar.
             </p>
           </div>
-
           <div style={styles.cardsGrid} className="cards-grid">
             {Object.keys(cardDetails).map((key) => {
               const item = cardDetails[key];
@@ -401,7 +317,6 @@ export default function Home() {
                 Momen kebersamaan, latihan fisik, ujian kenaikan tingkat, hingga kejuaraan pencak silat.
               </p>
             </div>
-
             <div style={styles.filterWrapper}>
               <button 
                 onClick={() => setActiveFilter('photo')} 
@@ -419,7 +334,6 @@ export default function Home() {
               </button>
             </div>
           </div>
-
           <div style={styles.galleryGrid4} className="gallery-grid-4">
             {filteredGallery.map((media) => {
               const hasImages = media.type === 'photo' && media.images && media.images.length > 0;
@@ -452,12 +366,10 @@ export default function Home() {
                         {media.type === 'video' ? <Play size={24} fill="white" /> : <Eye size={24} />}
                       </div>
                     </div>
-
                     <span style={styles.mediaTypeTag}>
                       {media.type === 'video' ? `🎬 Video (${media.urls ? media.urls.length : 0})` : `📷 Foto (${media.images ? media.images.length : 0})`}
                     </span>
                   </div>
-
                   <div style={styles.galleryMeta}>
                     <span style={styles.galleryCategory}>{media.category}</span>
                     <h4 style={styles.galleryTitle}>{media.title}</h4>
@@ -478,7 +390,6 @@ export default function Home() {
             <h2 style={styles.sectionTitleLight} className="section-title-light">Pertanyaan yang Sering Diajukan</h2>
             <p style={styles.sectionDescLight}>Temukan informasi penting seputar prosedur pendaftaran dan ketentuan latihan di ranting kami.</p>
           </div>
-
           <div style={styles.accordionContainer}>
             {[
               { q: "Siapa saja yang boleh mendaftar latihan?", a: "Latihan PSHT terbuka untuk umum mulai dari usia anak-anak (SD/SMP), remaja (SMA/K), hingga dewasa tanpa batasan latar belakang." },
@@ -532,10 +443,8 @@ export default function Home() {
                 <X size={20} />
               </button>
             </div>
-
             <h3 style={styles.mediaModalTitle}>{selectedMedia.title}</h3>
-
-            <div style={styles.mediaDisplayWrapper} className="media-display-wrapper">
+            <div style={styles.mediaDisplayWrapper}>
               {selectedMedia.type === 'video' ? (
                 <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <video 
@@ -547,7 +456,6 @@ export default function Home() {
                     <source src={selectedMedia.urls[currentImageIndex]} type="video/mp4" />
                     Browser Anda tidak mendukung pemutaran video.
                   </video>
-
                   {selectedMedia.urls.length > 1 && (
                     <>
                       <button onClick={prevMediaItem} style={styles.sliderBtnLeft}>
@@ -569,7 +477,6 @@ export default function Home() {
                     alt={selectedMedia.title} 
                     style={styles.modalFullImage} 
                   />
-
                   {selectedMedia.images.length > 1 && (
                     <>
                       <button onClick={prevMediaItem} style={styles.sliderBtnLeft}>
@@ -586,7 +493,6 @@ export default function Home() {
                 </div>
               )}
             </div>
-
             <p style={styles.mediaModalDesc}>{selectedMedia.desc}</p>
           </div>
         </div>
@@ -597,139 +503,6 @@ export default function Home() {
 
 const styles = {
   container: { width: '100%', boxSizing: 'border-box' },
-  
-  navbar: {
-    position: 'sticky',
-    top: 0,
-    zIndex: 100,
-    backgroundColor: '#09182c',
-    borderBottom: '1px solid #1e3a5f',
-    padding: '0.85rem 2rem',
-    boxSizing: 'border-box',
-    width: '100%'
-  },
-  navInner: {
-    maxWidth: '1300px',
-    margin: '0 auto',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  navBrand: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.75rem'
-  },
-  navBrandLogo: {
-    backgroundColor: '#c2410c',
-    padding: '0.45rem',
-    borderRadius: '10px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxShadow: '0 4px 12px rgba(194, 65, 12, 0.3)'
-  },
-  navTitle: {
-    fontSize: '0.9rem',
-    fontWeight: '800',
-    color: '#ffffff',
-    display: 'block'
-  },
-  navSubtitle: {
-    fontSize: '0.7rem',
-    fontWeight: '600',
-    color: '#fb923c',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    display: 'block'
-  },
-  navLink: {
-    color: '#cbd5e1',
-    textDecoration: 'none',
-    fontSize: '0.85rem',
-    fontWeight: '600',
-    transition: 'color 0.2s'
-  },
-  navLoginBtn: {
-    backgroundColor: '#c2410c',
-    color: '#ffffff',
-    border: 'none',
-    padding: '0.5rem 1.1rem',
-    borderRadius: '8px',
-    fontSize: '0.8rem',
-    fontWeight: '700',
-    cursor: 'pointer',
-    boxShadow: '0 4px 12px rgba(194, 65, 12, 0.3)'
-  },
-  hamburgerBtn: {
-    backgroundColor: '#162f4f',
-    border: '1px solid #1e3a5f',
-    padding: '0.5rem',
-    borderRadius: '8px',
-    cursor: 'pointer',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  
-  mobileDrawerOverlay: {
-    position: 'fixed',
-    inset: 0,
-    backgroundColor: 'rgba(9, 24, 44, 0.85)',
-    backdropFilter: 'blur(6px)',
-    zIndex: 1000,
-    display: 'flex',
-    justifyContent: 'flex-end'
-  },
-  mobileDrawerContent: {
-    width: '280px',
-    height: '100%',
-    backgroundColor: '#0f2744',
-    borderLeft: '1px solid #1e3a5f',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '1.5rem',
-    boxSizing: 'border-box'
-  },
-  mobileDrawerHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '2rem',
-    paddingBottom: '1rem',
-    borderBottom: '1px solid #1e3a5f'
-  },
-  mobileDrawerLinks: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.75rem',
-    flex: 1
-  },
-  mobileLink: {
-    color: '#ffffff',
-    textDecoration: 'none',
-    fontSize: '0.95rem',
-    fontWeight: '600',
-    padding: '0.75rem 1rem',
-    borderRadius: '10px',
-    backgroundColor: '#162f4f',
-    border: '1px solid #1e3a5f'
-  },
-  mobileDrawerFooter: {
-    paddingTop: '1rem',
-    borderTop: '1px solid #1e3a5f'
-  },
-  mobileLoginBtn: {
-    width: '100%',
-    backgroundColor: '#c2410c',
-    color: '#ffffff',
-    border: 'none',
-    padding: '0.75rem',
-    borderRadius: '10px',
-    fontWeight: '700',
-    fontSize: '0.9rem',
-    cursor: 'pointer'
-  },
-
   hero: {
     background: 'linear-gradient(135deg, #09182c 0%, #0f2744 100%)',
     padding: '6rem 4rem',
@@ -758,7 +531,8 @@ const styles = {
     padding: '0.85rem 1.75rem', 
     borderRadius: '10px', 
     fontWeight: '600', 
-    textDecoration: 'none', 
+    border: 'none',
+    cursor: 'pointer',
     display: 'inline-flex',
     alignItems: 'center',
     gap: '0.5rem',
@@ -772,7 +546,7 @@ const styles = {
     padding: '0.85rem 1.75rem', 
     borderRadius: '10px', 
     fontWeight: '600', 
-    textDecoration: 'none',
+    cursor: 'pointer',
     display: 'inline-block',
     fontSize: '0.95rem'
   },
@@ -788,30 +562,24 @@ const styles = {
     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)'
   },
   logoImage: { width: '240px', height: '240px', objectFit: 'contain' },
-
   sectionDark: { padding: '6rem 4rem', width: '100%', boxSizing: 'border-box', backgroundColor: '#0f2744' },
   sectionDarkAlt: { padding: '6rem 4rem', width: '100%', boxSizing: 'border-box', backgroundColor: '#09182c', borderTop: '1px solid #1e3a5f', borderBottom: '1px solid #1e3a5f' },
   sectionInner: { maxWidth: '1300px', margin: '0 auto', width: '100%' },
-
   sectionHeader: { marginBottom: '3rem', textAlign: 'left' },
   sectionTagLight: { color: '#fb923c', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.5rem', display: 'block', letterSpacing: '1.5px' },
   sectionTitleLight: { fontSize: '2.5rem', color: '#ffffff', fontWeight: '800', marginBottom: '0.75rem', lineHeight: '1.2' },
   sectionDescLight: { color: '#94a3b8', fontSize: '1.05rem', maxWidth: '800px', lineHeight: '1.6' },
-
   galleryHeaderFlex: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1.5rem' },
   filterWrapper: { display: 'flex', gap: '0.5rem', backgroundColor: '#0f2744', padding: '0.35rem', borderRadius: '12px', border: '1px solid #1e3a5f' },
   filterBtn: { backgroundColor: 'transparent', border: 'none', color: '#94a3b8', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '600', cursor: 'pointer' },
   filterBtnActive: { backgroundColor: '#c2410c', color: '#ffffff' },
-
   cardsGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', width: '100%' },
   galleryGrid4: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', width: '100%' },
-
   cardDark: { backgroundColor: '#162f4f', borderRadius: '16px', padding: '2rem', cursor: 'pointer', display: 'flex', flexDirection: 'column' },
   cardIcon: { width: '52px', height: '52px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' },
   cardTitleLight: { fontSize: '1.2rem', color: '#ffffff', fontWeight: '700', marginBottom: '0.5rem' },
   cardTextLight: { color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.6', flex: 1, marginBottom: '1.25rem' },
   cardLinkText: { display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#fb923c', fontSize: '0.85rem', fontWeight: '600' },
-
   galleryMediaWrapper: { 
     position: 'relative', 
     width: '100%', 
@@ -841,13 +609,11 @@ const styles = {
   galleryCategory: { color: '#fb923c', fontSize: '0.75rem', fontWeight: '700', marginBottom: '0.3rem', textTransform: 'uppercase', letterSpacing: '0.5px' },
   galleryTitle: { fontSize: '1.1rem', color: '#ffffff', fontWeight: '800', marginBottom: '0.5rem' },
   galleryDesc: { color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 },
-
   accordionContainer: { display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', maxWidth: '900px' },
   accordionItemDark: { backgroundColor: '#162f4f', borderRadius: '12px', overflow: 'hidden' },
   accordionHeaderDark: { padding: '1.25rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontWeight: '700', color: '#ffffff', fontSize: '1rem' },
   chevronWrapper: { backgroundColor: '#0f2744', padding: '6px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' },
   accordionBodyDark: { padding: '0 1.5rem 1.25rem 1.5rem', color: '#94a3b8', fontSize: '0.95rem', lineHeight: '1.6' },
-
   modalOverlay: {
     position: 'fixed',
     top: 0,
@@ -884,7 +650,6 @@ const styles = {
   modalText: { color: '#cbd5e1', fontSize: '0.95rem', lineHeight: '1.8', whiteSpace: 'pre-line', margin: 0 },
   modalActions: { display: 'flex', justifyContent: 'flex-end', paddingTop: '1rem', borderTop: '1px solid #1e3a5f' },
   modalCloseBtn: { backgroundColor: '#c2410c', color: '#ffffff', border: 'none', padding: '0.65rem 1.5rem', borderRadius: '10px', fontWeight: '700', fontSize: '0.9rem', cursor: 'pointer' },
-
   modalMediaContent: {
     backgroundColor: '#09182c',
     borderRadius: '20px',
