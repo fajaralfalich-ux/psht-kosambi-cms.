@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { BookOpen, Users, Shield, Award, ChevronDown, ChevronUp, Play, X, Eye, ArrowRight, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { BookOpen, Users, Shield, Award, ChevronDown, ChevronUp, Play, X, Eye, ArrowRight, Sparkles, ChevronLeft, ChevronRight, Menu } from 'lucide-react';
 import flowerLogo from '/psht1.png';
 
 export default function Home() {
+  const navigate = useNavigate();
   const [activeFaq, setActiveFaq] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [activeFilter, setActiveFilter] = useState('photo');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleFaq = (index) => {
     setActiveFaq(activeFaq === index ? null : index);
@@ -229,34 +232,88 @@ export default function Home() {
 
         .modal-enter { animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-        /* PENGATURAN AGAR HP MENYERUPAI LAPTOP (GRID 2 KOLOM & TAMPILAN KOMPAK) */
         @media (max-width: 768px) {
-          .hero-section { padding: 2.5rem 1.5rem !important; flex-direction: row !important; gap: 1.5rem !important; align-items: center !important; }
-          .hero-content { text-align: left !important; flex: 1.2 !important; }
-          .hero-title { font-size: 1.5rem !important; line-height: 1.2 !important; text-align: left !important; }
-          .hero-desc { font-size: 0.85rem !important; line-height: 1.5 !important; text-align: left !important; margin-bottom: 1rem !important; }
-          .hero-badges { justify-content: flex-start !important; gap: 0.4rem !important; margin-bottom: 1rem !important; }
-          .badge { padding: 0.3rem 0.6rem !important; font-size: 0.7rem !important; }
-          .btn-group { justify-content: flex-start !important; gap: 0.5rem !important; }
-          .btn-primary, .btn-secondary { width: auto !important; padding: 0.6rem 1rem !important; font-size: 0.8rem !important; }
-          .hero-image-wrapper { flex: 0.8 !important; }
-          .hero-card-badge { padding: 1.2rem !important; border-radius: 20px !important; }
-          .logo-image { width: 100px !important; height: 100px !important; }
+          .hero-section { padding: 3rem 1.25rem !important; flex-direction: column !important; gap: 2rem !important; text-align: center !important; }
+          .hero-content { text-align: center !important; max-width: 100% !important; }
+          .hero-title { font-size: 2rem !important; text-align: center !important; }
+          .hero-desc { font-size: 0.95rem !important; text-align: center !important; }
+          .hero-badges { justify-content: center !important; }
+          .btn-group { justify-content: center !important; }
+          .hero-image-wrapper { width: 100% !important; }
+          .hero-card-badge { padding: 2rem !important; }
+          .logo-image { width: 160px !important; height: 160px !important; }
 
-          /* Kartu Pilihan & Galeri Dibuat 2 Kolom di HP agar seperti Desktop */
-          .cards-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1rem !important; }
-          .gallery-grid-4 { grid-template-columns: repeat(2, 1fr) !important; gap: 1rem !important; }
+          .cards-grid { grid-template-columns: 1fr !important; }
+          .gallery-grid-4 { grid-template-columns: 1fr !important; }
           
           .section-dark, .section-dark-alt { padding: 3rem 1.25rem !important; }
-          .section-title-light { font-size: 1.5rem !important; }
-          .section-desc-light { font-size: 0.9rem !important; }
+          .section-title-light { font-size: 1.75rem !important; }
           
-          .gallery-header-flex { flex-direction: row !important; align-items: center !important; justify-content: space-between !important; }
+          .gallery-header-flex { flex-direction: column !important; align-items: flex-start !important; gap: 1rem !important; }
         }
       `}</style>
 
+      {/* 0. NAVBAR UTAMA */}
+      <nav style={styles.navbar}>
+        <div style={styles.navInner}>
+          <div style={styles.navBrand}>
+            <div style={styles.navBrandLogo}>
+              <Shield size={18} color="#ffffff" />
+            </div>
+            <div>
+              <span style={styles.navTitle}>PSHT Ranting Kosambi</span>
+              <span style={styles.navSubtitle}>Cabang Kota Tangerang</span>
+            </div>
+          </div>
+
+          <div style={styles.navMenuDesktop}>
+            <a href="#beranda" style={styles.navLink}>Beranda</a>
+            <a href="#profil" style={styles.navLink}>Profil</a>
+            <a href="#struktur" style={styles.navLink}>Struktur</a>
+            <a href="#kegiatan" style={styles.navLink}>Jadwal</a>
+            <button onClick={() => navigate('/admin/login')} style={styles.navLoginBtn}>
+              Login CMS
+            </button>
+          </div>
+
+          <button onClick={() => setIsMobileMenuOpen(true)} style={styles.hamburgerBtn}>
+            <Menu size={22} color="#ffffff" />
+          </button>
+        </div>
+      </nav>
+
+      {/* DRAWER MOBILE */}
+      {isMobileMenuOpen && (
+        <div style={styles.mobileDrawerOverlay} onClick={() => setIsMobileMenuOpen(false)}>
+          <div style={styles.mobileDrawerContent} onClick={(e) => e.stopPropagation()}>
+            <div style={styles.mobileDrawerHeader}>
+              <div style={styles.navBrand}>
+                <div style={styles.navBrandLogo}>
+                  <Shield size={16} color="#ffffff" />
+                </div>
+                <span style={styles.navTitle}>Menu Navigasi</span>
+              </div>
+              <button onClick={() => setIsMobileMenuOpen(false)} style={styles.closeIconButton}>
+                <X size={20} color="#ffffff" />
+              </button>
+            </div>
+            <div style={styles.mobileDrawerLinks}>
+              <a href="#beranda" onClick={() => setIsMobileMenuOpen(false)} style={styles.mobileLink}>Beranda</a>
+              <a href="#profil" onClick={() => setIsMobileMenuOpen(false)} style={styles.mobileLink}>Profil Organisasi</a>
+              <a href="#struktur" onClick={() => setIsMobileMenuOpen(false)} style={styles.mobileLink}>Struktur Kepengurusan</a>
+              <a href="#kegiatan" onClick={() => setIsMobileMenuOpen(false)} style={styles.mobileLink}>Jadwal Latihan</a>
+            </div>
+            <div style={styles.mobileDrawerFooter}>
+              <button onClick={() => { setIsMobileMenuOpen(false); navigate('/admin/login'); }} style={styles.mobileLoginBtn}>
+                Login CMS Admin
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* 1. HERO SECTION */}
-      <header style={styles.hero} className="hero-section">
+      <header id="beranda" style={styles.hero} className="hero-section">
         <div style={styles.heroContent} className="hero-content">
           <div style={styles.subHeadingWrapper}>
             <Sparkles size={14} color="#fb923c" />
@@ -289,7 +346,7 @@ export default function Home() {
       </header>
 
       {/* 2. TENTANG ORGANISASI */}
-      <section style={styles.sectionDark} className="section-dark">
+      <section id="profil" style={styles.sectionDark} className="section-dark">
         <div style={styles.sectionInner}>
           <div style={styles.sectionHeader}>
             <span style={styles.sectionTagLight}>PILIHAN PENDIDIKAN & AJARAN</span>
@@ -326,7 +383,7 @@ export default function Home() {
       </section>
 
       {/* 3. GALERI FOTO & VIDEO KEGIATAN */}
-      <section style={styles.sectionDarkAlt} className="section-dark-alt">
+      <section id="kegiatan" style={styles.sectionDarkAlt} className="section-dark-alt">
         <div style={styles.sectionInner}>
           <div style={styles.galleryHeaderFlex} className="gallery-header-flex">
             <div>
@@ -533,6 +590,150 @@ export default function Home() {
 const styles = {
   container: { width: '100%', boxSizing: 'border-box' },
   
+  navbar: {
+    position: 'sticky',
+    top: 0,
+    zIndex: 100,
+    backgroundColor: '#09182c',
+    borderBottom: '1px solid #1e3a5f',
+    padding: '0.85rem 2rem',
+    boxSizing: 'border-box',
+    width: '100%'
+  },
+  navInner: {
+    maxWidth: '1300px',
+    margin: '0 auto',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  navBrand: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.75rem'
+  },
+  navBrandLogo: {
+    backgroundColor: '#c2410c',
+    padding: '0.45rem',
+    borderRadius: '10px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0 4px 12px rgba(194, 65, 12, 0.3)'
+  },
+  navTitle: {
+    fontSize: '0.9rem',
+    fontWeight: '800',
+    color: '#ffffff',
+    display: 'block'
+  },
+  navSubtitle: {
+    fontSize: '0.7rem',
+    fontWeight: '600',
+    color: '#fb923c',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px',
+    display: 'block'
+  },
+  navMenuDesktop: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1.5rem',
+    '@media (max-width: 768px)': {
+      display: 'none'
+    }
+  },
+  navLink: {
+    color: '#cbd5e1',
+    textDecoration: 'none',
+    fontSize: '0.85rem',
+    fontWeight: '600',
+    transition: 'color 0.2s'
+  },
+  navLoginBtn: {
+    backgroundColor: '#c2410c',
+    color: '#ffffff',
+    border: 'none',
+    padding: '0.5rem 1.1rem',
+    borderRadius: '8px',
+    fontSize: '0.8rem',
+    fontWeight: '700',
+    cursor: 'pointer',
+    boxShadow: '0 4px 12px rgba(194, 65, 12, 0.3)'
+  },
+  hamburgerBtn: {
+    display: 'none',
+    backgroundColor: '#162f4f',
+    border: '1px solid #1e3a5f',
+    padding: '0.5rem',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    '@media (max-width: 768px)': {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  },
+  
+  mobileDrawerOverlay: {
+    position: 'fixed',
+    inset: 0,
+    backgroundColor: 'rgba(9, 24, 44, 0.85)',
+    backdropFilter: 'blur(6px)',
+    zIndex: 1000,
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
+  mobileDrawerContent: {
+    width: '280px',
+    height: '100%',
+    backgroundColor: '#0f2744',
+    borderLeft: '1px solid #1e3a5f',
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '1.5rem',
+    boxSizing: 'border-box'
+  },
+  mobileDrawerHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '2rem',
+    paddingBottom: '1rem',
+    borderBottom: '1px solid #1e3a5f'
+  },
+  mobileDrawerLinks: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.75rem',
+    flex: 1
+  },
+  mobileLink: {
+    color: '#ffffff',
+    textDecoration: 'none',
+    fontSize: '0.95rem',
+    fontWeight: '600',
+    padding: '0.75rem 1rem',
+    borderRadius: '10px',
+    backgroundColor: '#162f4f',
+    border: '1px solid #1e3a5f'
+  },
+  mobileDrawerFooter: {
+    paddingTop: '1rem',
+    borderTop: '1px solid #1e3a5f'
+  },
+  mobileLoginBtn: {
+    width: '100%',
+    backgroundColor: '#c2410c',
+    color: '#ffffff',
+    border: 'none',
+    padding: '0.75rem',
+    borderRadius: '10px',
+    fontWeight: '700',
+    fontSize: '0.9rem',
+    cursor: 'pointer'
+  },
+
   hero: {
     background: 'linear-gradient(135deg, #09182c 0%, #0f2744 100%)',
     padding: '6rem 4rem',
@@ -679,37 +880,85 @@ const styles = {
     border: '1px solid #1e3a5f',
     color: '#ffffff'
   },
-  modalHeaderTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' },
-  modalIconBox: { width: '52px', height: '52px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
-  closeIconButton: { backgroundColor: '#0f2744', border: '1px solid #1e3a5f', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#94a3b8' },
-  modalTitle: { fontSize: '1.5rem', color: '#ffffff', fontWeight: '800', margin: '0 0 1rem 0', flexShrink: 0 },
+  modalHeaderTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' },
+  modalIconBox: { width: '56px', height: '56px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  closeIconButton: { backgroundColor: '#0f2744', border: '1px solid #1e3a5f', color: '#94a3b8', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' },
+  modalTitle: { fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', marginBottom: '1rem' },
   modalTextScroll: { overflowY: 'auto', flex: 1, paddingRight: '0.5rem', marginBottom: '1.5rem' },
-  modalText: { fontSize: '0.95rem', color: '#94a3b8', lineHeight: '1.8', margin: 0, whiteSpace: 'pre-line' },
-  modalActions: { display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', flexShrink: 0, borderTop: '1px solid #1e3a5f', paddingTop: '1rem' },
-  modalCloseBtn: { backgroundColor: '#c2410c', color: '#ffffff', border: 'none', padding: '0.75rem 1.75rem', borderRadius: '10px', fontSize: '0.9rem', fontWeight: '600', cursor: 'pointer' },
+  modalText: { color: '#cbd5e1', fontSize: '0.95rem', lineHeight: '1.8', whiteSpace: 'pre-line', margin: 0 },
+  modalActions: { display: 'flex', justifyContent: 'flex-end', paddingTop: '1rem', borderTop: '1px solid #1e3a5f' },
+  modalCloseBtn: { backgroundColor: '#c2410c', color: '#ffffff', border: 'none', padding: '0.65rem 1.5rem', borderRadius: '10px', fontWeight: '700', fontSize: '0.9rem', cursor: 'pointer' },
 
   modalMediaContent: {
-    backgroundColor: '#162f4f',
+    backgroundColor: '#09182c',
     borderRadius: '20px',
-    padding: '2.5rem',
+    padding: '1.75rem',
     maxWidth: '850px',
     width: '100%',
     maxHeight: '90vh',
     display: 'flex',
     flexDirection: 'column',
-    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
     boxSizing: 'border-box',
-    border: '1px solid #1e3a5f',
-    color: '#ffffff'
+    border: '1px solid #1e3a5f'
   },
-  mediaModalHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' },
-  mediaModalCategory: { color: '#fb923c', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' },
-  mediaModalTitle: { fontSize: '1.35rem', color: '#ffffff', fontWeight: '800', marginBottom: '1rem' },
-  mediaDisplayWrapper: { width: '100%', height: '50vh', backgroundColor: '#070f1e', borderRadius: '12px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', border: '1px solid #1e3a5f', position: 'relative' },
-  modalFullImage: { width: '100%', height: '100%', objectFit: 'contain' },
-  modalVideoPlayer: { width: '100%', height: '100%', maxHeight: '50vh', outline: 'none', objectFit: 'contain' },
-  mediaModalDesc: { color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 },
-  sliderBtnLeft: { position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', backgroundColor: 'rgba(15, 23, 42, 0.7)', border: '1px solid #1e3a5f', color: '#ffffff', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 10, backdropFilter: 'blur(4px)' },
-  sliderBtnRight: { position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', backgroundColor: 'rgba(15, 23, 42, 0.7)', border: '1px solid #1e3a5f', color: '#ffffff', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 10, backdropFilter: 'blur(4px)' },
-  sliderCounter: { position: 'absolute', bottom: '12px', right: '12px', backgroundColor: 'rgba(15, 23, 42, 0.8)', color: '#ffffff', padding: '0.25rem 0.75rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '600', backdropFilter: 'blur(4px)', border: '1px solid #1e3a5f' }
+  mediaModalHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' },
+  mediaModalCategory: { fontSize: '0.75rem', fontWeight: '700', color: '#fb923c', textTransform: 'uppercase', letterSpacing: '1px' },
+  mediaModalTitle: { fontSize: '1.2rem', fontWeight: '800', color: '#ffffff', marginBottom: '1rem' },
+  mediaDisplayWrapper: {
+    position: 'relative',
+    width: '100%',
+    height: '380px',
+    backgroundColor: '#000000',
+    borderRadius: '12px',
+    overflow: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '1rem'
+  },
+  modalFullImage: { maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' },
+  modalVideoPlayer: { width: '100%', height: '100%', outline: 'none' },
+  sliderBtnLeft: {
+    position: 'absolute',
+    left: '12px',
+    backgroundColor: 'rgba(15, 23, 42, 0.7)',
+    color: '#ffffff',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    zIndex: 10
+  },
+  sliderBtnRight: {
+    position: 'absolute',
+    right: '12px',
+    backgroundColor: 'rgba(15, 23, 42, 0.7)',
+    color: '#ffffff',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    zIndex: 10
+  },
+  sliderCounter: {
+    position: 'absolute',
+    bottom: '12px',
+    backgroundColor: 'rgba(15, 23, 42, 0.8)',
+    color: '#ffffff',
+    padding: '0.3rem 0.75rem',
+    borderRadius: '20px',
+    fontSize: '0.75rem',
+    fontWeight: '600',
+    border: '1px solid rgba(255, 255, 255, 0.1)'
+  },
+  mediaModalDesc: { color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }
 };
