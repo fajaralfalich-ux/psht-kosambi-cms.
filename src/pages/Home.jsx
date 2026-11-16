@@ -256,7 +256,7 @@ export default function Home() {
         <div style={styles.heroContent} className="hero-content">
           <div style={styles.subHeadingWrapper}>
             <Sparkles size={14} color="#fb923c" />
-            <span style={styles.heroSubTag}>SITUS RESMI PSHT RANTING KOSAMBI</span>
+            <span style={styles.heroSubTag}></span>
           </div>
           <h1 style={styles.heroTitle} className="hero-title-anim hero-title">Persaudaraan Setia Hati Terate</h1>
           <p style={styles.heroDesc} className="hero-desc-anim hero-desc">
