@@ -169,6 +169,7 @@ export default function PenggunaCMS() {
   const handleOpenPassword = (user) => {
     setModalType('password');
     setSelectedUser(user);
+    setFormData({ password: '' });
     setIsModalOpen(true);
   };
 
@@ -346,7 +347,7 @@ export default function PenggunaCMS() {
       {/* KONTEN UTAMA */}
       <div className="flex-1 flex flex-col overflow-hidden w-full">
         
-        {/* HEADER ATAS (Sudah Dirapikan & Responsif) */}
+        {/* HEADER ATAS */}
         <header className={`h-16 md:h-20 ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'} border-b px-3 md:px-8 flex justify-between items-center no-print flex-shrink-0 gap-2`}>
           <div className="flex items-center gap-2 md:gap-3 overflow-hidden">
             <button onClick={() => setIsMobileSidebarOpen(true)} className="md:hidden p-1.5 text-slate-600 hover:bg-slate-100 rounded-lg transition flex-shrink-0">
@@ -801,6 +802,75 @@ export default function PenggunaCMS() {
                   <div className="flex justify-end gap-2 pt-3">
                     <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 border rounded-lg text-slate-600">Batal</button>
                     <button type="submit" className="px-4 py-2 bg-[#0f2744] text-white rounded-lg font-bold">Simpan User</button>
+                  </div>
+                </form>
+              </>
+            )}
+
+            {modalType === 'edit' && selectedUser && (
+              <>
+                <h3 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'} mb-4`}>Edit Pengguna: {selectedUser.name}</h3>
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  const updatedUsers = users.map(u => u.id === selectedUser.id ? { ...u, ...formData } : u);
+                  setUsers(updatedUsers);
+                  addLog('Edit Pengguna', `Memperbarui data user ${formData.name}`);
+                  alert('Data pengguna berhasil diperbarui!');
+                  setIsModalOpen(false);
+                }} className="space-y-4 text-xs font-semibold">
+                  <div>
+                    <label className="block text-slate-600 mb-1">Nama Lengkap</label>
+                    <input type="text" required value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal" />
+                  </div>
+                  <div>
+                    <label className="block text-slate-600 mb-1">Email</label>
+                    <input type="email" required value={formData.email || ''} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-slate-600 mb-1">Role</label>
+                      <select value={formData.role || 'Admin Ranting'} onChange={(e) => setFormData({ ...formData, role: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal">
+                        <option>Admin Ranting</option>
+                        <option>Pelatih</option>
+                        <option>Super Admin</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-slate-600 mb-1">Status</label>
+                      <select value={formData.status || 'Aktif'} onChange={(e) => setFormData({ ...formData, status: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal">
+                        <option>Aktif</option>
+                        <option>Non-Aktif</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-slate-600 mb-1">Jabatan / Rayon</label>
+                    <input type="text" required value={formData.jabatan || ''} onChange={(e) => setFormData({ ...formData, jabatan: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal" />
+                  </div>
+                  <div className="flex justify-end gap-2 pt-3">
+                    <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 border rounded-lg text-slate-600">Batal</button>
+                    <button type="submit" className="px-4 py-2 bg-[#0f2744] text-white rounded-lg font-bold">Simpan Perubahan</button>
+                  </div>
+                </form>
+              </>
+            )}
+
+            {modalType === 'password' && selectedUser && (
+              <>
+                <h3 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'} mb-4`}>Ganti Kata Sandi: {selectedUser.name}</h3>
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  addLog('Ganti Sandi', `Mengubah kata sandi untuk user ${selectedUser.name}`);
+                  alert('Kata sandi berhasil diperbarui!');
+                  setIsModalOpen(false);
+                }} className="space-y-4 text-xs font-semibold">
+                  <div>
+                    <label className="block text-slate-600 mb-1">Kata Sandi Baru</label>
+                    <input type="password" required value={formData.password || ''} onChange={(e) => setFormData({ ...formData, password: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal" placeholder="Masukkan sandi baru..." />
+                  </div>
+                  <div className="flex justify-end gap-2 pt-3">
+                    <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 border rounded-lg text-slate-600">Batal</button>
+                    <button type="submit" className="px-4 py-2 bg-[#0f2744] text-white rounded-lg font-bold">Simpan Sandi</button>
                   </div>
                 </form>
               </>
