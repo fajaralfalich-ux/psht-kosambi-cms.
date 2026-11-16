@@ -250,6 +250,14 @@ export default function Home() {
           .section-title-light { font-size: 1.75rem !important; }
           
           .gallery-header-flex { flex-direction: column !important; align-items: flex-start !important; gap: 1rem !important; }
+          
+          .desktop-menu { display: none !important; }
+          .hamburger-btn { display: flex !important; }
+        }
+        
+        @media (min-width: 769px) {
+          .desktop-menu { display: flex !important; }
+          .hamburger-btn { display: none !important; }
         }
       `}</style>
 
@@ -266,7 +274,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div style={styles.navMenuDesktop}>
+          <div className="desktop-menu" style={{ alignItems: 'center', gap: '1.5rem' }}>
             <a href="#beranda" style={styles.navLink}>Beranda</a>
             <a href="#profil" style={styles.navLink}>Profil</a>
             <a href="#struktur" style={styles.navLink}>Struktur</a>
@@ -276,7 +284,7 @@ export default function Home() {
             </button>
           </div>
 
-          <button onClick={() => setIsMobileMenuOpen(true)} style={styles.hamburgerBtn}>
+          <button onClick={() => setIsMobileMenuOpen(true)} className="hamburger-btn" style={styles.hamburgerBtn}>
             <Menu size={22} color="#ffffff" />
           </button>
         </div>
@@ -635,14 +643,6 @@ const styles = {
     letterSpacing: '0.5px',
     display: 'block'
   },
-  navMenuDesktop: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '1.5rem',
-    '@media (max-width: 768px)': {
-      display: 'none'
-    }
-  },
   navLink: {
     color: '#cbd5e1',
     textDecoration: 'none',
@@ -662,17 +662,13 @@ const styles = {
     boxShadow: '0 4px 12px rgba(194, 65, 12, 0.3)'
   },
   hamburgerBtn: {
-    display: 'none',
     backgroundColor: '#162f4f',
     border: '1px solid #1e3a5f',
     padding: '0.5rem',
     borderRadius: '8px',
     cursor: 'pointer',
-    '@media (max-width: 768px)': {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   
   mobileDrawerOverlay: {
