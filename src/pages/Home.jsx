@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Users, Shield, Award, ChevronDown, ChevronUp, Play, X, Eye, ArrowRight, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { BookOpen, Users, Shield, Award, ChevronDown, ChevronUp, Play, X, Eye, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import flowerLogo from '/psht1.png';
 
 export default function Home() {
@@ -220,21 +220,21 @@ export default function Home() {
         .modal-enter { animation: fadeInScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
         @media (max-width: 768px) {
-          .hero-section { padding: 2rem 1rem !important; flex-direction: column !important; gap: 1.5rem !important; text-align: center !important; }
-          .hero-content { text-align: center !important; max-width: 100% !important; }
-          .hero-title { font-size: 1.6rem !important; text-align: center !important; line-height: 1.2 !important; margin-bottom: 0.75rem !important; }
-          .hero-desc { font-size: 0.9rem !important; text-align: center !important; margin-bottom: 1rem !important; line-height: 1.5 !important; }
-          .hero-badges { justify-content: center !important; margin-bottom: 1rem !important; gap: 0.4rem !important; }
+          /* Membalik urutan flex agar logo berada di paling atas khusus untuk HP */
+          .hero-section { padding: 2rem 1rem !important; flex-direction: column-reverse !important; gap: 1.5rem !important; text-align: left !important; }
+          .hero-content { text-align: left !important; max-width: 100% !important; }
+          .hero-title { font-size: 1.6rem !important; text-align: left !important; line-height: 1.2 !important; margin-bottom: 0.75rem !important; }
+          .hero-desc { font-size: 0.9rem !important; text-align: left !important; margin-bottom: 1rem !important; line-height: 1.5 !important; }
+          .hero-badges { justify-content: flex-start !important; margin-bottom: 1rem !important; gap: 0.4rem !important; }
           .badge { padding: 0.3rem 0.65rem !important; font-size: 0.7rem !important; }
-          .btn-group { justify-content: center !important; gap: 0.6rem !important; }
+          .btn-group { justify-content: flex-start !important; gap: 0.6rem !important; }
           .btnPrimary, .btnSecondary { padding: 0.65rem 1.25rem !important; font-size: 0.85rem !important; width: 48% !important; text-align: center !important; justify-content: center !important; }
           
-          /* Pengaturan khusus logo hero di HP agar pas di tengah dan tidak terlalu besar */
-          .hero-image-wrapper { width: 100% !important; display: flex !important; justify-content: center !important; margin-top: 0.25rem !important; }
-          .hero-card-badge { padding: 1.25rem !important; border-radius: 20px !important; max-width: 160px !important; margin: 0 auto !important; }
-          .logo-image { width: 110px !important; height: 110px !important; }
+          /* Ukuran dan posisi logo di HP */
+          .hero-image-wrapper { width: 100% !important; display: flex !important; justify-content: center !important; margin-bottom: 0.5rem !important; }
+          .hero-card-badge { padding: 1.25rem !important; border-radius: 20px !important; max-width: 150px !important; margin: 0 auto !important; }
+          .logo-image { width: 100px !important; height: 100px !important; }
           
-          /* Grid Kartu Pilar 2 kolom yang rapi dan kompak di HP */
           .cards-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
           .cardDark { padding: 1rem !important; border-radius: 12px !important; }
           .cardIcon { width: 36px !important; height: 36px !important; margin-bottom: 0.6rem !important; border-radius: 8px !important; }
@@ -253,11 +253,12 @@ export default function Home() {
 
       {/* 1. HERO SECTION */}
       <header id="beranda" style={styles.hero} className="hero-section">
-        <div style={styles.heroContent} className="hero-content">
-          <div style={styles.subHeadingWrapper}>
-            <Sparkles size={14} color="#fb923c" />
-            <span style={styles.heroSubTag}></span>
+        <div style={styles.heroImageWrapper} className="hero-image-wrapper">
+          <div style={styles.heroCardBadge} className="logo-floating-box hero-card-badge">
+            <img src={flowerLogo} alt="Logo Bunga PSHT" style={styles.logoImage} className="logo-image" />
           </div>
+        </div>
+        <div style={styles.heroContent} className="hero-content">
           <h1 style={styles.heroTitle} className="hero-title-anim hero-title">Persaudaraan Setia Hati Terate</h1>
           <p style={styles.heroDesc} className="hero-desc-anim hero-desc">
             Mendidik manusia berbudi luhur, tahu benar dan salah, serta melestarikan seni bela diri tradisional pencak silat dengan semangat kekeluargaan yang tinggi.
@@ -274,11 +275,6 @@ export default function Home() {
             <button onClick={() => navigate('/kegiatan')} style={styles.btnSecondary} className="btn-hover-effect btnSecondary">
               Jadwal
             </button>
-          </div>
-        </div>
-        <div style={styles.heroImageWrapper} className="hero-image-wrapper">
-          <div style={styles.heroCardBadge} className="logo-floating-box hero-card-badge">
-            <img src={flowerLogo} alt="Logo Bunga PSHT" style={styles.logoImage} className="logo-image" />
           </div>
         </div>
       </header>
@@ -531,8 +527,6 @@ const styles = {
     borderBottom: '1px solid #1e3a5f'
   },
   heroContent: { maxWidth: '750px', flex: 1 },
-  subHeadingWrapper: { display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' },
-  heroSubTag: { fontSize: '0.85rem', fontWeight: '700', color: '#fb923c', textTransform: 'uppercase', letterSpacing: '1px' },
   heroTitle: { fontSize: '2.6rem', color: '#ffffff', fontWeight: '800', lineHeight: '1.2', marginBottom: '1.25rem' },
   heroDesc: { color: '#94a3b8', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '2rem' },
   heroBadges: { display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '2.25rem' },
