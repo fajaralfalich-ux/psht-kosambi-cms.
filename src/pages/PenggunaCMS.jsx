@@ -29,12 +29,13 @@ export default function PenggunaCMS() {
   const [darkMode, setDarkMode] = useState(true);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
-  // Fungsi Logout / Keluar Sistem
+  // Perbaikan fungsi Logout: Mengarah langsung ke /admin/login
   const handleLogout = () => {
     if (window.confirm('Apakah Anda yakin ingin keluar dari sistem (Logout)?')) {
-      localStorage.removeItem('psht_is_logged_in'); // Hapus sesi login jika ada
+      localStorage.removeItem('psht_cms_logged_in'); 
+      localStorage.removeItem('psht_cms_active_user');
       alert('Berhasil keluar dari sistem.');
-      window.location.href = '/login'; // Sesuaikan dengan route halaman login Anda
+      window.location.href = '/admin/login'; 
     }
   };
 
@@ -328,7 +329,6 @@ export default function PenggunaCMS() {
           </nav>
         </div>
 
-        {/* TOMBOL LOGOUT DI BAWAH SIDEBAR (OPSIONAL/TAMBAHAN) */}
         <div className="pt-4 border-t border-slate-800">
           <button 
             onClick={handleLogout}
@@ -389,7 +389,7 @@ export default function PenggunaCMS() {
       {/* KONTEN UTAMA */}
       <div className="flex-1 flex flex-col overflow-hidden w-full">
         
-        {/* HEADER ATAS DENGAN TOMBOL LOGOUT */}
+        {/* HEADER ATAS */}
         <header className={`h-16 md:h-20 ${darkMode ? 'bg-slate-900/60 border-slate-800/80' : 'bg-white/80 border-slate-200/80'} backdrop-blur-xl border-b px-4 md:px-8 flex justify-between items-center no-print flex-shrink-0 gap-3 shadow-sm`}>
           <div className="flex items-center gap-3 overflow-hidden">
             <button onClick={() => setIsMobileSidebarOpen(true)} className="md:hidden p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition flex-shrink-0 cursor-pointer">
@@ -418,7 +418,7 @@ export default function PenggunaCMS() {
                 {adminProfile.name.split(' ').map(n => n[0]).join('')}
               </div>
 
-              {/* TOMBOL LOGOUT CEPAT DI HEADER */}
+              {/* TOMBOL LOGOUT DI HEADER */}
               <button 
                 onClick={handleLogout} 
                 title="Keluar (Logout)"
