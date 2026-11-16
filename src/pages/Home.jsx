@@ -229,30 +229,29 @@ export default function Home() {
 
         .modal-enter { animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-        /* RESPONSIVE MEDIA QUERIES UNTUK HP & TABLET */
-        @media (max-width: 1024px) {
-          .hero-section { padding: 4rem 2rem !important; }
-          .hero-title { font-size: 2.2rem !important; white-space: normal !important; }
-          .gallery-grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
-          .section-dark, .section-dark-alt { padding: 4rem 2rem !important; }
-        }
-
+        /* PENGATURAN AGAR HP MENYERUPAI LAPTOP (GRID 2 KOLOM & TAMPILAN KOMPAK) */
         @media (max-width: 768px) {
-          .hero-section { padding: 2.5rem 1rem !important; flex-direction: column-reverse !important; text-align: center; }
-          .hero-content { max-width: 100% !important; width: 100% !important; text-align: center !important; }
-          .hero-title { font-size: 1.75rem !important; white-space: normal !important; text-align: center !important; }
-          .hero-desc { font-size: 0.95rem !important; text-align: center !important; }
-          .hero-badges { justify-content: center !important; }
-          .btn-group { justify-content: center !important; width: 100%; }
-          .btn-primary, .btn-secondary { width: 100%; justify-content: center; text-align: center; }
-          .hero-card-badge { padding: 1.5rem !important; margin-bottom: 1rem; }
-          .logo-image { width: 140px !important; height: 140px !important; }
-          .gallery-grid-4 { grid-template-columns: 1fr !important; }
+          .hero-section { padding: 2.5rem 1.5rem !important; flex-direction: row !important; gap: 1.5rem !important; align-items: center !important; }
+          .hero-content { text-align: left !important; flex: 1.2 !important; }
+          .hero-title { font-size: 1.5rem !important; line-height: 1.2 !important; text-align: left !important; }
+          .hero-desc { font-size: 0.85rem !important; line-height: 1.5 !important; text-align: left !important; margin-bottom: 1rem !important; }
+          .hero-badges { justify-content: flex-start !important; gap: 0.4rem !important; margin-bottom: 1rem !important; }
+          .badge { padding: 0.3rem 0.6rem !important; font-size: 0.7rem !important; }
+          .btn-group { justify-content: flex-start !important; gap: 0.5rem !important; }
+          .btn-primary, .btn-secondary { width: auto !important; padding: 0.6rem 1rem !important; font-size: 0.8rem !important; }
+          .hero-image-wrapper { flex: 0.8 !important; }
+          .hero-card-badge { padding: 1.2rem !important; border-radius: 20px !important; }
+          .logo-image { width: 100px !important; height: 100px !important; }
+
+          /* Kartu Pilihan & Galeri Dibuat 2 Kolom di HP agar seperti Desktop */
+          .cards-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1rem !important; }
+          .gallery-grid-4 { grid-template-columns: repeat(2, 1fr) !important; gap: 1rem !important; }
+          
           .section-dark, .section-dark-alt { padding: 3rem 1.25rem !important; }
-          .section-title-light { font-size: 1.75rem !important; }
-          .gallery-header-flex { flex-direction: column; align-items: flex-start !important; }
-          .modal-content, .modal-media-content { padding: 1.5rem !important; margin: 1rem; width: 95% !important; }
-          .media-display-wrapper { height: 35vh !important; }
+          .section-title-light { font-size: 1.5rem !important; }
+          .section-desc-light { font-size: 0.9rem !important; }
+          
+          .gallery-header-flex { flex-direction: row !important; align-items: center !important; justify-content: space-between !important; }
         }
       `}</style>
 
@@ -260,7 +259,7 @@ export default function Home() {
       <header style={styles.hero} className="hero-section">
         <div style={styles.heroContent} className="hero-content">
           <div style={styles.subHeadingWrapper}>
-            <Sparkles size={16} color="#fb923c" />
+            <Sparkles size={14} color="#fb923c" />
             <span style={styles.heroSubTag}>Situs Resmi PSHT Ranting Kosambi</span>
           </div>
           <h1 style={styles.heroTitle} className="hero-title-anim hero-title">Persaudaraan Setia Hati Terate</h1>
@@ -269,20 +268,20 @@ export default function Home() {
           </p>
           <div style={styles.heroBadges} className="hero-badges-anim hero-badges">
             <span style={styles.badge} className="badge-pulse">✨ Terbuka untuk Umum</span>
-            <span style={styles.badge} className="badge-pulse">🥋 Latihan Rutin 2x Seminggu</span>
-            <span style={styles.badge} className="badge-pulse">📜 Pelatih Bersertifikat</span>
+            <span style={styles.badge} className="badge-pulse">🥋 Latihan Rutin</span>
+            <span style={styles.badge} className="badge-pulse">📜 Bersertifikat</span>
           </div>
           <div style={styles.btnGroup} className="hero-btns-anim btn-group">
             <a href="/pendaftaran" style={styles.btnPrimary} className="btn-hover-effect btn-primary">
-              Daftar Latihan Sekarang <ArrowRight size={18} />
+              Daftar <ArrowRight size={16} />
             </a>
             <a href="/kegiatan" style={styles.btnSecondary} className="btn-hover-effect btn-secondary">
-              Lihat Jadwal Latihan
+              Jadwal
             </a>
           </div>
         </div>
 
-        <div style={styles.heroImageWrapper}>
+        <div style={styles.heroImageWrapper} className="hero-image-wrapper">
           <div style={styles.heroCardBadge} className="logo-floating-box hero-card-badge">
             <img src={flowerLogo} alt="Logo Bunga PSHT" style={styles.logoImage} className="logo-image" />
           </div>
@@ -300,7 +299,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div style={styles.cardsGrid}>
+          <div style={styles.cardsGrid} className="cards-grid">
             {Object.keys(cardDetails).map((key) => {
               const item = cardDetails[key];
               return (
