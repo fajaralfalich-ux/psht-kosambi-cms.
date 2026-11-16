@@ -220,34 +220,34 @@ export default function Home() {
         .modal-enter { animation: fadeInScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
         @media (max-width: 768px) {
-          .hero-section { padding: 3rem 1.25rem !important; flex-direction: column !important; gap: 2rem !important; text-align: left !important; }
-          .hero-content { text-align: left !important; max-width: 100% !important; }
-          .hero-title { font-size: 1.85rem !important; text-align: left !important; line-height: 1.2 !important; margin-bottom: 0.85rem !important; }
-          .hero-desc { font-size: 0.95rem !important; text-align: left !important; margin-bottom: 1.25rem !important; line-height: 1.6 !important; }
-          .hero-badges { justify-content: flex-start !important; margin-bottom: 1.25rem !important; gap: 0.5rem !important; }
-          .badge { padding: 0.35rem 0.75rem !important; font-size: 0.75rem !important; }
-          .btn-group { justify-content: flex-start !important; gap: 0.75rem !important; }
-          .btnPrimary, .btnSecondary { padding: 0.7rem 1.25rem !important; font-size: 0.85rem !important; }
+          .hero-section { padding: 2rem 1rem !important; flex-direction: column !important; gap: 1.5rem !important; text-align: center !important; }
+          .hero-content { text-align: center !important; max-width: 100% !important; }
+          .hero-title { font-size: 1.6rem !important; text-align: center !important; line-height: 1.2 !important; margin-bottom: 0.75rem !important; }
+          .hero-desc { font-size: 0.9rem !important; text-align: center !important; margin-bottom: 1rem !important; line-height: 1.5 !important; }
+          .hero-badges { justify-content: center !important; margin-bottom: 1rem !important; gap: 0.4rem !important; }
+          .badge { padding: 0.3rem 0.65rem !important; font-size: 0.7rem !important; }
+          .btn-group { justify-content: center !important; gap: 0.6rem !important; }
+          .btnPrimary, .btnSecondary { padding: 0.65rem 1.25rem !important; font-size: 0.85rem !important; width: 48% !important; text-align: center !important; justify-content: center !important; }
           
-          /* Pengaturan Logo Hero di HP agar kompak dan elegan */
-          .hero-image-wrapper { width: 100% !important; display: flex !important; justify-content: center !important; margin-top: 0.5rem !important; }
-          .hero-card-badge { padding: 1.5rem !important; border-radius: 20px !important; max-width: 200px !important; margin: 0 auto !important; }
-          .logo-image { width: 130px !important; height: 130px !important; }
+          /* Pengaturan khusus logo hero di HP agar pas di tengah dan tidak terlalu besar */
+          .hero-image-wrapper { width: 100% !important; display: flex !important; justify-content: center !important; margin-top: 0.25rem !important; }
+          .hero-card-badge { padding: 1.25rem !important; border-radius: 20px !important; max-width: 160px !important; margin: 0 auto !important; }
+          .logo-image { width: 110px !important; height: 110px !important; }
           
-          /* Grid Kartu Pilar 2 kolom rapi di HP */
+          /* Grid Kartu Pilar 2 kolom yang rapi dan kompak di HP */
           .cards-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
           .cardDark { padding: 1rem !important; border-radius: 12px !important; }
-          .cardIcon { width: 38px !important; height: 38px !important; margin-bottom: 0.75rem !important; border-radius: 8px !important; }
-          .cardTitleLight { font-size: 0.9rem !important; margin-bottom: 0.3rem !important; }
-          .cardTextLight { font-size: 0.75rem !important; line-height: 1.4 !important; margin-bottom: 0.75rem !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+          .cardIcon { width: 36px !important; height: 36px !important; margin-bottom: 0.6rem !important; border-radius: 8px !important; }
+          .cardTitleLight { font-size: 0.9rem !important; margin-bottom: 0.25rem !important; }
+          .cardTextLight { font-size: 0.75rem !important; line-height: 1.4 !important; margin-bottom: 0.6rem !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
           .cardLinkText { font-size: 0.75rem !important; }
 
           .gallery-grid-4 { grid-template-columns: 1fr !important; gap: 1rem !important; }
-          .section-dark, .section-dark-alt { padding: 3rem 1.25rem !important; }
-          .section-title-light { font-size: 1.5rem !important; }
-          .section-descLight { font-size: 0.9rem !important; }
-          .sectionHeader { margin-bottom: 1.75rem !important; }
-          .gallery-header-flex { flex-direction: column !important; align-items: flex-start !important; gap: 1rem !important; }
+          .section-dark, .section-dark-alt { padding: 2.5rem 1rem !important; }
+          .section-title-light { font-size: 1.35rem !important; }
+          .section-descLight { font-size: 0.85rem !important; }
+          .sectionHeader { margin-bottom: 1.5rem !important; }
+          .gallery-header-flex { flex-direction: column !important; align-items: flex-start !important; gap: 0.85rem !important; }
         }
       `}</style>
 
