@@ -26,7 +26,9 @@ import {
   BookOpen,
   Eye,
   EyeOff,
-  Upload
+  Upload,
+  Menu,
+  Printer
 } from 'lucide-react';
 
 export default function PenggunaCMS() {
@@ -39,6 +41,7 @@ export default function PenggunaCMS() {
   
   const [activeMenu, setActiveMenu] = useState('Profil Super Admin');
   const [darkMode, setDarkMode] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   // STATE TOGGLE LIHAT PASSWORD DI MODAL TAMBAH USER
   const [showPassword, setShowPassword] = useState(false);
@@ -337,8 +340,8 @@ export default function PenggunaCMS() {
   return (
     <div className={`flex h-screen ${bgMain} font-sans antialiased overflow-hidden transition-colors duration-500`}>
       
-      {/* SIDEBAR KIRI */}
-      <aside className="w-64 bg-[#0a1b2a] text-slate-300 flex flex-col justify-between hidden md:flex p-3 flex-shrink-0 shadow-xl transition-all duration-300">
+      {/* SIDEBAR DESKTOP */}
+      <aside className="w-64 bg-[#0a1b2a] text-slate-300 hidden md:flex flex-col justify-between p-3 flex-shrink-0 shadow-xl transition-all duration-300">
         <div>
           <div className="p-4 mb-3 border-b border-slate-800/80">
             <h1 className="text-white font-bold text-sm tracking-wide flex items-center gap-2.5">
@@ -393,53 +396,114 @@ export default function PenggunaCMS() {
         </div>
       </aside>
 
+      {/* SIDEBAR MOBILE (DRAWER) */}
+      {isMobileSidebarOpen && (
+        <div className="fixed inset-0 z-50 flex md:hidden">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-xs" onClick={() => setIsMobileSidebarOpen(false)}></div>
+          <aside className="relative w-72 bg-[#0a1b2a] text-slate-300 flex flex-col justify-between p-4 shadow-2xl z-10 h-full animate-in slide-in-from-left duration-300">
+            <div>
+              <div className="flex justify-between items-center mb-4 pb-3 border-b border-slate-800">
+                <h1 className="text-white font-bold text-sm flex items-center gap-2">
+                  <span className="bg-[#c2410c] p-1.5 rounded-lg text-white">
+                    <Shield size={16} />
+                  </span>
+                  <span>{webSettings.namaRanting}</span>
+                </h1>
+                <button onClick={() => setIsMobileSidebarOpen(false)} className="text-slate-400 hover:text-white p-1">
+                  <X size={20} />
+                </button>
+              </div>
+
+              <nav className="space-y-1">
+                {[
+                  { name: 'Profil Super Admin', icon: <User size={17} /> },
+                  { name: 'Manajemen Pengguna', icon: <Users size={17} /> },
+                  { name: 'Data Siswa', icon: <GraduationCap size={17} /> },
+                  { name: 'Data Warga', icon: <Award size={17} /> },
+                  { name: 'Struktur Organisasi', icon: <Briefcase size={17} /> },
+                  { name: 'Jadwal & Kegiatan', icon: <Calendar size={17} /> },
+                  { name: 'Log Audit Aktivitas', icon: <Activity size={17} /> },
+                  { name: 'Pengaturan Web', icon: <Settings size={17} /> },
+                ].map((menu) => (
+                  <button 
+                    key={menu.name}
+                    onClick={() => {
+                      setActiveMenu(menu.name);
+                      setIsMobileSidebarOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${
+                      activeMenu === menu.name 
+                        ? 'bg-[#c2410c] text-white font-semibold' 
+                        : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                    }`}
+                  >
+                    {menu.icon}
+                    <span>{menu.name}</span>
+                  </button>
+                ))}
+              </nav>
+            </div>
+
+            <div className="space-y-3 pt-4 border-t border-slate-800">
+              <button 
+                onClick={handleLogout}
+                className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white transition-all"
+              >
+                <LogOut size={16} /> Keluar (Logout)
+              </button>
+            </div>
+          </aside>
+        </div>
+      )}
+
       {/* KONTEN UTAMA */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden w-full">
         
         {/* HEADER ATAS */}
-        <header className={`h-20 ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'} border-b px-8 flex justify-between items-center shadow-xs transition-colors duration-500`}>
-          <div>
-            <h1 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'} transition-all duration-300`}>{activeMenu}</h1>
-            <p className="text-xs text-slate-500 mt-0.5">Pusat kontrol profesional untuk pengelolaan data operasional {webSettings.namaRanting}</p>
-          </div>
-
+        <header className={`h-20 ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'} border-b px-4 md:px-8 flex justify-between items-center shadow-xs transition-colors duration-500`}>
           <div className="flex items-center gap-3">
             <button 
+              onClick={() => setIsMobileSidebarOpen(true)} 
+              className={`p-2 rounded-xl border md:hidden cursor-pointer ${darkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-slate-100 border-slate-200 text-slate-800'}`}
+              title="Buka Menu"
+            >
+              <Menu size={20} />
+            </button>
+            <div>
+              <h1 className={`text-sm md:text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'} transition-all`}>{activeMenu}</h1>
+              <p className="text-[11px] md:text-xs text-slate-500 mt-0.5 hidden sm:block">Pusat kontrol operasional {webSettings.namaRanting}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 md:gap-3">
+            <button 
               onClick={() => navigate('/')} 
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all hover:scale-105 active:scale-95 cursor-pointer ${
                 darkMode ? 'bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700' : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
               }`}
             >
               <Home size={15} className="text-[#c2410c]" />
-              <span>Landing Page</span>
+              <span className="hidden sm:inline">Landing Page</span>
             </button>
 
-            <button onClick={() => setDarkMode(!darkMode)} className={`p-2.5 rounded-xl border transition-all duration-300 hover:rotate-45 active:scale-95 cursor-pointer ${darkMode ? 'bg-slate-800 border-slate-700 text-amber-400' : 'bg-slate-100 border-slate-200 text-slate-600'}`}>
+            <button onClick={() => setDarkMode(!darkMode)} className={`p-2.5 rounded-xl border transition-all hover:rotate-45 active:scale-95 cursor-pointer ${darkMode ? 'bg-slate-800 border-slate-700 text-amber-400' : 'bg-slate-100 border-slate-200 text-slate-600'}`}>
               {darkMode ? <Sun size={17} /> : <Moon size={17} />}
             </button>
 
-            <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
-              <div className="text-right">
+            <div className="flex items-center gap-3 pl-3 border-l border-slate-200 dark:border-slate-800">
+              <div className="text-right hidden sm:block">
                 <p className={`text-xs font-bold ${darkMode ? 'text-slate-200' : 'text-slate-800'}`}>{adminProfile.name}</p>
                 <p className="text-[10px] text-emerald-600 font-semibold uppercase tracking-wider">{adminProfile.role}</p>
               </div>
-              <div className="w-9 h-9 rounded-xl bg-[#0a1b2a] text-white font-bold flex items-center justify-center text-xs shadow-md transform hover:scale-105 transition-transform duration-300">
+              <div className="w-9 h-9 rounded-xl bg-[#0a1b2a] text-white font-bold flex items-center justify-center text-xs shadow-md">
                 {adminProfile.name.split(' ').map(n => n[0]).join('')}
               </div>
             </div>
-
-            <button 
-              onClick={handleLogout}
-              className="p-2.5 rounded-xl bg-red-50 text-red-600 hover:bg-red-600 hover:text-white border border-red-200 transition-all cursor-pointer md:hidden"
-              title="Logout"
-            >
-              <LogOut size={16} />
-            </button>
           </div>
         </header>
 
         {/* AREA KONTEN DINAMIS */}
-        <main className="flex-1 overflow-y-auto p-8 animate-in fade-in slide-in-from-bottom-2 duration-300">
+        <main className="flex-1 overflow-y-auto p-4 md:p-8 animate-in fade-in duration-300">
           
           {/* 1. PROFIL SUPER ADMIN */}
           {activeMenu === 'Profil Super Admin' && (
@@ -447,25 +511,25 @@ export default function PenggunaCMS() {
               
               <div className={`${bgCard} rounded-3xl border shadow-xl overflow-hidden relative`}>
                 <div className="h-32 bg-gradient-to-r from-[#0a1b2a] via-[#15324d] to-[#c2410c] px-8 flex items-end pb-4">
-                  <div className="absolute top-4 right-4 bg-black/30 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-[11px] font-medium text-white flex items-center gap-1.5">
+                  <div className="absolute top-4 right-4 bg-black/35 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-[11px] font-medium text-white flex items-center gap-1.5">
                     <CheckCircle2 size={13} className="text-emerald-400" /> Status: Terverifikasi Aktif
                   </div>
                 </div>
 
-                <div className="px-8 pb-8 pt-0 relative flex flex-col sm:flex-row items-center sm:items-end gap-6 -mt-14">
+                <div className="px-6 md:px-8 pb-8 pt-0 relative flex flex-col sm:flex-row items-center sm:items-end gap-6 -mt-14">
                   <div className="w-28 h-28 rounded-3xl bg-[#0a1b2a] text-white font-bold text-3xl flex items-center justify-center shadow-2xl border-4 border-white dark:border-slate-900 ring-4 ring-[#c2410c]/20">
                     {adminProfile.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div className="text-center sm:text-left flex-1">
                     <h2 className={`text-2xl font-black ${darkMode ? 'text-white' : 'text-slate-900'} tracking-tight`}>{adminProfile.name}</h2>
-                    <p className="text-xs text-[#c2410c] font-bold mt-1 flex items-center justify-center sm:justify-start gap-1.5">
+                    <p className="text-xs text-[#c2410c] font-bold mt-1 flex items-center justify-center sm:justify-start gap-1.5 flex-wrap">
                       <Shield size={14} /> {adminProfile.role} — <span className="text-slate-500 dark:text-slate-400 font-medium">{adminProfile.rayon}</span>
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className={`${bgCard} rounded-3xl border shadow-xl p-8`}>
+              <div className={`${bgCard} rounded-3xl border shadow-xl p-6 md:p-8`}>
                 <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-200 dark:border-slate-800/60">
                   <div>
                     <h3 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'} flex items-center gap-2`}>
@@ -562,7 +626,7 @@ export default function PenggunaCMS() {
 
           {/* 2. MANAJEMEN PENGGUNA */}
           {activeMenu === 'Manajemen Pengguna' && (
-            <div className="animate-in fade-in duration-500">
+            <div className="animate-in fade-in duration-500 space-y-6">
               <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
                 <div>
                   <h2 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Daftar Admin & Pengurus Sistem</h2>
@@ -572,7 +636,6 @@ export default function PenggunaCMS() {
                   <Plus size={15} /> Tambah User Baru
                 </button>
               </div>
-
               <div className={`${bgCard} rounded-2xl border shadow-xs overflow-hidden`}>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse">
@@ -616,26 +679,24 @@ export default function PenggunaCMS() {
 
           {/* 3. DATA SISWA / ATLET */}
           {activeMenu === 'Data Siswa' && (
-            <div className="animate-in fade-in duration-500">
+            <div className="animate-in fade-in duration-500 space-y-6">
               <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
                 <div>
                   <h2 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Buku Induk Data Siswa & Delegasi Atlet</h2>
                   <p className="text-xs text-slate-500 mt-1">Pengelolaan data siswa latihan & cetak Surat Pemberitahuan Delegasi Resmi.</p>
                 </div>
-
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2.5 flex-wrap">
                   <button onClick={() => exportCSV('students')} className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 py-2.5 rounded-xl flex items-center gap-2 shadow-md hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
                     <Download size={15} /> Unduh CSV
                   </button>
                   <button onClick={printDocument} className="bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-3.5 py-2.5 rounded-xl flex items-center gap-2 shadow-md hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
-                    <FileText size={15} /> Cetak Surat Resmi (PDF)
+                    <Printer size={15} /> Cetak Surat Resmi (PDF)
                   </button>
                   <button onClick={() => { setModalType('addStudent'); setFormData({ name: '', nik: '', tempatLahir: '', tanggalLahir: '', noHp: '', tinggiBadan: '', beratBadan: '', alamat: '', tingkatan: 'Siswa Polos', rayon: 'Rayon Salembaran', ranting: 'Ranting Kosambi' }); setIsModalOpen(true); }} className="bg-[#0a1b2a] hover:bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-xl flex items-center gap-2 shadow-md hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
                     <Plus size={15} /> Tambah Siswa Baru
                   </button>
                 </div>
               </div>
-
               <div className={`${bgCard} rounded-2xl border shadow-xs overflow-hidden`}>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse">
@@ -683,26 +744,24 @@ export default function PenggunaCMS() {
 
           {/* 4. DATA WARGA */}
           {activeMenu === 'Data Warga' && (
-            <div className="animate-in fade-in duration-500">
+            <div className="animate-in fade-in duration-500 space-y-6">
               <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
                 <div>
                   <h2 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Buku Induk Data Warga Pengesahan</h2>
                   <p className="text-xs text-slate-500 mt-1">Pengelolaan data warga tingkat pengesahan PSHT Ranting Kosambi dengan rayon dan ranting terpisah.</p>
                 </div>
-
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2.5 flex-wrap">
                   <button onClick={() => exportCSV('citizens')} className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 py-2.5 rounded-xl flex items-center gap-2 shadow-md hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
                     <Download size={15} /> Unduh CSV
                   </button>
                   <button onClick={printDocument} className="bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-3.5 py-2.5 rounded-xl flex items-center gap-2 shadow-md hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
-                    <FileText size={15} /> Cetak PDF
+                    <Printer size={15} /> Cetak PDF
                   </button>
                   <button onClick={() => { setModalType('addCitizen'); setFormData({ name: '', tingkatWarga: 'Warga Tingkat I', rayon: 'Rayon Kosambi Timur', ranting: 'Ranting Kosambi', tahunPengesahan: '2026', noHp: '' }); setIsModalOpen(true); }} className="bg-[#0a1b2a] hover:bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-xl flex items-center gap-2 shadow-md hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
                     <Plus size={15} /> Tambah Warga Baru
                   </button>
                 </div>
               </div>
-
               <div className={`${bgCard} rounded-2xl border shadow-xs overflow-hidden`}>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse">
@@ -745,7 +804,7 @@ export default function PenggunaCMS() {
 
           {/* 5. STRUKTUR ORGANISASI */}
           {activeMenu === 'Struktur Organisasi' && (
-            <div className="animate-in fade-in duration-500">
+            <div className="animate-in fade-in duration-500 space-y-6">
               <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
                 <div>
                   <h2 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Bagan Struktur Kepengurusan Ranting</h2>
@@ -755,7 +814,6 @@ export default function PenggunaCMS() {
                   <Plus size={15} /> Tambah Pengurus
                 </button>
               </div>
-
               <div className={`${bgCard} rounded-2xl border shadow-xs overflow-hidden`}>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse">
@@ -793,7 +851,7 @@ export default function PenggunaCMS() {
 
           {/* 6. JADWAL & KEGIATAN */}
           {activeMenu === 'Jadwal & Kegiatan' && (
-            <div className="animate-in fade-in duration-500">
+            <div className="animate-in fade-in duration-500 space-y-6">
               <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
                 <div>
                   <h2 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Jadwal Latihan & Agenda Kegiatan</h2>
@@ -803,7 +861,6 @@ export default function PenggunaCMS() {
                   <Plus size={15} /> Tambah Jadwal
                 </button>
               </div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {schedules.map((sc) => (
                   <div key={sc.id} className={`${bgCard} rounded-2xl border shadow-xs p-6 flex flex-col justify-between transform hover:-translate-y-1 hover:shadow-xl hover:border-2 hover:border-[#c2410c] transition-all duration-300`}>
@@ -839,7 +896,7 @@ export default function PenggunaCMS() {
           {/* 7. LOG AUDIT AKTIVITAS */}
           {activeMenu === 'Log Audit Aktivitas' && (
             <div className={`${bgCard} rounded-2xl border shadow-xs overflow-hidden animate-in fade-in duration-500`}>
-              <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+              <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center flex-wrap gap-4">
                 <div>
                   <h2 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Log Audit Aktivitas Sistem</h2>
                   <p className="text-xs text-slate-500 mt-0.5">Rekam jejak digital seluruh tindakan administratif yang dilakukan di CMS.</p>
@@ -848,7 +905,6 @@ export default function PenggunaCMS() {
                   Bersihkan Log
                 </button>
               </div>
-
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
@@ -880,7 +936,6 @@ export default function PenggunaCMS() {
               <div className={`${bgCard} rounded-2xl border shadow-xs p-8`}>
                 <h2 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'} mb-1`}>Pengaturan Website & Organisasi</h2>
                 <p className="text-xs text-slate-500 mb-6">Ubah identitas ranting dan status pendaftaran online.</p>
-
                 <form onSubmit={(e) => {
                   e.preventDefault();
                   addLog('Update Pengaturan', 'Memperbarui informasi konfigurasi web');
@@ -894,7 +949,7 @@ export default function PenggunaCMS() {
                     <label className="block text-slate-700 dark:text-slate-300 mb-1 font-bold">Wilayah Cabang</label>
                     <input type="text" value={webSettings.cabang} onChange={(e) => setWebSettings({ ...webSettings, cabang: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none transition-all duration-300 ${inputStyle}`} required />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-slate-700 dark:text-slate-300 mb-1 font-bold">Email Kontak Resmi</label>
                       <input type="email" value={webSettings.emailKontak} onChange={(e) => setWebSettings({ ...webSettings, emailKontak: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none transition-all duration-300 ${inputStyle}`} required />
@@ -968,7 +1023,7 @@ export default function PenggunaCMS() {
                   <input type="email" value={formData.email || ''} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} placeholder="alamat.email@psht.org" required />
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className={labelStyle}>Kata Sandi (Password)</label>
                     <div className="relative">
@@ -989,7 +1044,6 @@ export default function PenggunaCMS() {
                       </button>
                     </div>
                   </div>
-
                   <div>
                     <label className={labelStyle}>Konfirmasi Kata Sandi</label>
                     <div className="relative">
@@ -1012,7 +1066,7 @@ export default function PenggunaCMS() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className={labelStyle}>Peran (Role)</label>
                     <select value={formData.role || 'Admin Ranting'} onChange={(e) => setFormData({ ...formData, role: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`}>
@@ -1034,7 +1088,7 @@ export default function PenggunaCMS() {
               </form>
             )}
 
-            {/* FORM TAMBAH SISWA (DENGAN RAYON & RANTING TERPISAH) */}
+            {/* FORM TAMBAH SISWA */}
             {modalType === 'addStudent' && (
               <form onSubmit={(e) => {
                 e.preventDefault();
@@ -1066,7 +1120,7 @@ export default function PenggunaCMS() {
                   <label className={labelStyle}>Nama Lengkap Siswa</label>
                   <input type="text" value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} placeholder="Masukkan nama lengkap siswa" required />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className={labelStyle}>NIK</label>
                     <input type="text" value={formData.nik || ''} onChange={(e) => setFormData({ ...formData, nik: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} placeholder="3603xxxxxxxxxxxx" />
@@ -1076,8 +1130,7 @@ export default function PenggunaCMS() {
                     <input type="text" value={formData.noHp || ''} onChange={(e) => setFormData({ ...formData, noHp: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} placeholder="08xxxxxxxxxx" />
                   </div>
                 </div>
-
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className={labelStyle}>Tempat Lahir</label>
                     <input type="text" value={formData.tempatLahir || ''} onChange={(e) => setFormData({ ...formData, tempatLahir: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} placeholder="Contoh: Tangerang" required />
@@ -1087,9 +1140,7 @@ export default function PenggunaCMS() {
                     <input type="date" value={formData.tanggalLahir || ''} onChange={(e) => setFormData({ ...formData, tanggalLahir: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} required />
                   </div>
                 </div>
-
-                {/* RAYON DAN RANTING DIPISAH */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className={labelStyle}>Rayon</label>
                     <input type="text" value={formData.rayon || ''} onChange={(e) => setFormData({ ...formData, rayon: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} placeholder="Rayon Salembaran" required />
@@ -1099,7 +1150,6 @@ export default function PenggunaCMS() {
                     <input type="text" value={formData.ranting || ''} onChange={(e) => setFormData({ ...formData, ranting: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} placeholder="Ranting Kosambi" required />
                   </div>
                 </div>
-
                 <div className="pt-4 flex justify-end gap-3">
                   <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 cursor-pointer">Batal</button>
                   <button type="submit" className="bg-[#c2410c] hover:bg-orange-700 text-white font-bold px-5 py-2.5 rounded-xl cursor-pointer shadow-md hover:scale-105 active:scale-95 transition-all duration-300">Simpan Siswa</button>
@@ -1107,7 +1157,7 @@ export default function PenggunaCMS() {
               </form>
             )}
 
-            {/* FORM TAMBAH WARGA (DENGAN RAYON & RANTING DIPISAH) */}
+            {/* FORM TAMBAH WARGA */}
             {modalType === 'addCitizen' && (
               <form onSubmit={(e) => {
                 e.preventDefault();
@@ -1132,7 +1182,7 @@ export default function PenggunaCMS() {
                   <label className={labelStyle}>Nama Lengkap Warga</label>
                   <input type="text" value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} required />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className={labelStyle}>Tingkatan Warga</label>
                     <select value={formData.tingkatWarga || 'Warga Tingkat I'} onChange={(e) => setFormData({ ...formData, tingkatWarga: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`}>
@@ -1146,9 +1196,7 @@ export default function PenggunaCMS() {
                     <input type="text" value={formData.tahunPengesahan || ''} onChange={(e) => setFormData({ ...formData, tahunPengesahan: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} />
                   </div>
                 </div>
-
-                {/* RAYON DAN RANTING DIPISAH */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className={labelStyle}>Rayon</label>
                     <input type="text" value={formData.rayon || ''} onChange={(e) => setFormData({ ...formData, rayon: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} placeholder="Rayon Kosambi Timur" required />
@@ -1158,7 +1206,6 @@ export default function PenggunaCMS() {
                     <input type="text" value={formData.ranting || ''} onChange={(e) => setFormData({ ...formData, ranting: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} placeholder="Ranting Kosambi" required />
                   </div>
                 </div>
-
                 <div>
                   <label className={labelStyle}>No. HP / WhatsApp</label>
                   <input type="text" value={formData.noHp || ''} onChange={(e) => setFormData({ ...formData, noHp: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} />
@@ -1190,7 +1237,7 @@ export default function PenggunaCMS() {
                   <label className={labelStyle}>Nama Lengkap</label>
                   <input type="text" value={formData.nama || ''} onChange={(e) => setFormData({ ...formData, nama: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} required />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className={labelStyle}>Jabatan</label>
                     <input type="text" value={formData.jabatan || ''} onChange={(e) => setFormData({ ...formData, jabatan: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} required />
@@ -1221,7 +1268,7 @@ export default function PenggunaCMS() {
                   <label className={labelStyle}>Judul Kegiatan / Latihan</label>
                   <input type="text" value={formData.judul || ''} onChange={(e) => setFormData({ ...formData, judul: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} required />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className={labelStyle}>Hari</label>
                     <input type="text" value={formData.hari || ''} onChange={(e) => setFormData({ ...formData, hari: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} placeholder="Rabu & Sabtu" required />
@@ -1261,7 +1308,7 @@ export default function PenggunaCMS() {
                   <label className={labelStyle}>Judul Kegiatan / Latihan</label>
                   <input type="text" value={formData.judul || ''} onChange={(e) => setFormData({ ...formData, judul: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} required />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className={labelStyle}>Hari</label>
                     <input type="text" value={formData.hari || ''} onChange={(e) => setFormData({ ...formData, hari: e.target.value })} className={`w-full p-3 rounded-xl text-sm font-normal focus:outline-none ${inputStyle}`} required />
@@ -1289,7 +1336,6 @@ export default function PenggunaCMS() {
           </div>
         </div>
       )}
-
     </div>
   );
 }
