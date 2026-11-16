@@ -19,15 +19,31 @@ export default function KeShAn() {
   if (selectedTahap) {
     const data = contentData[selectedTahap];
     return (
-      <div style={styles.container}>
-        <div style={styles.innerWrapper}>
+      <div style={styles.container} className="keshan-detail-container">
+        <style>{`
+          @media (max-width: 768px) {
+            .keshan-detail-container {
+              padding: 3rem 1.25rem !important;
+            }
+            .keshan-detail-box {
+              padding: 1.75rem 1.25rem !important;
+            }
+            .keshan-detail-title {
+              font-size: 1.6rem !important;
+            }
+            .keshan-detail-text {
+              font-size: 0.95rem !important;
+            }
+          }
+        `}</style>
+        <div style={styles.innerWrapper} className="keshan-inner">
           <button onClick={() => setSelectedTahap(null)} style={styles.backButton}>
             &larr; Kembali ke Ke-SH-an
           </button>
-          <div style={styles.detailContentBox}>
+          <div style={styles.detailContentBox} className="keshan-detail-box">
             <div style={styles.detailBadge}>{data.nomor}</div>
-            <h1 style={styles.detailTitle}>{data.judul}</h1>
-            <p style={styles.detailText}>{data.deskripsiLengkap}</p>
+            <h1 style={styles.detailTitle} className="keshan-detail-title">{data.judul}</h1>
+            <p style={styles.detailText} className="keshan-detail-text">{data.deskripsiLengkap}</p>
           </div>
         </div>
       </div>
@@ -35,7 +51,7 @@ export default function KeShAn() {
   }
 
   return (
-    <div style={styles.container}>
+    <div style={styles.container} className="keshan-page-container">
       <style>{`
         .card-hover {
           transition: all 0.25s ease-in-out;
@@ -46,19 +62,41 @@ export default function KeShAn() {
           border-color: rgba(194, 65, 12, 0.6) !important;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
+
+        @media (max-width: 768px) {
+          .keshan-page-container {
+            padding: 3rem 1.25rem !important;
+          }
+          .keshan-inner {
+            padding: 0 !important;
+          }
+          .keshan-title {
+            font-size: 1.85rem !important;
+            line-height: 1.2 !important;
+          }
+          .keshan-subtitle {
+            font-size: 0.95rem !important;
+          }
+          .keshan-header-box {
+            margin-bottom: 2rem !important;
+          }
+          .keshan-step-card {
+            padding: 2rem 1.5rem !important;
+          }
+        }
       `}</style>
 
-      <div style={styles.innerWrapper}>
-        <div style={styles.headerBox}>
+      <div style={styles.innerWrapper} className="keshan-inner">
+        <div style={styles.headerBox} className="keshan-header-box">
           <span style={styles.tag}>KE-SH-AN & PENDIDIKAN</span>
-          <h1 style={styles.title}>Materi dan Aspek Ke-SH-an PSHT</h1>
-          <p style={styles.subtitle}>
+          <h1 style={styles.title} className="keshan-title">Materi dan Aspek Ke-SH-an PSHT</h1>
+          <p style={styles.subtitle} className="keshan-subtitle">
             Pendidikan dan landasan utama yang menjadi pedoman pembentukan karakter serta fisik setiap warga Persaudaraan Setia Hati Terate.
           </p>
         </div>
 
         <div style={styles.stepsGrid}>
-          <div style={styles.stepCard} className="card-hover">
+          <div style={styles.stepCard} className="card-hover keshan-step-card">
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <h3 style={styles.cardTitle}>TUJUAN PENDIDIKAN PSHT</h3>
               <p style={styles.cardText}>Tujuan dan Aspek Dasar Pendidikan PSHT (Pasal 5 AD/ART)...</p>
@@ -68,7 +106,7 @@ export default function KeShAn() {
             </button>
           </div>
 
-          <div style={styles.stepCard} className="card-hover">
+          <div style={styles.stepCard} className="card-hover keshan-step-card">
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <h3 style={styles.cardTitle}>5 PANCA DASAR PSHT</h3>
               <p style={styles.cardText}>Panca Dasar yang menjadi landasan utama pembentukan karakter...</p>
@@ -88,13 +126,14 @@ const styles = {
     width: '100%', 
     minHeight: 'calc(100vh - 80px)',
     backgroundColor: '#070f1e',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    padding: '6rem 3rem'
   },
   innerWrapper: {
-    padding: '6rem 3rem', // Padding kiri kanan sedikit diperkecil agar konten lebih melebar ke samping
     width: '100%', 
-    boxSizing: 'border-box'
-    // Batas maxWidth dihapus/dibuat 100% agar merentang penuh selebar layar
+    boxSizing: 'border-box',
+    maxWidth: '1400px',
+    margin: '0 auto'
   },
   headerBox: { marginBottom: '3.5rem', width: '100%' },
   tag: { color: '#c2410c', fontWeight: '700', fontSize: '0.85rem', marginBottom: '0.5rem', display: 'block', letterSpacing: '0.5px' },

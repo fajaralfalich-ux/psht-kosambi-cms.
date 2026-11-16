@@ -6,20 +6,62 @@ export default function Struktur() {
 
   return (
     <div style={styles.pageContainer}>
+      <style>{`
+        @keyframes fadeInUp {
+          0% { opacity: 0; transform: translateY(25px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .struktur-header-anim { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        .struktur-card-hover {
+          transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+          border: 1px solid #1e293b;
+        }
+        .struktur-card-hover:hover {
+          transform: translateY(-6px);
+          border-color: rgba(194, 65, 12, 0.6) !important;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* PENGATURAN RESPONSIF UNTUK HP */
+        @media (max-width: 768px) {
+          .struktur-container {
+            padding: 3rem 1.25rem !important;
+          }
+          .struktur-header-box {
+            margin-bottom: 2rem !important;
+          }
+          .struktur-title {
+            font-size: 1.85rem !important;
+            line-height: 1.2 !important;
+          }
+          .struktur-subtitle {
+            font-size: 0.95rem !important;
+          }
+          .struktur-card-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+          }
+          .struktur-card {
+            padding: 2rem 1.5rem !important;
+          }
+        }
+      `}</style>
+
       {/* Header Halaman */}
-      <div style={styles.headerBox}>
+      <div style={styles.headerBox} className="struktur-header-box struktur-header-anim">
         <span style={styles.tag}>STRUKTUR ORGANISASI</span>
-        <h1 style={styles.title}>Kepengurusan Ranting & Cabang</h1>
-        <p style={styles.subtitle}>
+        <h1 style={styles.title} className="struktur-title">Kepengurusan Ranting & Cabang</h1>
+        <p style={styles.subtitle} className="struktur-subtitle">
           Informasi mengenai susunan pengurus PSHT Ranting Kosambi & Cabang.
         </p>
       </div>
 
       {/* Grid Kartu Full Width (2 Kolom melebar proporsional) */}
-      <div style={styles.cardGrid}>
+      <div style={styles.cardGrid} className="struktur-card-grid">
         
         {/* Kartu 1: Struktur Pengurus Ranting */}
-        <div style={styles.card}>
+        <div style={styles.card} className="struktur-card-hover struktur-card">
           <div style={styles.iconBox}>
             <Users size={28} color="#c2410c" />
           </div>
@@ -38,7 +80,7 @@ export default function Struktur() {
         </div>
 
         {/* Kartu 2: Struktur Kepengurusan Cabang */}
-        <div style={styles.card}>
+        <div style={styles.card} className="struktur-card-hover struktur-card">
           <div style={styles.iconBox}>
             <Building2 size={28} color="#c2410c" />
           </div>
@@ -109,7 +151,7 @@ const styles = {
     padding: '6rem 4rem', 
     width: '100%', 
     boxSizing: 'border-box',
-    backgroundColor: '#070f1e', // Latar belakang navy gelap full layar
+    backgroundColor: '#070f1e', 
     minHeight: 'calc(100vh - 80px)'
   },
   headerBox: { marginBottom: '3.5rem', textAlign: 'left', maxWidth: '1400px', margin: '0 auto 3.5rem auto' },
@@ -164,7 +206,6 @@ const styles = {
     marginTop: 'auto'
   },
 
-  // Styling Modal Pop-up
   modalOverlay: {
     position: 'fixed',
     top: 0,

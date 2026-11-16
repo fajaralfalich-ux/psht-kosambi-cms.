@@ -20,29 +20,53 @@ export default function Profil() {
           border-color: rgba(194, 65, 12, 0.6) !important;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
+
+        /* PENGATURAN RESPONSIF UNTUK HP */
+        @media (max-width: 768px) {
+          .profile-hero-section {
+            padding: 3rem 1.25rem 1.5rem 1.25rem !important;
+          }
+          .profile-title {
+            font-size: 1.85rem !important;
+            line-height: 1.2 !important;
+          }
+          .profile-desc {
+            font-size: 0.95rem !important;
+          }
+          .profile-section {
+            padding: 1.5rem 1.25rem 3rem 1.25rem !important;
+          }
+          .profile-cards-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+          }
+          .profile-card {
+            padding: 2rem 1.5rem !important;
+          }
+        }
       `}</style>
 
       {/* HERO / HEADER SECTION */}
-      <header style={styles.hero}>
+      <header style={styles.hero} className="profile-hero-section">
         <div style={styles.heroContent} className="profile-hero-anim">
           <div style={styles.subHeadingWrapper}>
             <Sparkles size={16} color="#c2410c" />
             <span style={styles.heroSubTag}>Tentang Kami</span>
           </div>
-          <h1 style={styles.heroTitle}>Profil PSHT Ranting Kosambi</h1>
-          <p style={styles.heroDesc}>
+          <h1 style={styles.heroTitle} className="profile-title">Profil PSHT Ranting Kosambi</h1>
+          <p style={styles.heroDesc} className="profile-desc">
             Mengenal lebih dekat visi serta misi Persaudaraan Setia Hati Terate Ranting Kosambi, Cabang Kota Tangerang.
           </p>
         </div>
       </header>
 
       {/* KONTEN UTAMA (VISI & MISI) */}
-      <section style={styles.sectionDark}>
+      <section style={styles.sectionDark} className="profile-section">
         <div style={styles.sectionInner}>
-          <div style={styles.cardsGrid}>
+          <div style={styles.cardsGrid} className="profile-cards-grid">
             
             {/* KARTU VISI */}
-            <div style={styles.cardProfile} className="card-profile-hover">
+            <div style={styles.cardProfile} className="card-profile-hover profile-card">
               <div style={styles.cardIcon}>
                 <Shield size={28} color="#c2410c" />
               </div>
@@ -53,7 +77,7 @@ export default function Profil() {
             </div>
 
             {/* KARTU MISI */}
-            <div style={styles.cardProfile} className="card-profile-hover">
+            <div style={styles.cardProfile} className="card-profile-hover profile-card">
               <div style={styles.cardIcon}>
                 <Award size={28} color="#c2410c" />
               </div>

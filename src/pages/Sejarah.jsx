@@ -33,19 +33,39 @@ export default function Sejarah() {
   if (selectedTokoh) {
     const data = tokohData[selectedTokoh];
     return (
-      <div style={styles.detailContainer}>
+      <div style={styles.detailContainer} className="sejarah-detail-container">
+        <style>{`
+          @media (max-width: 768px) {
+            .sejarah-detail-container {
+              padding: 3rem 1.25rem !important;
+            }
+            .sejarah-detail-box {
+              padding: 1.75rem 1.25rem !important;
+            }
+            .sejarah-detail-title {
+              font-size: 1.6rem !important;
+            }
+            .sejarah-detail-image-box {
+              height: 240px !important;
+              max-width: 100% !important;
+            }
+            .sejarah-detail-text {
+              font-size: 0.95rem !important;
+            }
+          }
+        `}</style>
         <button onClick={() => setSelectedTokoh(null)} style={styles.backButton}>
           &larr; Kembali ke Daftar Tokoh
         </button>
-        <div style={styles.detailContentBox}>
-          <h1 style={styles.detailTitle}>{data.nama}</h1>
+        <div style={styles.detailContentBox} className="sejarah-detail-box">
+          <h1 style={styles.detailTitle} className="sejarah-detail-title">{data.nama}</h1>
           
-          <div style={styles.detailImageBox}>
+          <div style={styles.detailImageBox} className="sejarah-detail-image-box">
             <img src={data.foto} alt={data.nama} style={styles.detailImg} />
           </div>
 
           <div style={styles.detailTextWrapper}>
-            <p style={styles.detailText}>{data.deskripsiLengkap}</p>
+            <p style={styles.detailText} className="sejarah-detail-text">{data.deskripsiLengkap}</p>
           </div>
         </div>
       </div>
@@ -53,7 +73,7 @@ export default function Sejarah() {
   }
 
   return (
-    <div style={styles.pageContainer}>
+    <div style={styles.pageContainer} className="sejarah-page-container">
       <style>{`
         .card-hover {
           transition: all 0.25s ease-in-out;
@@ -64,20 +84,39 @@ export default function Sejarah() {
           border-color: rgba(194, 65, 12, 0.6) !important;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
+
+        @media (max-width: 768px) {
+          .sejarah-page-container {
+            padding: 3rem 1.25rem !important;
+          }
+          .sejarah-title {
+            font-size: 1.85rem !important;
+            line-height: 1.2 !important;
+          }
+          .sejarah-subtitle {
+            font-size: 0.95rem !important;
+          }
+          .sejarah-header-box {
+            margin-bottom: 2rem !important;
+          }
+          .sejarah-card-main, .sejarah-card {
+            padding: 2rem 1.5rem !important;
+          }
+        }
       `}</style>
 
       {/* Header Sejarah */}
-      <div style={styles.headerBox}>
+      <div style={styles.headerBox} className="sejarah-header-box">
         <span style={styles.tag}>SEJARAH PERJUANGAN</span>
-        <h1 style={styles.title}>Sejarah Singkat Berdirinya PSHT</h1>
-        <p style={styles.subtitle}>
+        <h1 style={styles.title} className="sejarah-title">Sejarah Singkat Berdirinya PSHT</h1>
+        <p style={styles.subtitle} className="sejarah-subtitle">
           Mengenal akar perjuangan, tokoh pendiri, serta perjalanan panjang Persaudaraan Setia Hati Terate dari masa ke masa.
         </p>
       </div>
 
       {/* Bagian Tokoh Utama di Atas (Tengah) */}
       <div style={styles.topCardWrapper}>
-        <div style={styles.cardMain} className="card-hover">
+        <div style={styles.cardMain} className="card-hover sejarah-card-main">
           <div style={styles.imageBox}>
             <img src={soeroPhoto} alt="Ki Ngabehi Soerodiwiryo" style={styles.tokohImg} />
           </div>
@@ -96,7 +135,7 @@ export default function Sejarah() {
       {/* Bagian 3 Kotak Tokoh di Bawah */}
       <div style={styles.contentGrid}>
         {/* Tokoh 1: Ki Hadjar */}
-        <div style={styles.card} className="card-hover">
+        <div style={styles.card} className="card-hover sejarah-card">
           <div style={styles.imageBox}>
             <img src={kiHadjarPhoto} alt="Ki Hadjar Hardjo Oetomo" style={styles.tokohImg} />
           </div>
@@ -112,7 +151,7 @@ export default function Sejarah() {
         </div>
 
         {/* Tokoh 2: Soetomo */}
-        <div style={styles.card} className="card-hover">
+        <div style={styles.card} className="card-hover sejarah-card">
           <div style={styles.imageBox}>
             <img src={soetomoPhoto} alt="R.M. Soetomo Mangkoedjojo" style={styles.tokohImg} />
           </div>
@@ -128,7 +167,7 @@ export default function Sejarah() {
         </div>
 
         {/* Tokoh 3: Imam Koesoepangat */}
-        <div style={styles.card} className="card-hover">
+        <div style={styles.card} className="card-hover sejarah-card">
           <div style={styles.imageBox}>
             <img src={imamPhoto} alt="R.M. Imam Koesoepangat" style={styles.tokohImg} />
           </div>

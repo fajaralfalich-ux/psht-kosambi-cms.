@@ -13,7 +13,7 @@ export default function Kegiatan() {
   const filteredRayon = filter === 'Semua' ? rayonList : rayonList.filter(r => r.nama === filter);
 
   return (
-    <div style={styles.pageContainer}>
+    <div style={styles.pageContainer} className="kegiatan-page-container">
       <style>{`
         .card-hover {
           transition: all 0.25s ease-in-out;
@@ -32,14 +32,38 @@ export default function Kegiatan() {
           color: #ffffff !important;
           background-color: #0e1d32 !important;
         }
+
+        @media (max-width: 768px) {
+          .kegiatan-page-container {
+            padding: 3rem 1.25rem !important;
+          }
+          .kegiatan-inner {
+            padding: 0 !important;
+          }
+          .kegiatan-title {
+            font-size: 1.85rem !important;
+            line-height: 1.2 !important;
+          }
+          .kegiatan-cards-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+          }
+          .kegiatan-card {
+            padding: 2rem 1.5rem !important;
+          }
+          .kegiatan-filter-group {
+            gap: 0.5rem !important;
+            margin-bottom: 2rem !important;
+          }
+        }
       `}</style>
 
-      <div style={styles.innerWrapper}>
+      <div style={styles.innerWrapper} className="kegiatan-inner">
         <span style={styles.tag}>KEGIATAN & JADWAL</span>
-        <h1 style={styles.title}>Jadwal Latihan Rutin Rayon</h1>
+        <h1 style={styles.title} className="kegiatan-title">Jadwal Latihan Rutin Rayon</h1>
 
         {/* Filter Button */}
-        <div style={styles.filterGroup}>
+        <div style={styles.filterGroup} className="kegiatan-filter-group">
           {['Semua', 'Ranting Kosambi', 'Rayon Salembaran Jaya', 'Rayon Jatimulya'].map((item) => (
             <button 
               key={item}
@@ -53,9 +77,9 @@ export default function Kegiatan() {
         </div>
 
         {/* Grid Cards dengan ukuran yang dibatasi agar tidak terlalu panjang */}
-        <div style={styles.cardsGrid}>
+        <div style={styles.cardsGrid} className="kegiatan-cards-grid">
           {filteredRayon.map((rayon, idx) => (
-            <div key={idx} style={styles.card} className="card-hover">
+            <div key={idx} style={styles.card} className="card-hover kegiatan-card">
               <h3 style={styles.cardTitle}>{rayon.nama}</h3>
               <p style={styles.infoRow}><Calendar size={16} color="#c2410c" /> <strong>Hari:</strong> {rayon.hari}</p>
               <p style={styles.infoRow}><Clock size={16} color="#c2410c" /> <strong>Waktu:</strong> {rayon.jam}</p>
@@ -73,10 +97,10 @@ const styles = {
     width: '100%', 
     minHeight: 'calc(100vh - 80px)',
     backgroundColor: '#070f1e',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    padding: '6rem 4rem'
   },
   innerWrapper: {
-    padding: '6rem 4rem', 
     maxWidth: '1400px', 
     margin: '0 auto', 
     width: '100%', 
