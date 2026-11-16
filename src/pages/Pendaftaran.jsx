@@ -19,12 +19,14 @@ import {
   Download,
   User,
   GraduationCap,
-  Award
+  Award,
+  Menu
 } from 'lucide-react';
 
 export default function PenggunaCMS() {
   const [activeMenu, setActiveMenu] = useState('Manajemen Pengguna');
   const [darkMode, setDarkMode] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   // 1. DATA USERS (MANAJEMEN PENGGUNA)
   const [users, setUsers] = useState(() => {
@@ -57,7 +59,7 @@ export default function PenggunaCMS() {
     };
   });
 
-  // 3. DATA SISWA (Sinkron dengan localStorage 'psht_siswa_list')
+  // 3. DATA SISWA
   const [students, setStudents] = useState(() => {
     const saved = localStorage.getItem('psht_siswa_list');
     return saved ? JSON.parse(saved) : [
@@ -121,7 +123,6 @@ export default function PenggunaCMS() {
   useEffect(() => { localStorage.setItem('psht_cms_logs', JSON.stringify(auditLogs)); }, [auditLogs]);
   useEffect(() => { localStorage.setItem('psht_cms_settings', JSON.stringify(webSettings)); }, [webSettings]);
 
-  // Listener untuk memperbarui data siswa secara real-time dari tab pendaftaran
   useEffect(() => {
     const handleStorageChange = () => {
       const updatedStudents = localStorage.getItem('psht_siswa_list');
@@ -141,7 +142,6 @@ export default function PenggunaCMS() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterRole, setFilterRole] = useState('Semua role');
   const [filterStatus, setFilterStatus] = useState('Semua status');
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('add');
   const [selectedUser, setSelectedUser] = useState(null);
@@ -261,8 +261,18 @@ export default function PenggunaCMS() {
   const bgMain = darkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-100 text-slate-800';
   const bgCard = darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200';
 
+  const menuItems = [
+    { name: 'Profil Super Admin', icon: <User size={18} /> },
+    { name: 'Manajemen Pengguna', icon: <Users size={18} /> },
+    { name: 'Data Siswa', icon: <GraduationCap size={18} /> },
+    { name: 'Data Warga', icon: <Award size={18} /> },
+    { name: 'Jadwal & Kegiatan', icon: <Calendar size={18} /> },
+    { name: 'Log Audit Aktivitas', icon: <Activity size={18} /> },
+    { name: 'Pengaturan Web', icon: <Settings size={18} /> },
+  ];
+
   return (
-    <div className={`flex h-screen ${bgMain} font-sans antialiased overflow-hidden`}>
+    <div className={`flex h-screen ${bgMain} font-sans antialiased overflow-hidden relative`}>
       
       <style>{`
         @media print {
@@ -272,8 +282,8 @@ export default function PenggunaCMS() {
         }
       `}</style>
 
-      {/* SIDEBAR KIRI */}
-      <aside className="w-64 bg-[#0f2744] text-slate-300 flex flex-col justify-between hidden md:flex p-3 no-print flex-shrink-0">
+      {/* SIDEBAR DESKTOP */}
+      <aside className="w-64 bg-[#0f2744] text-slate-300 hidden md:flex flex-col justify-between p-3 no-print flex-shrink-0 shadow-lg">
         <div>
           <div className="p-4 mb-2 border-b border-slate-800/80">
             <h1 className="text-white font-bold text-base flex items-center gap-2">
@@ -284,17 +294,8 @@ export default function PenggunaCMS() {
             </h1>
             <p className="text-xs text-amber-400 mt-1 font-medium tracking-wide">{webSettings.cabang}</p>
           </div>
-
           <nav className="space-y-1.5">
-            {[
-              { name: 'Profil Super Admin', icon: <User size={18} /> },
-              { name: 'Manajemen Pengguna', icon: <Users size={18} /> },
-              { name: 'Data Siswa', icon: <GraduationCap size={18} /> },
-              { name: 'Data Warga', icon: <Award size={18} /> },
-              { name: 'Jadwal & Kegiatan', icon: <Calendar size={18} /> },
-              { name: 'Log Audit Aktivitas', icon: <Activity size={18} /> },
-              { name: 'Pengaturan Web', icon: <Settings size={18} /> },
-            ].map((menu) => (
+            {menuItems.map((menu) => (
               <button 
                 key={menu.name}
                 onClick={() => setActiveMenu(menu.name)}
@@ -308,31 +309,69 @@ export default function PenggunaCMS() {
         </div>
       </aside>
 
+      {/* SIDEBAR MOBILE OVERLAY */}
+      {isMobileSidebarOpen && (
+        <div className="fixed inset-0 bg-black/60 z-50 flex md:hidden" onClick={() => setIsMobileSidebarOpen(false)}>
+          <div className="w-64 bg-[#0f2744] text-slate-300 h-full flex flex-col p-3 shadow-xl" onClick={(e) => e.stopPropagation()}>
+            <div className="p-4 mb-2 border-b border-slate-800/80 flex justify-between items-center">
+              <div>
+                <h1 className="text-white font-bold text-sm flex items-center gap-2">
+                  <span className="bg-[#c2410c] p-1.5 rounded-lg text-white">
+                    <Shield size={16} />
+                  </span>
+                  {webSettings.namaRanting}
+                </h1>
+                <p className="text-[11px] text-amber-400 mt-1 font-medium">{webSettings.cabang}</p>
+              </div>
+              <button onClick={() => setIsMobileSidebarOpen(false)} className="text-slate-400 hover:text-white p-1">
+                <X size={20} />
+              </button>
+            </div>
+            <nav className="space-y-1.5 overflow-y-auto flex-1">
+              {menuItems.map((menu) => (
+                <button 
+                  key={menu.name}
+                  onClick={() => { setActiveMenu(menu.name); setIsMobileSidebarOpen(false); }}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition cursor-pointer ${activeMenu === menu.name ? 'bg-[#c2410c] text-white shadow-md' : 'text-slate-300 hover:bg-slate-800/50 hover:text-white'}`}
+                >
+                  {menu.icon}
+                  <span>{menu.name}</span>
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
+
       {/* KONTEN UTAMA */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden w-full">
         
         {/* HEADER ATAS */}
-        <header className={`h-20 ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'} border-b px-8 flex justify-between items-center no-print`}>
-          <div>
-            <h1 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{activeMenu} CMS</h1>
-            <p className="text-xs text-slate-500">Pusat kontrol dan pengelolaan data website resmi {webSettings.namaRanting}</p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button onClick={() => setDarkMode(!darkMode)} className="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition cursor-pointer">
-              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+        <header className={`h-16 md:h-20 ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'} border-b px-4 md:px-8 flex justify-between items-center no-print flex-shrink-0`}>
+          <div className="flex items-center gap-3">
+            <button onClick={() => setIsMobileSidebarOpen(true)} className="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition">
+              <Menu size={22} />
             </button>
-            <button className="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition relative">
-              <Bell size={20} />
+            <div>
+              <h1 className={`text-base md:text-xl font-bold ${darkMode ? 'text-white' : 'text-slate-900'} truncate`}>{activeMenu} CMS</h1>
+              <p className="hidden md:block text-xs text-slate-500">Pusat kontrol dan pengelolaan data website resmi {webSettings.namaRanting}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 md:gap-4">
+            <button onClick={() => setDarkMode(!darkMode)} className="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition cursor-pointer">
+              {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button className="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition relative hidden sm:block">
+              <Bell size={18} />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#c2410c] rounded-full"></span>
             </button>
             
-            <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
-              <div className="text-right">
-                <p className={`text-sm font-bold ${darkMode ? 'text-slate-200' : 'text-slate-800'}`}>{adminProfile.name}</p>
-                <p className="text-[11px] text-slate-500">Super Admin</p>
+            <div className="flex items-center gap-2 md:gap-3 pl-2 md:pl-4 border-l border-slate-200">
+              <div className="text-right hidden sm:block">
+                <p className={`text-xs md:text-sm font-bold ${darkMode ? 'text-slate-200' : 'text-slate-800'}`}>{adminProfile.name}</p>
+                <p className="text-[10px] text-slate-500">Super Admin</p>
               </div>
-              <div className="w-10 h-10 rounded-full bg-[#c2410c] text-white font-bold flex items-center justify-center text-sm shadow-sm">
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#c2410c] text-white font-bold flex items-center justify-center text-xs md:text-sm shadow-sm flex-shrink-0">
                 {adminProfile.name.split(' ').map(n => n[0]).join('')}
               </div>
             </div>
@@ -340,24 +379,23 @@ export default function PenggunaCMS() {
         </header>
 
         {/* AREA KONTEN DINAMIS */}
-        <main className="flex-1 overflow-y-auto p-8">
+        <main className="flex-1 overflow-y-auto p-4 md:p-8 w-full">
           
           {/* PROFIL SUPER ADMIN */}
           {activeMenu === 'Profil Super Admin' && (
             <div className="max-w-3xl mx-auto space-y-6">
-              <div className={`${bgCard} rounded-2xl border shadow-sm p-8 flex items-center gap-6`}>
-                <div className="w-20 h-20 rounded-2xl bg-[#0f2744] text-white font-bold text-2xl flex items-center justify-center shadow-md">
+              <div className={`${bgCard} rounded-2xl border shadow-sm p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6 text-center sm:text-left`}>
+                <div className="w-20 h-20 rounded-2xl bg-[#0f2744] text-white font-bold text-2xl flex items-center justify-center shadow-md flex-shrink-0">
                   {adminProfile.name.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div>
-                  <h2 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{adminProfile.name}</h2>
-                  <p className="text-sm text-[#c2410c] font-semibold mt-0.5">{adminProfile.role} — {adminProfile.rayon}</p>
+                  <h2 className={`text-lg md:text-xl font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{adminProfile.name}</h2>
+                  <p className="text-xs md:text-sm text-[#c2410c] font-semibold mt-0.5">{adminProfile.role} — {adminProfile.rayon}</p>
                   <p className="text-xs text-slate-500 mt-2">{adminProfile.bio}</p>
                 </div>
               </div>
-
-              <div className={`${bgCard} rounded-2xl border shadow-sm p-8`}>
-                <h3 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'} mb-4`}>Pengaturan Profil & Akun</h3>
+              <div className={`${bgCard} rounded-2xl border shadow-sm p-6 md:p-8`}>
+                <h3 className={`text-sm md:text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'} mb-4`}>Pengaturan Profil & Akun</h3>
                 
                 <form onSubmit={(e) => {
                   e.preventDefault();
@@ -372,7 +410,7 @@ export default function PenggunaCMS() {
                     <label className="block text-slate-700 mb-1">Email Resmi</label>
                     <input type="email" value={adminProfile.email} onChange={(e) => setAdminProfile({ ...adminProfile, email: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal focus:outline-none focus:border-blue-500" required />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-slate-700 mb-1">Nomor Induk Mahasiswa (NIM)</label>
                       <input type="text" value={adminProfile.nim} onChange={(e) => setAdminProfile({ ...adminProfile, nim: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal focus:outline-none focus:border-blue-500" />
@@ -387,7 +425,7 @@ export default function PenggunaCMS() {
                     <textarea rows={3} value={adminProfile.bio} onChange={(e) => setAdminProfile({ ...adminProfile, bio: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal focus:outline-none focus:border-blue-500" />
                   </div>
                   <div className="pt-2">
-                    <button type="submit" className="bg-[#0f2744] hover:bg-blue-900 text-white font-bold px-5 py-3 rounded-xl cursor-pointer shadow-sm transition">
+                    <button type="submit" className="w-full sm:w-auto bg-[#0f2744] hover:bg-blue-900 text-white font-bold px-5 py-3 rounded-xl cursor-pointer shadow-sm transition">
                       Simpan Perubahan Profil
                     </button>
                   </div>
@@ -399,23 +437,22 @@ export default function PenggunaCMS() {
           {/* MANAJEMEN PENGGUNA */}
           {activeMenu === 'Manajemen Pengguna' && (
             <>
-              <div className="flex justify-between items-start mb-6 no-print">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 no-print">
                 <div>
                   <div className="flex items-center gap-3">
-                    <h2 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Daftar Admin & Pengurus</h2>
+                    <h2 className={`text-base md:text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Daftar Admin & Pengurus</h2>
                     <span className="bg-slate-200 text-slate-700 text-xs px-2.5 py-0.5 rounded-full font-semibold">{users.length} akun</span>
                   </div>
                   <p className="text-xs text-slate-500 mt-1">Kelola hak akses pengurus ranting, pelatih, dan administrator website PSHT Ranting Kosambi.</p>
                 </div>
                 
-                <button onClick={handleOpenAdd} className="bg-[#0f2744] hover:bg-blue-900 text-white text-sm font-semibold px-4 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition cursor-pointer">
+                <button onClick={handleOpenAdd} className="w-full sm:w-auto bg-[#0f2744] hover:bg-blue-900 text-white text-xs md:text-sm font-semibold px-4 py-2.5 rounded-lg flex items-center justify-center gap-2 shadow-sm transition cursor-pointer">
                   <Plus size={16} /> Tambah user
                 </button>
               </div>
-
-              <div className={`${bgCard} rounded-xl border shadow-sm p-6`}>
-                <div className="flex flex-wrap gap-4 mb-6 no-print">
-                  <div className="relative flex-1 min-w-[280px]">
+              <div className={`${bgCard} rounded-xl border shadow-sm p-4 md:p-6`}>
+                <div className="flex flex-wrap gap-3 mb-6 no-print">
+                  <div className="relative flex-1 min-w-[240px]">
                     <Search className="absolute left-3 top-3 text-slate-400" size={18} />
                     <input 
                       type="text" 
@@ -425,57 +462,54 @@ export default function PenggunaCMS() {
                       className={`w-full pl-10 pr-4 py-2.5 ${darkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-900'} border rounded-lg text-sm focus:outline-none focus:border-blue-500 transition`}
                     />
                   </div>
-
                   <select value={filterRole} onChange={(e) => setFilterRole(e.target.value)} className={`px-4 py-2.5 ${darkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-900'} border rounded-lg text-sm`}>
                     <option>Semua role</option>
                     <option>Super Admin</option>
                     <option>Admin Ranting</option>
                     <option>Pelatih</option>
                   </select>
-
                   <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className={`px-4 py-2.5 ${darkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-900'} border rounded-lg text-sm`}>
                     <option>Semua status</option>
                     <option>Aktif</option>
                     <option>Non-Aktif</option>
                   </select>
                 </div>
-
                 <div className="overflow-x-auto border border-slate-100 rounded-lg">
-                  <table className="w-full text-left border-collapse">
+                  <table className="w-full text-left border-collapse min-w-[650px]">
                     <thead>
                       <tr className={`bg-slate-50/70 border-b border-slate-200 text-xs font-bold text-slate-600 uppercase tracking-wider ${darkMode ? 'bg-slate-800 text-slate-300 border-slate-700' : ''}`}>
-                        <th className="p-4">Nama / Email</th>
-                        <th className="p-4">Peran / Role</th>
-                        <th className="p-4">Rayon / Jabatan</th>
-                        <th className="p-4">Status</th>
-                        <th className="p-4">Login Terakhir</th>
-                        <th className="p-4 text-center no-print">Aksi</th>
+                        <th className="p-3 md:p-4">Nama / Email</th>
+                        <th className="p-3 md:p-4">Peran / Role</th>
+                        <th className="p-3 md:p-4">Rayon / Jabatan</th>
+                        <th className="p-3 md:p-4">Status</th>
+                        <th className="p-3 md:p-4">Login Terakhir</th>
+                        <th className="p-3 md:p-4 text-center no-print">Aksi</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 text-sm">
                       {filteredUsers.length > 0 ? (
                         filteredUsers.map((user) => (
                           <tr key={user.id} className="hover:bg-slate-50/50 transition">
-                            <td className="p-4">
+                            <td className="p-3 md:p-4">
                               <div className={`font-bold ${darkMode ? 'text-slate-100' : 'text-slate-900'} flex items-center gap-2`}>
                                 {user.name}
                                 {user.isMain && <span className="bg-amber-100 text-amber-700 text-[10px] px-2 py-0.5 rounded font-semibold">Utama</span>}
                               </div>
                               <div className="text-xs text-slate-500">{user.email}</div>
                             </td>
-                            <td className="p-4">
+                            <td className="p-3 md:p-4">
                               <span className={`text-xs px-2.5 py-1 rounded-md font-semibold ${user.role === 'Super Admin' ? 'bg-rose-100 text-rose-700' : 'bg-blue-100 text-blue-700'}`}>{user.role}</span>
                             </td>
-                            <td className="p-4">
+                            <td className="p-3 md:p-4">
                               <div className={`font-semibold ${darkMode ? 'text-slate-300' : 'text-slate-800'}`}>{user.jabatan}</div>
                             </td>
-                            <td className="p-4">
+                            <td className="p-3 md:p-4">
                               <span className={`inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-semibold ${user.status === 'Aktif' ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-700'}`}>
                                 <span className={`w-1.5 h-1.5 rounded-full ${user.status === 'Aktif' ? 'bg-emerald-500' : 'bg-slate-500'}`}></span> {user.status}
                               </span>
                             </td>
-                            <td className="p-4 text-xs text-slate-500 font-medium">{user.lastLogin}</td>
-                            <td className="p-4 no-print">
+                            <td className="p-3 md:p-4 text-xs text-slate-500 font-medium">{user.lastLogin}</td>
+                            <td className="p-3 md:p-4 no-print">
                               <div className="flex items-center justify-center gap-1.5">
                                 <button onClick={() => handleOpenView(user)} title="Lihat" className="p-1.5 border rounded-lg hover:bg-slate-100 text-slate-600 transition cursor-pointer"><Eye size={15} /></button>
                                 <button onClick={() => handleOpenEdit(user)} title="Edit" className="p-1.5 border rounded-lg hover:bg-slate-100 text-slate-600 transition cursor-pointer"><Edit size={15} /></button>
@@ -498,63 +532,60 @@ export default function PenggunaCMS() {
           {/* DATA SISWA */}
           {activeMenu === 'Data Siswa' && (
             <>
-              <div className="flex justify-between items-start mb-6 no-print flex-wrap gap-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 no-print">
                 <div>
                   <div className="flex items-center gap-3">
-                    <h2 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Buku Induk Data Siswa PSHT</h2>
+                    <h2 className={`text-base md:text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Buku Induk Data Siswa PSHT</h2>
                     <span className="bg-blue-100 text-blue-700 text-xs px-2.5 py-0.5 rounded-full font-semibold">Total: {students.length} Siswa</span>
                   </div>
                   <p className="text-xs text-slate-500 mt-1">Pengelolaan khusus data siswa latihan berstatus aktif/proses pencak silat.</p>
                 </div>
-
-                <div className="flex items-center gap-2">
-                  <button onClick={() => exportCSV('students')} className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition cursor-pointer">
-                    <Download size={15} /> Unduh Excel / CSV
+                <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                  <button onClick={() => exportCSV('students')} className="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3 py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition cursor-pointer">
+                    <Download size={15} /> Unduh Excel
                   </button>
-                  <button onClick={printDocument} className="bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-3.5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition cursor-pointer">
-                    <FileText size={15} /> Cetak Dokumen PDF
+                  <button onClick={printDocument} className="flex-1 sm:flex-none bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-3 py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition cursor-pointer">
+                    <FileText size={15} /> Cetak PDF
                   </button>
-                  <button onClick={() => { setModalType('addStudent'); setFormData({ name: '', nik: '', noHp: '', tinggiBadan: '', beratBadan: '', alamat: '', tingkatan: 'Siswa Polos', rayon: 'Rayon Salembaran Jaya' }); setIsModalOpen(true); }} className="bg-[#0f2744] hover:bg-blue-900 text-white text-xs font-semibold px-3.5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition cursor-pointer">
-                    <Plus size={15} /> Tambah Siswa Baru
+                  <button onClick={() => { setModalType('addStudent'); setFormData({ name: '', nik: '', noHp: '', tinggiBadan: '', beratBadan: '', alamat: '', tingkatan: 'Siswa Polos', rayon: 'Rayon Salembaran Jaya' }); setIsModalOpen(true); }} className="w-full sm:w-auto bg-[#0f2744] hover:bg-blue-900 text-white text-xs font-semibold px-3.5 py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition cursor-pointer">
+                    <Plus size={15} /> Tambah Siswa
                   </button>
                 </div>
               </div>
-
               <div className="print-only hidden text-center border-b-2 border-black pb-4 mb-6">
                 <h2 className="text-lg font-bold">PERSAUDARAAN SETIA HATI TERATE (PSHT)</h2>
                 <h3 className="text-sm font-semibold">RANTING KOSAMBI — LAPORAN DATA SISWA</h3>
                 <p className="text-xs mt-1">Dicetak Tanggal: {new Date().toLocaleDateString('id-ID')}</p>
               </div>
-
-              <div className={`${bgCard} rounded-xl border shadow-sm p-6`}>
+              <div className={`${bgCard} rounded-xl border shadow-sm p-4 md:p-6`}>
                 <div className="overflow-x-auto border border-slate-100 rounded-lg">
-                  <table className="w-full text-left border-collapse">
+                  <table className="w-full text-left border-collapse min-w-[750px]">
                     <thead>
                       <tr className="bg-slate-50/70 border-b border-slate-200 text-xs font-bold text-slate-600 uppercase tracking-wider">
-                        <th className="p-4">Nama Lengkap</th>
-                        <th className="p-4">NIK</th>
-                        <th className="p-4">No. WhatsApp</th>
-                        <th className="p-4">Fisik (TB / BB)</th>
-                        <th className="p-4">Alamat</th>
-                        <th className="p-4">Tingkatan</th>
-                        <th className="p-4">Rayon</th>
-                        <th className="p-4">Status</th>
-                        <th className="p-4 text-center no-print">Aksi</th>
+                        <th className="p-3 md:p-4">Nama Lengkap</th>
+                        <th className="p-3 md:p-4">NIK</th>
+                        <th className="p-3 md:p-4">No. WhatsApp</th>
+                        <th className="p-3 md:p-4">Fisik (TB / BB)</th>
+                        <th className="p-3 md:p-4">Alamat</th>
+                        <th className="p-3 md:p-4">Tingkatan</th>
+                        <th className="p-3 md:p-4">Rayon</th>
+                        <th className="p-3 md:p-4">Status</th>
+                        <th className="p-3 md:p-4 text-center no-print">Aksi</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 text-sm">
                       {students.length > 0 ? (
                         students.map((s, index) => (
                           <tr key={index} className="hover:bg-slate-50/50 transition">
-                            <td className="p-4 font-bold text-slate-900">{s.name}</td>
-                            <td className="p-4 text-xs font-mono text-slate-600">{s.nik || '-'}</td>
-                            <td className="p-4 text-xs text-slate-600">{s.noHp || '-'}</td>
-                            <td className="p-4 text-xs text-slate-600">{s.tinggiBadan || '-'} cm / {s.beratBadan || '-'} kg</td>
-                            <td className="p-4 text-xs text-slate-500 max-w-xs truncate" title={s.alamat}>{s.alamat || '-'}</td>
-                            <td className="p-4"><span className="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded-md font-semibold">{s.tingkatan || 'Siswa Polos'}</span></td>
-                            <td className="p-4 font-semibold text-slate-700">{s.rayon}</td>
-                            <td className="p-4"><span className="bg-emerald-100 text-emerald-700 text-xs px-2.5 py-1 rounded-full font-semibold">● {s.status || 'Aktif'}</span></td>
-                            <td className="p-4 text-center no-print">
+                            <td className="p-3 md:p-4 font-bold text-slate-900">{s.name}</td>
+                            <td className="p-3 md:p-4 text-xs font-mono text-slate-600">{s.nik || '-'}</td>
+                            <td className="p-3 md:p-4 text-xs text-slate-600">{s.noHp || '-'}</td>
+                            <td className="p-3 md:p-4 text-xs text-slate-600">{s.tinggiBadan || '-'} cm / {s.beratBadan || '-'} kg</td>
+                            <td className="p-3 md:p-4 text-xs text-slate-500 max-w-xs truncate" title={s.alamat}>{s.alamat || '-'}</td>
+                            <td className="p-3 md:p-4"><span className="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded-md font-semibold">{s.tingkatan || 'Siswa Polos'}</span></td>
+                            <td className="p-3 md:p-4 font-semibold text-slate-700">{s.rayon}</td>
+                            <td className="p-3 md:p-4"><span className="bg-emerald-100 text-emerald-700 text-xs px-2.5 py-1 rounded-full font-semibold">● {s.status || 'Aktif'}</span></td>
+                            <td className="p-3 md:p-4 text-center no-print">
                               <button onClick={() => { 
                                 const filtered = students.filter((_, i) => i !== index);
                                 setStudents(filtered); 
@@ -577,50 +608,48 @@ export default function PenggunaCMS() {
           {/* DATA WARGA */}
           {activeMenu === 'Data Warga' && (
             <>
-              <div className="flex justify-between items-start mb-6 no-print flex-wrap gap-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 no-print">
                 <div>
                   <div className="flex items-center gap-3">
-                    <h2 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Buku Induk Data Warga PSHT</h2>
-                    <span className="bg-amber-100 text-amber-800 text-xs px-2.5 py-0.5 rounded-full font-semibold">Total: {citizens.length} Warga Pengesahan</span>
+                    <h2 className={`text-base md:text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Buku Induk Data Warga PSHT</h2>
+                    <span className="bg-amber-100 text-amber-800 text-xs px-2.5 py-0.5 rounded-full font-semibold">Total: {citizens.length} Warga</span>
                   </div>
                   <p className="text-xs text-slate-500 mt-1">Pengelolaan khusus data warga (pendekar/pengesahan) PSHT Ranting Kosambi.</p>
                 </div>
-
-                <div className="flex items-center gap-2">
-                  <button onClick={() => exportCSV('citizens')} className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition cursor-pointer">
-                    <Download size={15} /> Unduh Excel / CSV
+                <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                  <button onClick={() => exportCSV('citizens')} className="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3 py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition cursor-pointer">
+                    <Download size={15} /> Unduh Excel
                   </button>
-                  <button onClick={printDocument} className="bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-3.5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition cursor-pointer">
-                    <FileText size={15} /> Cetak Dokumen PDF
+                  <button onClick={printDocument} className="flex-1 sm:flex-none bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-3 py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition cursor-pointer">
+                    <FileText size={15} /> Cetak PDF
                   </button>
-                  <button onClick={() => { setModalType('addCitizen'); setFormData({ name: '', tingkatWarga: 'Warga Tingkat I', rayon: 'Rayon Kosambi Timur', tahunPengesahan: '2026', noHp: '' }); setIsModalOpen(true); }} className="bg-[#0f2744] hover:bg-blue-900 text-white text-xs font-semibold px-3.5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition cursor-pointer">
-                    <Plus size={15} /> Tambah Warga Baru
+                  <button onClick={() => { setModalType('addCitizen'); setFormData({ name: '', tingkatWarga: 'Warga Tingkat I', rayon: 'Rayon Kosambi Timur', tahunPengesahan: '2026', noHp: '' }); setIsModalOpen(true); }} className="w-full sm:w-auto bg-[#0f2744] hover:bg-blue-900 text-white text-xs font-semibold px-3.5 py-2.5 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition cursor-pointer">
+                    <Plus size={15} /> Tambah Warga
                   </button>
                 </div>
               </div>
-
-              <div className={`${bgCard} rounded-xl border shadow-sm p-6`}>
+              <div className={`${bgCard} rounded-xl border shadow-sm p-4 md:p-6`}>
                 <div className="overflow-x-auto border border-slate-100 rounded-lg">
-                  <table className="w-full text-left border-collapse">
+                  <table className="w-full text-left border-collapse min-w-[650px]">
                     <thead>
                       <tr className="bg-slate-50/70 border-b border-slate-200 text-xs font-bold text-slate-600 uppercase tracking-wider">
-                        <th className="p-4">No. Induk Warga</th>
-                        <th className="p-4">Nama Lengkap</th>
-                        <th className="p-4">Tingkatan Warga</th>
-                        <th className="p-4">Rayon / Ranting</th>
-                        <th className="p-4">Tahun Pengesahan</th>
-                        <th className="p-4 text-center no-print">Aksi</th>
+                        <th className="p-3 md:p-4">No. Induk Warga</th>
+                        <th className="p-3 md:p-4">Nama Lengkap</th>
+                        <th className="p-3 md:p-4">Tingkatan Warga</th>
+                        <th className="p-3 md:p-4">Rayon / Ranting</th>
+                        <th className="p-3 md:p-4">Tahun Pengesahan</th>
+                        <th className="p-3 md:p-4 text-center no-print">Aksi</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 text-sm">
                       {citizens.map((c) => (
                         <tr key={c.id} className="hover:bg-slate-50/50 transition">
-                          <td className="p-4 font-mono font-bold text-amber-600">{c.id}</td>
-                          <td className="p-4 font-bold text-slate-900">{c.name}<div className="text-xs font-normal text-slate-500">HP: {c.noHp}</div></td>
-                          <td className="p-4"><span className="bg-purple-100 text-purple-800 text-xs px-2.5 py-1 rounded-md font-semibold">{c.tingkatWarga}</span></td>
-                          <td className="p-4 font-semibold text-slate-700">{c.rayon}</td>
-                          <td className="p-4 font-medium text-slate-600">{c.tahunPengesahan}</td>
-                          <td className="p-4 text-center no-print">
+                          <td className="p-3 md:p-4 font-mono font-bold text-amber-600">{c.id}</td>
+                          <td className="p-3 md:p-4 font-bold text-slate-900">{c.name}<div className="text-xs font-normal text-slate-500">HP: {c.noHp}</div></td>
+                          <td className="p-3 md:p-4"><span className="bg-purple-100 text-purple-800 text-xs px-2.5 py-1 rounded-md font-semibold">{c.tingkatWarga}</span></td>
+                          <td className="p-3 md:p-4 font-semibold text-slate-700">{c.rayon}</td>
+                          <td className="p-3 md:p-4 font-medium text-slate-600">{c.tahunPengesahan}</td>
+                          <td className="p-3 md:p-4 text-center no-print">
                             <button onClick={() => { setCitizens(citizens.filter(x => x.id !== c.id)); addLog('Hapus Warga', `Menghapus warga ${c.name}`); }} className="p-1.5 border border-slate-200 rounded-lg hover:bg-red-50 text-red-600 transition cursor-pointer" title="Hapus"><Trash2 size={15} /></button>
                           </td>
                         </tr>
@@ -635,25 +664,24 @@ export default function PenggunaCMS() {
           {/* JADWAL & KEGIATAN */}
           {activeMenu === 'Jadwal & Kegiatan' && (
             <>
-              <div className="flex justify-between items-start mb-6 no-print">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 no-print">
                 <div>
-                  <h2 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Kelola Jadwal & Kegiatan</h2>
+                  <h2 className={`text-base md:text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Kelola Jadwal & Kegiatan</h2>
                   <p className="text-xs text-slate-500 mt-1">Atur jadwal latihan rutin dan agenda kegiatan PSHT Ranting Kosambi.</p>
                 </div>
-                <button onClick={() => { setModalType('addSchedule'); setFormData({ judul: '', hari: '', waktu: '', lokasi: '', pembina: '' }); setIsModalOpen(true); }} className="bg-[#0f2744] hover:bg-blue-900 text-white text-xs font-semibold px-4 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition cursor-pointer">
+                <button onClick={() => { setModalType('addSchedule'); setFormData({ judul: '', hari: '', waktu: '', lokasi: '', pembina: '' }); setIsModalOpen(true); }} className="w-full sm:w-auto bg-[#0f2744] hover:bg-blue-900 text-white text-xs font-semibold px-4 py-2.5 rounded-lg flex items-center justify-center gap-2 shadow-sm transition cursor-pointer">
                   <Plus size={16} /> Tambah Jadwal Baru
                 </button>
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 {schedules.map((sch) => (
-                  <div key={sch.id} className={`${bgCard} rounded-xl border shadow-sm p-6 flex flex-col justify-between`}>
+                  <div key={sch.id} className={`${bgCard} rounded-xl border shadow-sm p-4 md:p-6 flex flex-col justify-between`}>
                     <div>
                       <div className="flex justify-between items-start mb-3">
                         <span className="bg-orange-100 text-[#c2410c] text-xs font-bold px-3 py-1 rounded-lg">{sch.hari}</span>
                         <button onClick={() => { setSchedules(schedules.filter(x => x.id !== sch.id)); addLog('Hapus Jadwal', `Menghapus jadwal ${sch.judul}`); }} className="text-slate-400 hover:text-red-600 transition cursor-pointer"><Trash2 size={16} /></button>
                       </div>
-                      <h3 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'} mb-2`}>{sch.judul}</h3>
+                      <h3 className={`text-sm md:text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'} mb-2`}>{sch.judul}</h3>
                       <p className="text-xs text-slate-500 mb-1">⏰ {sch.waktu}</p>
                       <p className="text-xs text-slate-500 mb-1">📍 {sch.lokasi}</p>
                       <p className="text-xs text-slate-500">👨‍🏫 Pembina: {sch.pembina}</p>
@@ -666,21 +694,20 @@ export default function PenggunaCMS() {
 
           {/* LOG AUDIT AKTIVITAS */}
           {activeMenu === 'Log Audit Aktivitas' && (
-            <div className={`${bgCard} rounded-xl border shadow-sm p-6`}>
-              <h2 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'} mb-1`}>Log Audit Sistem</h2>
+            <div className={`${bgCard} rounded-xl border shadow-sm p-4 md:p-6`}>
+              <h2 className={`text-base md:text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'} mb-1`}>Log Audit Sistem</h2>
               <p className="text-xs text-slate-500 mb-6">Rekaman aktivitas penting yang dilakukan oleh admin dan pengurus dalam sistem CMS.</p>
-
               <div className="space-y-3">
                 {auditLogs.map((log) => (
-                  <div key={log.id} className="p-4 border border-slate-100 rounded-xl flex items-center justify-between text-xs">
+                  <div key={log.id} className="p-3 md:p-4 border border-slate-100 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                     <div>
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
                         <span className="bg-blue-100 text-blue-700 font-bold px-2 py-0.5 rounded">{log.aksi}</span>
                         <span className="font-semibold text-slate-700">Oleh: {log.aktor}</span>
                       </div>
                       <p className="text-slate-500">{log.detail}</p>
                     </div>
-                    <div className="text-right text-slate-400 font-mono text-[11px]">{log.waktu}</div>
+                    <div className="text-left sm:text-right text-slate-400 font-mono text-[11px]">{log.waktu}</div>
                   </div>
                 ))}
               </div>
@@ -689,10 +716,9 @@ export default function PenggunaCMS() {
 
           {/* PENGATURAN WEB */}
           {activeMenu === 'Pengaturan Web' && (
-            <div className={`${bgCard} rounded-xl border shadow-sm p-8 max-w-2xl`}>
-              <h2 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'} mb-1`}>Konfigurasi Web Ranting</h2>
+            <div className={`${bgCard} rounded-xl border shadow-sm p-6 md:p-8 max-w-2xl mx-auto`}>
+              <h2 className={`text-base md:text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'} mb-1`}>Konfigurasi Web Ranting</h2>
               <p className="text-xs text-slate-500 mb-6">Ubah informasi utama dan status operasional website publik PSHT Ranting Kosambi.</p>
-
               <form onSubmit={(e) => {
                 e.preventDefault();
                 addLog('Pengaturan Web', 'Memperbarui konfigurasi utama website');
@@ -706,7 +732,7 @@ export default function PenggunaCMS() {
                   <label className="block text-slate-700 mb-1">Wilayah Cabang</label>
                   <input type="text" value={webSettings.cabang} onChange={(e) => setWebSettings({ ...webSettings, cabang: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal focus:outline-none" required />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-slate-700 mb-1">Email Kontak Resmi</label>
                     <input type="email" value={webSettings.emailKontak} onChange={(e) => setWebSettings({ ...webSettings, emailKontak: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal focus:outline-none" required />
@@ -716,23 +742,21 @@ export default function PenggunaCMS() {
                     <input type="text" value={webSettings.telepon} onChange={(e) => setWebSettings({ ...webSettings, telepon: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal focus:outline-none" required />
                   </div>
                 </div>
-
                 <div className="pt-4">
-                  <button type="submit" className="bg-[#0f2744] hover:bg-blue-900 text-white font-bold px-5 py-3 rounded-xl cursor-pointer shadow-sm transition">
+                  <button type="submit" className="w-full sm:w-auto bg-[#0f2744] hover:bg-blue-900 text-white font-bold px-5 py-3 rounded-xl cursor-pointer shadow-sm transition">
                     Simpan Konfigurasi Web
                   </button>
                 </div>
               </form>
             </div>
           )}
-
         </main>
       </div>
 
       {/* MODAL GLOBAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className={`${bgCard} rounded-2xl max-w-lg w-full p-6 shadow-2xl relative border`}>
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div className={`${bgCard} rounded-2xl max-w-lg w-full p-6 shadow-2xl relative border my-auto`}>
             <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition"><X size={20} /></button>
             
             {modalType === 'add' && (
@@ -790,7 +814,7 @@ export default function PenggunaCMS() {
                     <label className="block text-slate-600 mb-1">Nama Lengkap Siswa</label>
                     <input type="text" required value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal" placeholder="Nama siswa..." />
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-slate-600 mb-1">NIK (16 Digit)</label>
                       <input type="text" required value={formData.nik || ''} onChange={(e) => setFormData({ ...formData, nik: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal" placeholder="Nomor NIK..." />
@@ -810,7 +834,7 @@ export default function PenggunaCMS() {
                       <input type="text" required value={formData.beratBadan || ''} onChange={(e) => setFormData({ ...formData, beratBadan: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal" placeholder="Contoh: 60" />
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-slate-600 mb-1">Tingkatan Sabuk</label>
                       <select value={formData.tingkatan || 'Siswa Polos'} onChange={(e) => setFormData({ ...formData, tingkatan: e.target.value })} className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg text-sm font-normal">
@@ -927,11 +951,9 @@ export default function PenggunaCMS() {
                 </div>
               </>
             )}
-
           </div>
         </div>
       )}
-
     </div>
   );
 }
