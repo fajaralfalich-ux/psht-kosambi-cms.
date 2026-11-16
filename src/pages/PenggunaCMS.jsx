@@ -20,13 +20,23 @@ import {
   User,
   GraduationCap,
   Award,
-  Menu
+  Menu,
+  LogOut
 } from 'lucide-react';
 
 export default function PenggunaCMS() {
   const [activeMenu, setActiveMenu] = useState('Manajemen Pengguna');
-  const [darkMode, setDarkMode] = useState(true); // Default diset ke dark mode agar gradasi terlihat maksimal
+  const [darkMode, setDarkMode] = useState(true);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
+  // Fungsi Logout / Keluar Sistem
+  const handleLogout = () => {
+    if (window.confirm('Apakah Anda yakin ingin keluar dari sistem (Logout)?')) {
+      localStorage.removeItem('psht_is_logged_in'); // Hapus sesi login jika ada
+      alert('Berhasil keluar dari sistem.');
+      window.location.href = '/login'; // Sesuaikan dengan route halaman login Anda
+    }
+  };
 
   // 1. DATA USERS (MANAJEMEN PENGGUNA)
   const [users, setUsers] = useState(() => {
@@ -259,7 +269,6 @@ export default function PenggunaCMS() {
     return matchSearch && matchRole && matchStatus;
   });
 
-  // Tema warna Gradasi Premium
   const bgMain = darkMode 
     ? 'bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-slate-100' 
     : 'bg-gradient-to-br from-slate-50 via-blue-50/40 to-indigo-50/50 text-slate-800';
@@ -289,7 +298,7 @@ export default function PenggunaCMS() {
         }
       `}</style>
 
-      {/* SIDEBAR DESKTOP DENGAN GRADASI */}
+      {/* SIDEBAR DESKTOP */}
       <aside className="w-64 bg-gradient-to-b from-[#0a1b30] via-[#081324] to-[#040a12] text-slate-300 hidden md:flex flex-col justify-between p-4 no-print flex-shrink-0 shadow-2xl border-r border-slate-800/60">
         <div>
           <div className="p-3.5 mb-4 border-b border-slate-800/80 bg-gradient-to-r from-blue-950/40 to-transparent rounded-2xl">
@@ -318,42 +327,61 @@ export default function PenggunaCMS() {
             ))}
           </nav>
         </div>
+
+        {/* TOMBOL LOGOUT DI BAWAH SIDEBAR (OPSIONAL/TAMBAHAN) */}
+        <div className="pt-4 border-t border-slate-800">
+          <button 
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-950/40 hover:text-rose-300 transition cursor-pointer"
+          >
+            <LogOut size={18} />
+            <span>Keluar Sistem (Logout)</span>
+          </button>
+        </div>
       </aside>
 
       {/* SIDEBAR MOBILE OVERLAY */}
       {isMobileSidebarOpen && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex md:hidden animate-fade-in" onClick={() => setIsMobileSidebarOpen(false)}>
-          <div className="w-72 bg-gradient-to-b from-[#0a1b30] to-[#040a12] text-slate-300 h-full flex flex-col p-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <div className="p-3 mb-3 border-b border-slate-800 flex justify-between items-center">
-              <div>
-                <h1 className="text-white font-bold text-sm flex items-center gap-2">
-                  <span className="bg-gradient-to-tr from-orange-600 to-amber-500 p-1.5 rounded-lg text-white">
-                    <Shield size={16} />
-                  </span>
-                  {webSettings.namaRanting}
-                </h1>
-                <p className="text-[10px] text-amber-400 mt-1 font-semibold uppercase">{webSettings.cabang}</p>
+          <div className="w-72 bg-gradient-to-b from-[#0a1b30] to-[#040a12] text-slate-300 h-full flex flex-col p-4 shadow-2xl justify-between" onClick={(e) => e.stopPropagation()}>
+            <div>
+              <div className="p-3 mb-3 border-b border-slate-800 flex justify-between items-center">
+                <div>
+                  <h1 className="text-white font-bold text-sm flex items-center gap-2">
+                    <span className="bg-gradient-to-tr from-orange-600 to-amber-500 p-1.5 rounded-lg text-white">
+                      <Shield size={16} />
+                    </span>
+                    {webSettings.namaRanting}
+                  </h1>
+                  <p className="text-[10px] text-amber-400 mt-1 font-semibold uppercase">{webSettings.cabang}</p>
+                </div>
+                <button onClick={() => setIsMobileSidebarOpen(false)} className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800">
+                  <X size={20} />
+                </button>
               </div>
-              <button onClick={() => setIsMobileSidebarOpen(false)} className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800">
-                <X size={20} />
+              <nav className="space-y-1.5 overflow-y-auto">
+                {menuItems.map((menu) => (
+                  <button 
+                    key={menu.name}
+                    onClick={() => { setActiveMenu(menu.name); setIsMobileSidebarOpen(false); }}
+                    className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-semibold transition cursor-pointer ${
+                      activeMenu === menu.name 
+                        ? 'bg-gradient-to-r from-orange-600 to-amber-600 text-white shadow-md' 
+                        : 'text-slate-300 hover:bg-slate-800/50 hover:text-white'
+                    }`}
+                  >
+                    {menu.icon}
+                    <span>{menu.name}</span>
+                  </button>
+                ))}
+              </nav>
+            </div>
+            <div className="pt-3 border-t border-slate-800">
+              <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-950/40">
+                <LogOut size={18} />
+                <span>Keluar Sistem (Logout)</span>
               </button>
             </div>
-            <nav className="space-y-1.5 overflow-y-auto flex-1">
-              {menuItems.map((menu) => (
-                <button 
-                  key={menu.name}
-                  onClick={() => { setActiveMenu(menu.name); setIsMobileSidebarOpen(false); }}
-                  className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-semibold transition cursor-pointer ${
-                    activeMenu === menu.name 
-                      ? 'bg-gradient-to-r from-orange-600 to-amber-600 text-white shadow-md' 
-                      : 'text-slate-300 hover:bg-slate-800/50 hover:text-white'
-                  }`}
-                >
-                  {menu.icon}
-                  <span>{menu.name}</span>
-                </button>
-              ))}
-            </nav>
           </div>
         </div>
       )}
@@ -361,7 +389,7 @@ export default function PenggunaCMS() {
       {/* KONTEN UTAMA */}
       <div className="flex-1 flex flex-col overflow-hidden w-full">
         
-        {/* HEADER ATAS */}
+        {/* HEADER ATAS DENGAN TOMBOL LOGOUT */}
         <header className={`h-16 md:h-20 ${darkMode ? 'bg-slate-900/60 border-slate-800/80' : 'bg-white/80 border-slate-200/80'} backdrop-blur-xl border-b px-4 md:px-8 flex justify-between items-center no-print flex-shrink-0 gap-3 shadow-sm`}>
           <div className="flex items-center gap-3 overflow-hidden">
             <button onClick={() => setIsMobileSidebarOpen(true)} className="md:hidden p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition flex-shrink-0 cursor-pointer">
@@ -389,6 +417,15 @@ export default function PenggunaCMS() {
               <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-orange-600 to-amber-600 text-white font-bold flex items-center justify-center text-xs md:text-sm shadow-lg shadow-orange-900/30 ring-2 ring-orange-400/30 flex-shrink-0">
                 {adminProfile.name.split(' ').map(n => n[0]).join('')}
               </div>
+
+              {/* TOMBOL LOGOUT CEPAT DI HEADER */}
+              <button 
+                onClick={handleLogout} 
+                title="Keluar (Logout)"
+                className="p-2.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-xl transition cursor-pointer ml-1"
+              >
+                <LogOut size={18} />
+              </button>
             </div>
           </div>
         </header>
@@ -423,25 +460,25 @@ export default function PenggunaCMS() {
                 }} className="space-y-4 text-xs font-semibold">
                   <div>
                     <label className="block text-slate-400 mb-1.5">Nama Lengkap</label>
-                    <input type="text" value={adminProfile.name} onChange={(e) => setAdminProfile({ ...adminProfile, name: e.target.value })} className="w-full p-3 bg-slate-950/40 text-slate-100 border border-slate-700/80 rounded-2xl text-sm font-normal focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition shadow-inner" required />
+                    <input type="text" value={adminProfile.name} onChange={(e) => setAdminProfile({ ...adminProfile, name: e.target.value })} className="w-full p-3 bg-slate-950/40 text-slate-100 border border-slate-700/80 rounded-2xl text-sm font-normal focus:outline-none focus:ring-2 focus:ring-orange-500/50 shadow-inner" required />
                   </div>
                   <div>
                     <label className="block text-slate-400 mb-1.5">Email Resmi</label>
-                    <input type="email" value={adminProfile.email} onChange={(e) => setAdminProfile({ ...adminProfile, email: e.target.value })} className="w-full p-3 bg-slate-950/40 text-slate-100 border border-slate-700/80 rounded-2xl text-sm font-normal focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition shadow-inner" required />
+                    <input type="email" value={adminProfile.email} onChange={(e) => setAdminProfile({ ...adminProfile, email: e.target.value })} className="w-full p-3 bg-slate-950/40 text-slate-100 border border-slate-700/80 rounded-2xl text-sm font-normal focus:outline-none focus:ring-2 focus:ring-orange-500/50 shadow-inner" required />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-slate-400 mb-1.5">Nomor Induk Mahasiswa (NIM)</label>
-                      <input type="text" value={adminProfile.nim} onChange={(e) => setAdminProfile({ ...adminProfile, nim: e.target.value })} className="w-full p-3 bg-slate-950/40 text-slate-100 border border-slate-700/80 rounded-2xl text-sm font-normal focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition shadow-inner" />
+                      <input type="text" value={adminProfile.nim} onChange={(e) => setAdminProfile({ ...adminProfile, nim: e.target.value })} className="w-full p-3 bg-slate-950/40 text-slate-100 border border-slate-700/80 rounded-2xl text-sm font-normal focus:outline-none focus:ring-2 focus:ring-orange-500/50 shadow-inner" />
                     </div>
                     <div>
                       <label className="block text-slate-400 mb-1.5">Nomor WhatsApp</label>
-                      <input type="text" value={adminProfile.noHp} onChange={(e) => setAdminProfile({ ...adminProfile, noHp: e.target.value })} className="w-full p-3 bg-slate-950/40 text-slate-100 border border-slate-700/80 rounded-2xl text-sm font-normal focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition shadow-inner" />
+                      <input type="text" value={adminProfile.noHp} onChange={(e) => setAdminProfile({ ...adminProfile, noHp: e.target.value })} className="w-full p-3 bg-slate-950/40 text-slate-100 border border-slate-700/80 rounded-2xl text-sm font-normal focus:outline-none focus:ring-2 focus:ring-orange-500/50 shadow-inner" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-slate-400 mb-1.5">Biografi Singkat</label>
-                    <textarea rows={3} value={adminProfile.bio} onChange={(e) => setAdminProfile({ ...adminProfile, bio: e.target.value })} className="w-full p-3 bg-slate-950/40 text-slate-100 border border-slate-700/80 rounded-2xl text-sm font-normal focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition shadow-inner" />
+                    <textarea rows={3} value={adminProfile.bio} onChange={(e) => setAdminProfile({ ...adminProfile, bio: e.target.value })} className="w-full p-3 bg-slate-950/40 text-slate-100 border border-slate-700/80 rounded-2xl text-sm font-normal focus:outline-none focus:ring-2 focus:ring-orange-500/50 shadow-inner" />
                   </div>
                   <div className="pt-2">
                     <button type="submit" className="w-full sm:w-auto bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-bold px-7 py-3 rounded-2xl cursor-pointer shadow-lg shadow-orange-900/30 transition transform hover:-translate-y-0.5">
@@ -767,7 +804,7 @@ export default function PenggunaCMS() {
         </main>
       </div>
 
-      {/* MODAL GLOBAL DENGAN EFEK GLASMORPHISM */}
+      {/* MODAL GLOBAL */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 p-4 overflow-y-auto animate-fade-in">
           <div className={`${bgCard} rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative border border-slate-800 my-auto`}>
