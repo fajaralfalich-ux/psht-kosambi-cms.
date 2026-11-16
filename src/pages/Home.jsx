@@ -238,17 +238,18 @@ export default function Home() {
         }
 
         @media (max-width: 768px) {
-          .hero-section { padding: 3rem 1.25rem !important; flex-direction: column-reverse !important; text-align: center; }
-          .hero-content { maxWidth: 100% !important; }
-          .hero-title { font-size: 1.8rem !important; white-space: normal !important; }
-          .hero-desc { font-size: 1rem !important; }
+          .hero-section { padding: 2.5rem 1rem !important; flex-direction: column-reverse !important; text-align: center; }
+          .hero-content { max-width: 100% !important; width: 100% !important; text-align: center !important; }
+          .hero-title { font-size: 1.75rem !important; white-space: normal !important; text-align: center !important; }
+          .hero-desc { font-size: 0.95rem !important; text-align: center !important; }
           .hero-badges { justify-content: center !important; }
-          .btn-group { justify-content: center !important; }
-          .hero-card-badge { padding: 2rem !important; margin-bottom: 1rem; }
-          .logo-image { width: 160px !important; height: 160px !important; }
+          .btn-group { justify-content: center !important; width: 100%; }
+          .btn-primary, .btn-secondary { width: 100%; justify-content: center; text-align: center; }
+          .hero-card-badge { padding: 1.5rem !important; margin-bottom: 1rem; }
+          .logo-image { width: 140px !important; height: 140px !important; }
           .gallery-grid-4 { grid-template-columns: 1fr !important; }
           .section-dark, .section-dark-alt { padding: 3rem 1.25rem !important; }
-          .section-title-light { font-size: 1.8rem !important; }
+          .section-title-light { font-size: 1.75rem !important; }
           .gallery-header-flex { flex-direction: column; align-items: flex-start !important; }
           .modal-content, .modal-media-content { padding: 1.5rem !important; margin: 1rem; width: 95% !important; }
           .media-display-wrapper { height: 35vh !important; }
@@ -272,10 +273,10 @@ export default function Home() {
             <span style={styles.badge} className="badge-pulse">📜 Pelatih Bersertifikat</span>
           </div>
           <div style={styles.btnGroup} className="hero-btns-anim btn-group">
-            <a href="/pendaftaran" style={styles.btnPrimary} className="btn-hover-effect">
+            <a href="/pendaftaran" style={styles.btnPrimary} className="btn-hover-effect btn-primary">
               Daftar Latihan Sekarang <ArrowRight size={18} />
             </a>
-            <a href="/kegiatan" style={styles.btnSecondary} className="btn-hover-effect">
+            <a href="/kegiatan" style={styles.btnSecondary} className="btn-hover-effect btn-secondary">
               Lihat Jadwal Latihan
             </a>
           </div>
@@ -550,7 +551,7 @@ const styles = {
   heroContent: { maxWidth: '750px', flex: 1 },
   subHeadingWrapper: { display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' },
   heroSubTag: { fontSize: '0.85rem', fontWeight: '700', color: '#fb923c', textTransform: 'uppercase', letterSpacing: '1px' },
-  heroTitle: { fontSize: '2.6rem', color: '#ffffff', fontWeight: '800', lineHeight: '1.2', marginBottom: '1.25rem', whiteSpace: 'nowrap' },
+  heroTitle: { fontSize: '2.6rem', color: '#ffffff', fontWeight: '800', lineHeight: '1.2', marginBottom: '1.25rem' },
   heroDesc: { color: '#94a3b8', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '2rem' },
   heroBadges: { display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '2.25rem' },
   badge: { padding: '0.5rem 1rem', borderRadius: '30px', fontSize: '0.85rem', fontWeight: '600', cursor: 'default' },
