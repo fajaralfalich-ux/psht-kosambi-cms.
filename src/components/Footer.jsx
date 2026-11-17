@@ -13,7 +13,7 @@ export default function Footer() {
             <p style={styles.columnText}>
               Jl. Raya Salembaran No.38, Salembaran, Kec. Kosambi, Kabupaten Tangerang, Banten 15214
             </p>
-            {/* Embed Google Maps Presisi Sesuai Titik Lokasi Kantor Kecamatan Kosambi (Tinggi disesuaikan jadi 95px) */}
+            {/* Embed Google Maps dengan Lebar Terbatas (Tidak Terlalu Panjang) */}
             <div style={styles.mapWrapper}>
               <iframe
                 title="Peta Lokasi Kantor Kecamatan Kosambi"
@@ -108,6 +108,7 @@ const styles = {
   },
   mapWrapper: {
     width: '100%',
+    maxWidth: '480px', // Membatasi lebar maksimum peta agar tidak terlalu lebar
     borderRadius: '10px',
     overflow: 'hidden',
     border: '1px solid #1e3a5f',
