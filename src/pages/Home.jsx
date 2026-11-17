@@ -294,7 +294,7 @@ export default function Home() {
             Mendidik manusia berbudi luhur, tahu benar dan salah, serta melestarikan seni bela diri tradisional pencak silat dengan semangat kekeluargaan yang tinggi.
           </p>
 
-          {/* 3 TOMBOL NAVIGASI SECTION */}
+          {/* 4 TOMBOL NAVIGASI SECTION */}
           <div style={styles.heroBadges} className="hero-badges-anim hero-badges">
             <button
               type="button"
@@ -325,6 +325,16 @@ export default function Home() {
             >
               <span>📜</span>
               <span>FAQ (Tanya Jawab)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollToSection('footer')}
+              style={styles.badge}
+              className="badge-nav-btn"
+              title="Lihat Informasi Ranting & Hak Cipta"
+            >
+              <span>📍</span>
+              <span>Info & Hak Cipta</span>
             </button>
           </div>
 
@@ -489,6 +499,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 5. FOOTER */}
+      <footer id="footer" style={styles.footer}>
+        <p style={styles.footerText}>
+          © 2026 PSHT Ranting Kosambi · Cabang Kota Tangerang. Hak Cipta Dilindungi.
+        </p>
+      </footer>
 
       {/* MODAL DETAIL KARTU */}
       {selectedCard && (
@@ -740,6 +757,19 @@ const styles = {
   },
   chevronWrapper: { backgroundColor: '#0f2744', padding: '6px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' },
   accordionBodyDark: { padding: '0 1.5rem 1.25rem 1.5rem', color: '#94a3b8', fontSize: '0.95rem', lineHeight: '1.6' },
+  footer: {
+    backgroundColor: '#06101e',
+    borderTop: '1px solid #1e3a5f',
+    padding: '2.25rem 1rem',
+    textAlign: 'center',
+    width: '100%',
+    boxSizing: 'border-box'
+  },
+  footerText: {
+    color: '#94a3b8',
+    fontSize: '0.85rem',
+    margin: 0
+  },
   modalOverlay: {
     position: 'fixed',
     top: 0,
