@@ -33,7 +33,7 @@ export default function Footer() {
             <h4 style={styles.columnTitle}>📞 Kontak & Layanan Informasi</h4>
             <p style={styles.columnText}>
               <strong>Hp / WhatsApp:</strong><br />
-              081281746139, 081280537777, 081218036603<br /><br />
+              081281746139, 08128053777, 081218036603<br /><br />
               <strong>Email Resmi:</strong><br />
               psht.kosambi1922@gmail.com
             </p>
