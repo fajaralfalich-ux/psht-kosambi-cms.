@@ -1,123 +1,195 @@
 import React from 'react';
+import { MapPin, Phone, Mail, ExternalLink } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer id="footer" style={styles.footer}>
-      <div style={styles.container}>
-        {/* Informasi Dua Kolom (Kiri & Kanan) Tanpa Kotak */}
-        <div style={styles.twoColumnContainer} className="footer-two-col">
+    <footer style={styles.footer} className="footer-container">
+      <style>{`
+        .footer-container {
+          background-color: #070f1e;
+          border-top: 1px solid #1e3a5f;
+        }
+        
+        /* PENGATURAN RESPONSIF UNTUK HP */
+        @media (max-width: 768px) {
+          .footer-content-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2.5rem !important;
+          }
+          .footer-inner {
+            padding: 3rem 1.25rem 2rem 1.25rem !important;
+          }
+        }
+      `}</style>
+
+      <div style={styles.innerWrapper} className="footer-inner">
+        
+        {/* GRID KONTEN UTAMA (Kiri & Kanan Melebar) */}
+        <div style={styles.contentGrid} className="footer-content-grid">
           
-          {/* Kolom Kiri: Lokasi & Maps Presisi Kantor Kecamatan */}
-          <div style={styles.columnBox}>
-            <h4 style={styles.columnTitle}>📍 location Ranting Kosambi</h4>
-            <p style={styles.columnText}>
+          {/* KOLOM KIRI: LOKASI & PETA */}
+          <div style={styles.column}>
+            <div style={styles.headerWithIcon}>
+              <div style={styles.iconBox}>
+                <MapPin size={20} color="#fb923c" />
+              </div>
+              <h3 style={styles.columnTitle}>Lokasi Ranting Kosambi</h3>
+            </div>
+            
+            <p style={styles.addressText}>
               Jl. Raya Salembaran No.38, Salembaran, Kec. Kosambi, Kabupaten Tangerang, Banten 15214
             </p>
-            {/* Embed Google Maps Presisi Sesuai Titik Lokasi Kantor Kecamatan Kosambi */}
+
+            {/* EMBED GOOGLE MAPS */}
             <div style={styles.mapWrapper}>
-              <iframe
-                title="Peta Lokasi Kantor Kecamatan Kosambi"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.8661858509375!2d106.66414317498993!3d-6.0742845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a039988334ad3%3A0x4ba54b728efbe8e4!2sKantor%20Kecamatan%20Kosambi!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
-                width="100%"
-                height="160"
-                style={{ border: 0, borderRadius: '10px' }}
-                allowFullScreen=""
+              <iframe 
+                title="Peta Kantor Kecamatan Kosambi"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.666373708304!2d106.6657!3d-6.0894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a02568a555555%3A0x123456789abcdef!2sKantor%20Kecamatan%20Kosambi!5e0!3m2!1sid!2sid!4v1650000000000!5m2!1sid!2sid" 
+                style={styles.mapIframe}
+                allowFullScreen="" 
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
           </div>
 
-          {/* Kolom Kanan: Kontak & Email */}
-          <div style={styles.columnBox}>
-            <h4 style={styles.columnTitle}>📞 Kontak & Layanan Informasi</h4>
-            <p style={styles.columnText}>
-              <strong>Hp / WhatsApp:</strong><br />
-              081281746139, 08128053777, 081218036603<br /><br />
-              <strong>Email Resmi:</strong><br />
-              psht.kosambi1922@gmail.com
-            </p>
+          {/* KOLOM KANAN: KONTAK & LAYANAN INFORMASI */}
+          <div style={styles.column}>
+            <div style={styles.headerWithIcon}>
+              <div style={styles.iconBox}>
+                <Phone size={20} color="#fb923c" />
+              </div>
+              <h3 style={styles.columnTitle}>Kontak & Layanan Informasi</h3>
+            </div>
+
+            <div style={styles.contactItem}>
+              <p style={styles.contactLabel}>Hp / WhatsApp:</p>
+              <p style={styles.contactValue}>
+                081281746139, 08128053777, 081218036603
+              </p>
+            </div>
+
+            <div style={styles.contactItem}>
+              <p style={styles.contactLabel}>Email Resmi:</p>
+              <div style={styles.emailWrapper}>
+                <Mail size={16} color="#fb923c" />
+                <span style={styles.contactValue}>psht.kosambi1922@gmail.com</span>
+              </div>
+            </div>
           </div>
 
         </div>
 
-        <div style={styles.divider}></div>
-
-        <div style={styles.copyright}>
-          <p>© 2026 PSHT Ranting Kosambi · Cabang Kota Tangerang. Hak Cipta Dilindungi.</p>
+        {/* GARIS PEMBATAS & COPYRIGHT */}
+        <div style={styles.bottomBar}>
+          <p style={styles.copyrightText}>
+            &copy; 2026 PSHT Ranting Kosambi &bull; Cabang Kota Tangerang. Hak Cipta Dilindungi.
+          </p>
         </div>
-      </div>
 
-      <style>{`
-        @media (max-width: 768px) {
-          .footer-two-col {
-            flex-direction: column !important;
-            gap: 1.5rem !important;
-          }
-        }
-      `}</style>
+      </div>
     </footer>
   );
 }
 
 const styles = {
   footer: {
-    backgroundColor: '#070f1e',
-    color: '#94a3b8',
-    padding: '3rem 2rem 2rem 2rem',
-    borderTop: '1px solid #1e3a5f',
     width: '100%',
     boxSizing: 'border-box',
-    scrollMarginTop: '70px'
+    backgroundColor: '#070f1e',
   },
-  container: {
-    maxWidth: '1100px',
+  innerWrapper: {
+    maxWidth: '1200px',
     margin: '0 auto',
+    width: '100%',
+    boxSizing: 'border-box',
+    padding: '4rem 4rem 2rem 4rem',
+  },
+  contentGrid: {
+    display: 'grid',
+    gridTemplateColumns: '1.2fr 1fr',
+    gap: '3.5rem',
+    width: '100%',
+    alignItems: 'start',
+  },
+  column: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center'
+    textAlign: 'left',
   },
-  twoColumnContainer: {
+  headerWithIcon: {
     display: 'flex',
-    justifyContent: 'space-between',
-    gap: '3rem',
-    width: '100%',
-    marginBottom: '2.5rem',
-    textAlign: 'left'
+    alignItems: 'center',
+    gap: '0.75rem',
+    marginBottom: '1rem',
   },
-  columnBox: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    padding: '0.5rem'
+  iconBox: {
+    width: '38px',
+    height: '38px',
+    borderRadius: '10px',
+    backgroundColor: '#10223b',
+    border: '1px solid #1e3a5f',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   columnTitle: {
+    fontSize: '1.2rem',
     color: '#ffffff',
-    fontSize: '0.95rem',
-    fontWeight: '700',
-    marginBottom: '0.75rem'
+    fontWeight: '800',
+    margin: 0,
   },
-  columnText: {
-    fontSize: '0.88rem',
+  addressText: {
+    color: '#94a3b8',
+    fontSize: '0.95rem',
     lineHeight: '1.6',
-    color: '#cbd5e1',
-    marginBottom: '1rem'
+    marginBottom: '1.25rem',
+    margin: '0 0 1.25rem 0',
   },
   mapWrapper: {
     width: '100%',
-    borderRadius: '10px',
+    height: '210px',
+    borderRadius: '14px',
     overflow: 'hidden',
     border: '1px solid #1e3a5f',
-    marginTop: '0.5rem'
+    backgroundColor: '#10223b',
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)',
   },
-  divider: {
+  mapIframe: {
     width: '100%',
-    height: '1px',
-    backgroundColor: '#1e3a5f',
-    marginBottom: '1.5rem'
+    height: '100%',
+    border: 'none',
   },
-  copyright: {
-    fontSize: '0.82rem',
-    color: '#64748b'
+  contactItem: {
+    marginBottom: '1.5rem',
+  },
+  contactLabel: {
+    color: '#cbd5e1',
+    fontSize: '0.9rem',
+    fontWeight: '700',
+    marginBottom: '0.35rem',
+    margin: '0 0 0.35rem 0',
+  },
+  contactValue: {
+    color: '#94a3b8',
+    fontSize: '0.95rem',
+    lineHeight: '1.6',
+    margin: 0,
+  },
+  emailWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+  },
+  bottomBar: {
+    marginTop: '3.5rem',
+    paddingTop: '1.5rem',
+    borderTop: '1px solid #1e3a5f',
+    textAlign: 'center',
+  },
+  copyrightText: {
+    color: '#64748b',
+    fontSize: '0.85rem',
+    margin: 0,
   }
 };
