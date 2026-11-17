@@ -193,6 +193,14 @@ export default function Home() {
         .hero-desc-anim { animation: fadeInUp 0.6s ease 0.1s forwards; opacity: 0; }
         .hero-badges-anim { animation: fadeInUp 0.7s ease 0.2s forwards; opacity: 0; }
         
+        /* Efek Gradasi Emas Mewah pada Judul */
+        .gradient-gold-title {
+          background: linear-gradient(135deg, #ffffff 20%, #fde047 60%, #e11d48 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-shadow: 0 4px 20px rgba(251, 191, 36, 0.25);
+        }
+
         .logo-floating-box {
           animation: floatEnhanced 4s ease-in-out infinite, pulseGlow 4s ease-in-out infinite;
         }
@@ -407,7 +415,9 @@ export default function Home() {
       {/* 1. HERO SECTION */}
       <header id="beranda" style={styles.hero} className="hero-section">
         <div style={styles.heroContent} className="hero-content">
-          <h1 style={styles.heroTitle} className="hero-title-anim hero-title">Persaudaraan Setia Hati Terate</h1>
+          <h1 style={styles.heroTitle} className="hero-title-anim hero-title gradient-gold-title">
+            Persaudaraan Setia Hati Terate
+          </h1>
           <p style={styles.heroDesc} className="hero-desc-anim hero-desc">
             Mendidik manusia berbudi luhur, tahu benar dan salah, serta melestarikan seni bela diri tradisional pencak silat dengan semangat kekeluargaan yang tinggi.
           </p>
@@ -723,7 +733,7 @@ const styles = {
     borderBottom: '1px solid #1e3a5f'
   },
   heroContent: { maxWidth: '750px', flex: 1 },
-  heroTitle: { fontSize: '2.6rem', color: '#ffffff', fontWeight: '800', lineHeight: '1.2', marginBottom: '1.25rem' },
+  heroTitle: { fontSize: '2.6rem', fontWeight: '800', lineHeight: '1.2', marginBottom: '1.25rem' },
   heroDesc: { color: '#94a3b8', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '2rem' },
   heroBadges: { display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1rem' },
   badge: { padding: '0.55rem 1.15rem', borderRadius: '30px', fontSize: '0.85rem', fontWeight: '700' },
@@ -908,7 +918,7 @@ const styles = {
     boxSizing: 'border-box',
     border: '1px solid #1e3a5f'
   },
-  mediaModalHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' },
+  mediaModalHeader: { display: 'flex', justifyContent: 'space-system', alignItems: 'center', marginBottom: '0.75rem' },
   mediaModalCategory: { fontSize: '0.75rem', fontWeight: '700', color: '#fb923c', textTransform: 'uppercase', letterSpacing: '1px' },
   mediaModalTitle: { fontSize: '1.2rem', fontWeight: '800', color: '#ffffff', marginBottom: '1rem' },
   mediaDisplayWrapper: {
