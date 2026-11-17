@@ -11,7 +11,7 @@ export default function Footer() {
           <div style={styles.columnBox}>
             <h4 style={styles.columnTitle}>📍 Lokasi Ranting & Pusat Latihan</h4>
             <p style={styles.columnText}>
-              Area Kantor Kecamatan Kosambi & Jl. Raya Salembaran, Kosambi, Kabupaten Tangerang, Banten
+              Jl. Raya Salembaran No.38, Salembaran, Kec. Kosambi, Kabupaten Tangerang, Banten 15214
             </p>
             {/* Embed Google Maps */}
             <div style={styles.mapWrapper}>
