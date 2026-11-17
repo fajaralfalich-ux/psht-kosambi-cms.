@@ -12,8 +12,7 @@ import {
   Eye,
   ArrowRight,
   ChevronLeft,
-  ChevronRight,
-  MessageCircle
+  ChevronRight
 } from 'lucide-react';
 import flowerLogo from '/psht1.png';
 
@@ -193,15 +192,9 @@ export default function Home() {
         .hero-title-anim { animation: fadeInUp 0.5s ease forwards; }
         .hero-desc-anim { animation: fadeInUp 0.6s ease 0.1s forwards; opacity: 0; }
         .hero-badges-anim { animation: fadeInUp 0.7s ease 0.2s forwards; opacity: 0; }
-        .hero-btns-anim { animation: fadeInUp 0.8s ease 0.3s forwards; opacity: 0; }
         
         .logo-floating-box {
           animation: floatEnhanced 4s ease-in-out infinite, pulseGlow 4s ease-in-out infinite;
-        }
-        .btn-hover-effect { transition: all 0.2s ease; }
-        .btn-hover-effect:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 16px rgba(249, 115, 22, 0.35);
         }
         .card-hover {
           transition: all 0.25s ease;
@@ -273,25 +266,13 @@ export default function Home() {
           }
           .hero-badges { 
             justify-content: center !important; 
-            margin-bottom: 1rem !important; 
+            margin-bottom: 0.5rem !important; 
             gap: 0.4rem !important; 
           }
           .badge-nav-btn { 
             padding: 0.35rem 0.7rem !important; 
             font-size: 0.7rem !important; 
             border-radius: 16px !important;
-          }
-          .btn-group { 
-            justify-content: center !important; 
-            width: 100% !important;
-          }
-          .btnWhatsApp { 
-            padding: 0.75rem 1.25rem !important; 
-            font-size: 0.9rem !important; 
-            width: 100% !important; 
-            max-width: 280px !important;
-            text-align: center !important; 
-            justify-content: center !important; 
           }
           
           .hero-image-wrapper { 
@@ -473,20 +454,6 @@ export default function Home() {
               <span>📍</span>
               <span>Info & Hak Cipta</span>
             </button>
-          </div>
-
-          {/* TOMBOL WHATSAPP PENGGANTI DAFTAR & JADWAL */}
-          <div style={styles.btnGroup} className="hero-btns-anim btn-group">
-            <a
-              href="https://wa.me/6281234567890?text=Halo%20Admin%20PSHT%20Ranting%20Kosambi,%20saya%20ingin%20bertanya%20mengenai%20pendaftaran%20dan%20informasi%20latihan."
-              target="_blank"
-              rel="noopener noreferrer"
-              style={styles.btnWhatsApp}
-              className="btn-hover-effect btnWhatsApp"
-            >
-              <MessageCircle size={18} />
-              <span>Hubungi Admin WhatsApp</span>
-            </a>
           </div>
         </div>
 
@@ -758,22 +725,8 @@ const styles = {
   heroContent: { maxWidth: '750px', flex: 1 },
   heroTitle: { fontSize: '2.6rem', color: '#ffffff', fontWeight: '800', lineHeight: '1.2', marginBottom: '1.25rem' },
   heroDesc: { color: '#94a3b8', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '2rem' },
-  heroBadges: { display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '2.25rem' },
+  heroBadges: { display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1rem' },
   badge: { padding: '0.55rem 1.15rem', borderRadius: '30px', fontSize: '0.85rem', fontWeight: '700' },
-  btnGroup: { display: 'flex', gap: '1rem', flexWrap: 'wrap' },
-  btnWhatsApp: {
-    backgroundColor: '#25D366',
-    color: 'white',
-    padding: '0.85rem 2rem',
-    borderRadius: '10px',
-    fontWeight: '700',
-    textDecoration: 'none',
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '0.6rem',
-    fontSize: '0.95rem',
-    boxShadow: '0 8px 20px rgba(37, 211, 102, 0.3)'
-  },
   heroImageWrapper: { display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 },
   heroCardBadge: {
     backgroundColor: '#162f4f',
