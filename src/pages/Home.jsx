@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Users, Shield, Award, ChevronDown, ChevronUp, Play, X, Eye, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  BookOpen,
+  Users,
+  Shield,
+  Award,
+  ChevronDown,
+  ChevronUp,
+  Play,
+  X,
+  Eye,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight
+} from 'lucide-react';
 import flowerLogo from '/psht1.png';
 
 export default function Home() {
@@ -13,6 +26,14 @@ export default function Home() {
 
   const toggleFaq = (index) => {
     setActiveFaq(activeFaq === index ? null : index);
+  };
+
+  // Fungsi navigasi smooth scroll ke masing-masing section
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const galleryItems = [
@@ -30,7 +51,7 @@ export default function Home() {
       type: 'photo',
       title: 'Ujian Kenaikan Tingkat Siswa',
       category: 'Ujian Kenaikan Tingkat (UKT)',
-      images: ['/foto7.jpeg' , '/foto9.jpeg', '/foto10.jpeg'],
+      images: ['/foto7.jpeg', '/foto9.jpeg', '/foto10.jpeg'],
       objectPos: 'center',
       desc: 'Dokumentasi kegiatan Ujian Kenaikan Tingkat (UKT) untuk menguji kemampuan fisik, mental, dan jurus siswa PSHT.'
     },
@@ -65,7 +86,7 @@ export default function Home() {
       type: 'video',
       title: 'Kegiatan Latihan Gabungan & Silaturahim',
       category: 'Kegiatan Latihan Gabungan',
-      urls: ['/video2.mp4'], 
+      urls: ['/video2.mp4'],
       desc: 'Kebersamaan anggota dan kontingen PSHT Ranting Kosambi dalam berbagai momentum kegiatan.'
     },
     {
@@ -83,10 +104,10 @@ export default function Home() {
       category: 'Doa Bersama & Bakti Sosial',
       urls: ['/video4.mp4'],
       desc: 'Kebersamaan anggota dan kontingen PSHT Ranting Kosambi dalam berbagai momentum kegiatan.'
-    },
+    }
   ];
 
-  const filteredGallery = galleryItems.filter(item => item.type === activeFilter);
+  const filteredGallery = galleryItems.filter((item) => item.type === activeFilter);
 
   const handleOpenModal = (media) => {
     setSelectedMedia(media);
@@ -203,18 +224,30 @@ export default function Home() {
         }
         .gallery-card:hover img, .gallery-card:hover video { transform: scale(1.05); }
         .gallery-card:hover .gallery-overlay { opacity: 1; }
-        .badge-pulse { 
-          transition: all 0.2s ease; 
-          background: rgba(30, 58, 95, 0.6);
-          backdrop-filter: blur(6px);
-          border: 1px solid #1e3a5f;
+        
+        .badge-nav-btn {
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          background: rgba(30, 58, 95, 0.7);
+          backdrop-filter: blur(8px);
+          border: 1px solid #2b4c7e;
           color: #e2e8f0;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
         }
-        .badge-pulse:hover {
-          background-color: #f97316 !important;
+        .badge-nav-btn:hover {
+          background: linear-gradient(135deg, #c2410c 0%, #f97316 100%) !important;
           color: #ffffff !important;
-          border-color: #f97316 !important;
+          border-color: #fb923c !important;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(249, 115, 22, 0.35);
         }
+        .badge-nav-btn:active {
+          transform: scale(0.96);
+        }
+
         .filter-btn { transition: all 0.2s ease; }
         .filter-btn:hover { background-color: #1e3a5f; color: #ffffff; }
         .modal-enter { animation: fadeInScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
@@ -225,7 +258,7 @@ export default function Home() {
           .hero-title { font-size: 1.6rem !important; text-align: left !important; line-height: 1.2 !important; margin-bottom: 0.75rem !important; }
           .hero-desc { font-size: 0.9rem !important; text-align: left !important; margin-bottom: 1rem !important; line-height: 1.5 !important; }
           .hero-badges { justify-content: flex-start !important; margin-bottom: 1rem !important; gap: 0.4rem !important; }
-          .badge { padding: 0.3rem 0.65rem !important; font-size: 0.7rem !important; }
+          .badge-nav-btn { padding: 0.4rem 0.75rem !important; font-size: 0.72rem !important; }
           .btn-group { justify-content: flex-start !important; gap: 0.6rem !important; }
           .btnPrimary, .btnSecondary { padding: 0.65rem 1.25rem !important; font-size: 0.85rem !important; width: 48% !important; text-align: center !important; justify-content: center !important; }
           
@@ -239,7 +272,6 @@ export default function Home() {
           .cardTitleLight { font-size: 0.9rem !important; margin-bottom: 0.25rem !important; }
           .cardTextLight { font-size: 0.75rem !important; line-height: 1.4 !important; margin-bottom: 0.6rem !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
           .cardLinkText { font-size: 0.75rem !important; }
-
           .gallery-grid-4 { grid-template-columns: 1fr !important; gap: 1rem !important; }
           .section-dark, .section-dark-alt { padding: 2.5rem 1rem !important; }
           .section-title-light { font-size: 1.35rem !important; }
@@ -249,7 +281,7 @@ export default function Home() {
         }
       `}</style>
 
-      {/* 1. HERO SECTION (Logo diletakkan di atas teks secara struktur HTML agar tampil paling atas di HP) */}
+      {/* 1. HERO SECTION */}
       <header id="beranda" style={styles.hero} className="hero-section">
         <div style={styles.heroImageWrapper} className="hero-image-wrapper">
           <div style={styles.heroCardBadge} className="logo-floating-box hero-card-badge">
@@ -261,11 +293,41 @@ export default function Home() {
           <p style={styles.heroDesc} className="hero-desc-anim hero-desc">
             Mendidik manusia berbudi luhur, tahu benar dan salah, serta melestarikan seni bela diri tradisional pencak silat dengan semangat kekeluargaan yang tinggi.
           </p>
+
+          {/* 3 TOMBOL NAVIGASI SECTION */}
           <div style={styles.heroBadges} className="hero-badges-anim hero-badges">
-            <span style={styles.badge} className="badge-pulse">✨ Terbuka untuk Umum</span>
-            <span style={styles.badge} className="badge-pulse">🥋 Latihan Rutin</span>
-            <span style={styles.badge} className="badge-pulse">📜 Bersertifikat</span>
+            <button
+              type="button"
+              onClick={() => scrollToSection('profil')}
+              style={styles.badge}
+              className="badge-nav-btn"
+              title="Lihat Nilai Luhur dan Karakter Utama PSHT"
+            >
+              <span>✨</span>
+              <span>Nilai Luhur & Karakter</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollToSection('kegiatan')}
+              style={styles.badge}
+              className="badge-nav-btn"
+              title="Lihat Galeri Aktivitas Ranting Kosambi"
+            >
+              <span>🥋</span>
+              <span>Galeri Aktivitas</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollToSection('faq')}
+              style={styles.badge}
+              className="badge-nav-btn"
+              title="Lihat Pertanyaan yang Sering Diajukan"
+            >
+              <span>📜</span>
+              <span>FAQ (Tanya Jawab)</span>
+            </button>
           </div>
+
           <div style={styles.btnGroup} className="hero-btns-anim btn-group">
             <button onClick={() => navigate('/pendaftaran')} style={styles.btnPrimary} className="btn-hover-effect btnPrimary">
               Daftar <ArrowRight size={16} />
@@ -277,7 +339,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 2. TENTANG ORGANISASI */}
+      {/* 2. TENTANG ORGANISASI (NILAI LUHUR) */}
       <section id="profil" style={styles.sectionDark} className="section-dark">
         <div style={styles.sectionInner}>
           <div style={styles.sectionHeader} className="sectionHeader">
@@ -291,9 +353,9 @@ export default function Home() {
             {Object.keys(cardDetails).map((key) => {
               const item = cardDetails[key];
               return (
-                <div 
-                  key={key} 
-                  style={styles.cardDark} 
+                <div
+                  key={key}
+                  style={styles.cardDark}
                   className="card-hover cardDark"
                   onClick={() => setSelectedCard(item)}
                 >
@@ -325,15 +387,15 @@ export default function Home() {
               </p>
             </div>
             <div style={styles.filterWrapper}>
-              <button 
-                onClick={() => setActiveFilter('photo')} 
+              <button
+                onClick={() => setActiveFilter('photo')}
                 style={{ ...styles.filterBtn, ...(activeFilter === 'photo' ? styles.filterBtnActive : {}) }}
                 className="filter-btn"
               >
                 📷 Foto
               </button>
-              <button 
-                onClick={() => setActiveFilter('video')} 
+              <button
+                onClick={() => setActiveFilter('video')}
                 style={{ ...styles.filterBtn, ...(activeFilter === 'video' ? styles.filterBtnActive : {}) }}
                 className="filter-btn"
               >
@@ -346,8 +408,8 @@ export default function Home() {
               const hasImages = media.type === 'photo' && media.images && media.images.length > 0;
               const hasVideos = media.type === 'video' && media.urls && media.urls.length > 0;
               return (
-                <div 
-                  key={media.id} 
+                <div
+                  key={media.id}
                   className="gallery-card card-hover"
                   onClick={() => handleOpenModal(media)}
                 >
@@ -357,17 +419,17 @@ export default function Home() {
                         <source src={media.urls[0]} type="video/mp4" />
                       </video>
                     ) : hasImages ? (
-                      <img 
-                        src={media.images[0]} 
-                        alt={media.title} 
-                        style={{ ...styles.galleryImage, objectPosition: media.objectPos }} 
+                      <img
+                        src={media.images[0]}
+                        alt={media.title}
+                        style={{ ...styles.galleryImage, objectPosition: media.objectPos }}
                       />
                     ) : (
                       <div style={styles.emptyCardPlaceholder}>
                         <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Media belum tersedia</p>
                       </div>
                     )}
-                    
+
                     <div className="gallery-overlay" style={styles.galleryOverlay}>
                       <div style={styles.playIconBadge}>
                         {media.type === 'video' ? <Play size={24} fill="white" /> : <Eye size={24} />}
@@ -390,18 +452,29 @@ export default function Home() {
       </section>
 
       {/* 4. FAQ */}
-      <section style={styles.sectionDark} className="section-dark">
+      <section id="faq" style={styles.sectionDark} className="section-dark">
         <div style={styles.sectionInner}>
           <div style={styles.sectionHeader} className="sectionHeader">
             <span style={styles.sectionTagLight}>FAQ (TANYA JAWAB)</span>
             <h2 style={styles.sectionTitleLight} className="section-title-light">Pertanyaan yang Sering Diajukan</h2>
-            <p style={styles.sectionDescLight} className="section-descLight">Temukan informasi penting seputar prosedur pendaftaran dan ketentuan latihan di ranting kami.</p>
+            <p style={styles.sectionDescLight} className="section-descLight">
+              Temukan informasi penting seputar prosedur pendaftaran dan ketentuan latihan di ranting kami.
+            </p>
           </div>
           <div style={styles.accordionContainer}>
             {[
-              { q: "Siapa saja yang boleh mendaftar latihan?", a: "Latihan PSHT terbuka untuk umum mulai dari usia anak-anak (SD/SMP), remaja (SMA/K), hingga dewasa tanpa batasan latar belakang." },
-              { q: "Berapa biaya pendaftaran dan latihan?", a: "Biaya administrasi awal mencakup kelengkapan atribut latihan sakral. Iuran bulanan dikelola secara transparan dan kekeluargaan oleh pengurus Rayon masing-masing." },
-              { q: "Apa saja dokumen yang harus disiapkan?", a: "Fotokopi KTP/Kartu Keluarga, pas foto ukuran 3x4 (2 lembar), serta surat izin resmi dari orang tua atau wali bagi pendaftar yang berusia di bawah 17 tahun." }
+              {
+                q: 'Siapa saja yang boleh mendaftar latihan?',
+                a: 'Latihan PSHT terbuka untuk umum mulai dari usia anak-anak (SD/SMP), remaja (SMA/K), hingga dewasa tanpa batasan latar belakang.'
+              },
+              {
+                q: 'Berapa biaya pendaftaran dan latihan?',
+                a: 'Biaya administrasi awal mencakup kelengkapan atribut latihan sakral. Iuran bulanan dikelola secara transparan dan kekeluargaan oleh pengurus Rayon masing-masing.'
+              },
+              {
+                q: 'Apa saja dokumen yang harus disiapkan?',
+                a: 'Fotokopi KTP/Kartu Keluarga, pas foto ukuran 3x4 (2 lembar), serta surat izin resmi dari orang tua atau wali bagi pendaftar yang berusia di bawah 17 tahun.'
+              }
             ].map((item, idx) => (
               <div key={idx} style={styles.accordionItemDark} className="card-hover">
                 <div style={styles.accordionHeaderDark} onClick={() => toggleFaq(idx)}>
@@ -454,10 +527,10 @@ export default function Home() {
             <div style={styles.mediaDisplayWrapper}>
               {selectedMedia.type === 'video' ? (
                 <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <video 
-                    key={selectedMedia.urls[currentImageIndex]} 
-                    controls 
-                    autoPlay 
+                  <video
+                    key={selectedMedia.urls[currentImageIndex]}
+                    controls
+                    autoPlay
                     style={styles.modalVideoPlayer}
                   >
                     <source src={selectedMedia.urls[currentImageIndex]} type="video/mp4" />
@@ -479,10 +552,10 @@ export default function Home() {
                 </div>
               ) : (
                 <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <img 
-                    src={selectedMedia.images[currentImageIndex]} 
-                    alt={selectedMedia.title} 
-                    style={styles.modalFullImage} 
+                  <img
+                    src={selectedMedia.images[currentImageIndex]}
+                    alt={selectedMedia.title}
+                    style={styles.modalFullImage}
                   />
                   {selectedMedia.images.length > 1 && (
                     <>
@@ -528,14 +601,14 @@ const styles = {
   heroTitle: { fontSize: '2.6rem', color: '#ffffff', fontWeight: '800', lineHeight: '1.2', marginBottom: '1.25rem' },
   heroDesc: { color: '#94a3b8', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '2rem' },
   heroBadges: { display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '2.25rem' },
-  badge: { padding: '0.5rem 1rem', borderRadius: '30px', fontSize: '0.85rem', fontWeight: '600', cursor: 'default' },
+  badge: { padding: '0.55rem 1.15rem', borderRadius: '30px', fontSize: '0.85rem', fontWeight: '700' },
   btnGroup: { display: 'flex', gap: '1rem', flexWrap: 'wrap' },
-  btnPrimary: { 
-    backgroundColor: '#c2410c', 
-    color: 'white', 
-    padding: '0.85rem 1.75rem', 
-    borderRadius: '10px', 
-    fontWeight: '600', 
+  btnPrimary: {
+    backgroundColor: '#c2410c',
+    color: 'white',
+    padding: '0.85rem 1.75rem',
+    borderRadius: '10px',
+    fontWeight: '600',
     border: 'none',
     cursor: 'pointer',
     display: 'inline-flex',
@@ -544,31 +617,39 @@ const styles = {
     fontSize: '0.95rem',
     boxShadow: '0 8px 20px rgba(194, 65, 12, 0.3)'
   },
-  btnSecondary: { 
-    backgroundColor: '#162f4f', 
-    color: '#ffffff', 
-    border: '1px solid #1e3a5f', 
-    padding: '0.85rem 1.75rem', 
-    borderRadius: '10px', 
-    fontWeight: '600', 
+  btnSecondary: {
+    backgroundColor: '#162f4f',
+    color: '#ffffff',
+    border: '1px solid #1e3a5f',
+    padding: '0.85rem 1.75rem',
+    borderRadius: '10px',
+    fontWeight: '600',
     cursor: 'pointer',
     display: 'inline-block',
     fontSize: '0.95rem'
   },
   heroImageWrapper: { display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 },
-  heroCardBadge: { 
-    backgroundColor: '#162f4f', 
-    padding: '3.5rem', 
-    borderRadius: '30px', 
-    display: 'flex', 
-    justifyContent: 'center', 
+  heroCardBadge: {
+    backgroundColor: '#162f4f',
+    padding: '3.5rem',
+    borderRadius: '30px',
+    display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
     border: '1px solid #1e3a5f',
     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)'
   },
   logoImage: { width: '240px', height: '240px', objectFit: 'contain' },
-  sectionDark: { padding: '6rem 4rem', width: '100%', boxSizing: 'border-box', backgroundColor: '#0f2744' },
-  sectionDarkAlt: { padding: '6rem 4rem', width: '100%', boxSizing: 'border-box', backgroundColor: '#09182c', borderTop: '1px solid #1e3a5f', borderBottom: '1px solid #1e3a5f' },
+  sectionDark: { padding: '6rem 4rem', width: '100%', boxSizing: 'border-box', backgroundColor: '#0f2744', scrollMarginTop: '70px' },
+  sectionDarkAlt: {
+    padding: '6rem 4rem',
+    width: '100%',
+    boxSizing: 'border-box',
+    backgroundColor: '#09182c',
+    borderTop: '1px solid #1e3a5f',
+    borderBottom: '1px solid #1e3a5f',
+    scrollMarginTop: '70px'
+  },
   sectionInner: { maxWidth: '1300px', margin: '0 auto', width: '100%' },
   sectionHeader: { marginBottom: '3rem', textAlign: 'left' },
   sectionTagLight: { color: '#fb923c', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.5rem', display: 'block', letterSpacing: '1.5px' },
@@ -585,18 +666,18 @@ const styles = {
   cardTitleLight: { fontSize: '1.2rem', color: '#ffffff', fontWeight: '700', marginBottom: '0.5rem' },
   cardTextLight: { color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.6', flex: 1, marginBottom: '1.25rem' },
   cardLinkText: { display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#fb923c', fontSize: '0.85rem', fontWeight: '600' },
-  galleryMediaWrapper: { 
-    position: 'relative', 
-    width: '100%', 
-    height: '240px', 
-    overflow: 'hidden', 
-    backgroundColor: '#070f1e' 
+  galleryMediaWrapper: {
+    position: 'relative',
+    width: '100%',
+    height: '240px',
+    overflow: 'hidden',
+    backgroundColor: '#070f1e'
   },
-  galleryImage: { 
-    width: '100%', 
-    height: '100%', 
-    objectFit: 'cover', 
-    transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)' 
+  galleryImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
   },
   emptyCardPlaceholder: {
     width: '100%',
@@ -607,16 +688,56 @@ const styles = {
     backgroundColor: '#070f1e',
     color: '#94a3b8'
   },
-  galleryOverlay: { position: 'absolute', inset: 0, backgroundColor: 'rgba(15, 23, 42, 0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0, transition: 'opacity 0.3s ease' },
-  playIconBadge: { width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#c2410c', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(194, 65, 12, 0.4)' },
-  mediaTypeTag: { position: 'absolute', top: '14px', left: '14px', backgroundColor: 'rgba(15, 23, 42, 0.8)', color: 'white', padding: '0.3rem 0.85rem', borderRadius: '20px', fontSize: '0.7rem', fontWeight: '600', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)' },
+  galleryOverlay: {
+    position: 'absolute',
+    inset: 0,
+    backgroundColor: 'rgba(15, 23, 42, 0.5)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    opacity: 0,
+    transition: 'opacity 0.3s ease'
+  },
+  playIconBadge: {
+    width: '48px',
+    height: '48px',
+    borderRadius: '50%',
+    backgroundColor: '#c2410c',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0 4px 15px rgba(194, 65, 12, 0.4)'
+  },
+  mediaTypeTag: {
+    position: 'absolute',
+    top: '14px',
+    left: '14px',
+    backgroundColor: 'rgba(15, 23, 42, 0.8)',
+    color: 'white',
+    padding: '0.3rem 0.85rem',
+    borderRadius: '20px',
+    fontSize: '0.7rem',
+    fontWeight: '600',
+    backdropFilter: 'blur(4px)',
+    border: '1px solid rgba(255,255,255,0.1)'
+  },
   galleryMeta: { padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 },
   galleryCategory: { color: '#fb923c', fontSize: '0.75rem', fontWeight: '700', marginBottom: '0.3rem', textTransform: 'uppercase', letterSpacing: '0.5px' },
   galleryTitle: { fontSize: '1.1rem', color: '#ffffff', fontWeight: '800', marginBottom: '0.5rem' },
   galleryDesc: { color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 },
   accordionContainer: { display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', maxWidth: '900px' },
   accordionItemDark: { backgroundColor: '#162f4f', borderRadius: '12px', overflow: 'hidden' },
-  accordionHeaderDark: { padding: '1.25rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontWeight: '700', color: '#ffffff', fontSize: '1rem' },
+  accordionHeaderDark: {
+    padding: '1.25rem 1.5rem',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    cursor: 'pointer',
+    fontWeight: '700',
+    color: '#ffffff',
+    fontSize: '1rem'
+  },
   chevronWrapper: { backgroundColor: '#0f2744', padding: '6px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' },
   accordionBodyDark: { padding: '0 1.5rem 1.25rem 1.5rem', color: '#94a3b8', fontSize: '0.95rem', lineHeight: '1.6' },
   modalOverlay: {
@@ -649,12 +770,32 @@ const styles = {
   },
   modalHeaderTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' },
   modalIconBox: { width: '56px', height: '56px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  closeIconButton: { backgroundColor: '#0f2744', border: '1px solid #1e3a5f', color: '#94a3b8', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' },
+  closeIconButton: {
+    backgroundColor: '#0f2744',
+    border: '1px solid #1e3a5f',
+    color: '#94a3b8',
+    width: '36px',
+    height: '36px',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer'
+  },
   modalTitle: { fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', marginBottom: '1rem' },
   modalTextScroll: { overflowY: 'auto', flex: 1, paddingRight: '0.5rem', marginBottom: '1.5rem' },
   modalText: { color: '#cbd5e1', fontSize: '0.95rem', lineHeight: '1.8', whiteSpace: 'pre-line', margin: 0 },
   modalActions: { display: 'flex', justifyContent: 'flex-end', paddingTop: '1rem', borderTop: '1px solid #1e3a5f' },
-  modalCloseBtn: { backgroundColor: '#c2410c', color: '#ffffff', border: 'none', padding: '0.65rem 1.5rem', borderRadius: '10px', fontWeight: '700', fontSize: '0.9rem', cursor: 'pointer' },
+  modalCloseBtn: {
+    backgroundColor: '#c2410c',
+    color: '#ffffff',
+    border: 'none',
+    padding: '0.65rem 1.5rem',
+    borderRadius: '10px',
+    fontWeight: '700',
+    fontSize: '0.9rem',
+    cursor: 'pointer'
+  },
   modalMediaContent: {
     backgroundColor: '#09182c',
     borderRadius: '20px',
