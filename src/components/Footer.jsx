@@ -28,8 +28,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Kolom Kanan: Kontak & Email */}
-          <div style={{ ...styles.columnBox, marginLeft: '-3rem' }} className="footer-right-col">
+          {/* Kolom Kanan: Kontak & Email (Digeser ke kanan dengan mengurangi/menghapus margin negatif) */}
+          <div style={{ ...styles.columnBox, marginLeft: '0rem' }} className="footer-right-col">
             <h4 style={styles.columnTitle}>📞 Kontak & Layanan Informasi</h4>
             <p style={styles.columnText}>
               <strong>Hp / WhatsApp:</strong><br />
@@ -84,7 +84,7 @@ const styles = {
   twoColumnContainer: {
     display: 'flex',
     justifyContent: 'flex-start',
-    gap: '5rem',
+    gap: '4rem', // Gap disesuaikan agar jarak antar kolom pas
     width: '100%',
     marginBottom: '2.5rem',
     textAlign: 'left'
@@ -108,7 +108,7 @@ const styles = {
   },
   mapWrapper: {
     width: '100%',
-    maxWidth: '250px', // Diperkecil lagi lebarnya agar lebih proporsional
+    maxWidth: '250px',
     borderRadius: '8px',
     overflow: 'hidden',
     border: '1px solid #1e3a5f',
