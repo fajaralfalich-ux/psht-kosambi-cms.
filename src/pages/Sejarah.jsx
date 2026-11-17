@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Sparkles, ArrowRight, ArrowLeft } from 'lucide-react';
 import kiHadjarPhoto from '/ki hajar.jpg';
 import soeroPhoto from '/ki soero.jpg';
 import soetomoPhoto from '/soetomo.jpg';
@@ -35,12 +36,25 @@ export default function Sejarah() {
     return (
       <div style={styles.detailContainer} className="sejarah-detail-container">
         <style>{`
+          @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          .sejarah-detail-anim { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+          
+          .gradient-gold-title {
+            background: linear-gradient(135deg, #ffffff 20%, #fde047 60%, #e11d48 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(251, 191, 36, 0.2);
+          }
+
           @media (max-width: 768px) {
             .sejarah-detail-container {
               padding: 3rem 1.25rem !important;
             }
             .sejarah-detail-box {
-              padding: 1.75rem 1.25rem !important;
+              padding: 2rem 1.5rem !important;
             }
             .sejarah-detail-title {
               font-size: 1.6rem !important;
@@ -54,11 +68,14 @@ export default function Sejarah() {
             }
           }
         `}</style>
+        
         <button onClick={() => setSelectedTokoh(null)} style={styles.backButton}>
-          &larr; Kembali ke Daftar Tokoh
+          <ArrowLeft size={18} />
+          <span>Kembali ke Daftar Tokoh</span>
         </button>
-        <div style={styles.detailContentBox} className="sejarah-detail-box">
-          <h1 style={styles.detailTitle} className="sejarah-detail-title">{data.nama}</h1>
+
+        <div style={styles.detailContentBox} className="sejarah-detail-box sejarah-detail-anim">
+          <h1 style={styles.detailTitle} className="sejarah-detail-title gradient-gold-title">{data.nama}</h1>
           
           <div style={styles.detailImageBox} className="sejarah-detail-image-box">
             <img src={data.foto} alt={data.nama} style={styles.detailImg} />
@@ -75,29 +92,47 @@ export default function Sejarah() {
   return (
     <div style={styles.pageContainer} className="sejarah-page-container">
       <style>{`
+        @keyframes fadeInUp {
+          0% { opacity: 0; transform: translateY(20px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .sejarah-header-anim { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        .gradient-gold-title {
+          background: linear-gradient(135deg, #ffffff 20%, #fde047 60%, #e11d48 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-shadow: 0 4px 20px rgba(251, 191, 36, 0.2);
+        }
+
         .card-hover {
-          transition: all 0.25s ease-in-out;
-          border: 1px solid #1e293b;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          border: 1px solid #1e3a5f;
+          background: linear-gradient(145deg, #10223b 0%, #0d1b30 100%);
         }
         .card-hover:hover {
-          transform: translateY(-6px);
-          border-color: rgba(194, 65, 12, 0.6) !important;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+          transform: translateY(-5px);
+          border-color: rgba(249, 115, 22, 0.6) !important;
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
         }
 
         @media (max-width: 768px) {
           .sejarah-page-container {
             padding: 3rem 1.25rem !important;
           }
-          .sejarah-title {
-            font-size: 1.85rem !important;
-            line-height: 1.2 !important;
-          }
-          .sejarah-subtitle {
-            font-size: 0.95rem !important;
-          }
           .sejarah-header-box {
             margin-bottom: 2rem !important;
+            text-align: center !important;
+          }
+          .subHeadingWrapper {
+            justify-content: center !important;
+          }
+          .sejarah-title {
+            font-size: 1.75rem !important;
+            line-height: 1.25 !important;
+          }
+          .sejarah-subtitle {
+            font-size: 0.9rem !important;
           }
           .sejarah-card-main, .sejarah-card {
             padding: 2rem 1.5rem !important;
@@ -106,9 +141,14 @@ export default function Sejarah() {
       `}</style>
 
       {/* Header Sejarah */}
-      <div style={styles.headerBox} className="sejarah-header-box">
-        <span style={styles.tag}>SEJARAH PERJUANGAN</span>
-        <h1 style={styles.title} className="sejarah-title">Sejarah Singkat Berdirinya PSHT</h1>
+      <div style={styles.headerBox} className="sejarah-header-box sejarah-header-anim">
+        <div style={styles.subHeadingWrapper} className="subHeadingWrapper">
+          <Sparkles size={16} color="#fb923c" />
+          <span style={styles.tag}>SEJARAH PERJUANGAN</span>
+        </div>
+        <h1 style={styles.title} className="sejarah-title gradient-gold-title">
+          Sejarah Singkat Berdirinya PSHT
+        </h1>
         <p style={styles.subtitle} className="sejarah-subtitle">
           Mengenal akar perjuangan, tokoh pendiri, serta perjalanan panjang Persaudaraan Setia Hati Terate dari masa ke masa.
         </p>
@@ -120,13 +160,15 @@ export default function Sejarah() {
           <div style={styles.imageBox}>
             <img src={soeroPhoto} alt="Ki Ngabehi Soerodiwiryo" style={styles.tokohImg} />
           </div>
+          <span style={styles.cardBadge}>Pendiri Setia Hati</span>
           <h3 style={styles.cardTitle}>Ki Ngabehi Soerodiwiryo</h3>
           <p style={styles.cardText}>
-            Ki Ngabehi Soerodiwiryo (Eyang Suro) adalah pendiri ajaran Ilmu Setia Hati (SH)...
+            Ki Ngabehi Soerodiwiryo (Eyang Suro) adalah pendiri ajaran Ilmu Setia Hati yang menjadi akar sejarah PSHT...
           </p>
           <div style={styles.btnWrapper}>
             <button onClick={() => setSelectedTokoh('kiSoero')} style={styles.btnRed}>
-              Baca selengkapnya
+              <span>Baca selengkapnya</span>
+              <ArrowRight size={16} />
             </button>
           </div>
         </div>
@@ -134,18 +176,21 @@ export default function Sejarah() {
 
       {/* Bagian 3 Kotak Tokoh di Bawah */}
       <div style={styles.contentGrid}>
+        
         {/* Tokoh 1: Ki Hadjar */}
         <div style={styles.card} className="card-hover sejarah-card">
           <div style={styles.imageBox}>
             <img src={kiHadjarPhoto} alt="Ki Hadjar Hardjo Oetomo" style={styles.tokohImg} />
           </div>
+          <span style={styles.cardBadge}>Perintis Cikal Bakal PSHT</span>
           <h3 style={styles.cardTitle}>Ki Hadjar Hardjo Oetomo</h3>
           <p style={styles.cardText}>
-            Ki Hadjar Hardjo Oetomo Lahir di Winongo, Kota Madiun, Jawa Timur, Tahun 1883...
+            Ki Hadjar Hardjo Oetomo lahir di Winongo, Madiun pada tahun 1883 dan merintis SH PSC pada tahun 1922...
           </p>
           <div style={styles.btnWrapper}>
             <button onClick={() => setSelectedTokoh('kiHadjar')} style={styles.btnRed}>
-              Baca selengkapnya
+              <span>Baca selengkapnya</span>
+              <ArrowRight size={16} />
             </button>
           </div>
         </div>
@@ -155,13 +200,15 @@ export default function Sejarah() {
           <div style={styles.imageBox}>
             <img src={soetomoPhoto} alt="R.M. Soetomo Mangkoedjojo" style={styles.tokohImg} />
           </div>
+          <span style={styles.cardBadge}>Ketua Umum Pusat Pertama</span>
           <h3 style={styles.cardTitle}>R.M. Soetomo Mangkoedjojo</h3>
           <p style={styles.cardText}>
-            Merupakan tokoh penting yang memiliki jasa besar dalam perjalanan sejarah PSHT...
+            Merupakan tokoh penting yang berjasa besar dalam menyusun AD/ART serta menstrukturkan organisasi PSHT...
           </p>
           <div style={styles.btnWrapper}>
             <button onClick={() => setSelectedTokoh('soetomo')} style={styles.btnRed}>
-              Baca selengkapnya
+              <span>Baca selengkapnya</span>
+              <ArrowRight size={16} />
             </button>
           </div>
         </div>
@@ -171,16 +218,19 @@ export default function Sejarah() {
           <div style={styles.imageBox}>
             <img src={imamPhoto} alt="R.M. Imam Koesoepangat" style={styles.tokohImg} />
           </div>
-          <h3 style={styles.cardTitle}>RM. Imam Koesoepangat</h3>
+          <span style={styles.cardBadge}>Penditho Wesi Kuning</span>
+          <h3 style={styles.cardTitle}>R.M. Imam Koesoepangat</h3>
           <p style={styles.cardText}>
-            R.M. Imam Koesoepangat lahir di Madiun pada 18 November 1938 dan dikenal dengan julukan...
+            R.M. Imam Koesoepangat memiliki peran besar dalam mengembangkan bidang kerohanian dan budi luhur PSHT...
           </p>
           <div style={styles.btnWrapper}>
             <button onClick={() => setSelectedTokoh('imam')} style={styles.btnRed}>
-              Baca selengkapnya
+              <span>Baca selengkapnya</span>
+              <ArrowRight size={16} />
             </button>
           </div>
         </div>
+
       </div>
     </div>
   );
@@ -188,35 +238,37 @@ export default function Sejarah() {
 
 const styles = {
   pageContainer: { 
-    padding: '6rem 4rem', 
+    padding: '5rem 4rem 6rem 4rem', 
     width: '100%', 
     boxSizing: 'border-box',
     backgroundColor: '#070f1e',
     minHeight: 'calc(100vh - 80px)'
   },
-  headerBox: { marginBottom: '3.5rem', textAlign: 'center', maxWidth: '1400px', margin: '0 auto 3.5rem auto' },
-  tag: { color: '#c2410c', fontWeight: '700', fontSize: '0.85rem', marginBottom: '0.5rem', display: 'block', letterSpacing: '0.5px' },
-  title: { fontSize: '2.8rem', color: '#ffffff', fontWeight: '800', marginBottom: '0.75rem', textAlign: 'center' },
-  subtitle: { color: '#94a3b8', fontSize: '1.1rem', lineHeight: '1.6', maxWidth: '800px', margin: '0 auto', textAlign: 'center' },
+  headerBox: { marginBottom: '3rem', textAlign: 'left', maxWidth: '1200px', margin: '0 auto 3rem auto' },
+  subHeadingWrapper: { display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' },
+  tag: { color: '#fb923c', fontWeight: '700', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1.5px' },
+  title: { fontSize: '2.5rem', fontWeight: '800', marginBottom: '0.75rem', lineHeight: '1.2' },
+  subtitle: { color: '#94a3b8', fontSize: '1.05rem', lineHeight: '1.6', maxWidth: '800px' },
   
-  topCardWrapper: { display: 'flex', justifyContent: 'center', marginBottom: '2.5rem', maxWidth: '1400px', margin: '0 auto 2.5rem auto' },
-  cardMain: { background: '#0e1d32', borderRadius: '20px', padding: '2.5rem', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%', maxWidth: '420px', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.3)' },
+  topCardWrapper: { display: 'flex', justifyContent: 'center', marginBottom: '2.5rem', maxWidth: '1200px', margin: '0 auto 2.5rem auto' },
+  cardMain: { borderRadius: '20px', padding: '2.5rem', textAlign: 'left', display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '450px', boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)' },
 
-  contentGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2.5rem', maxWidth: '1400px', margin: '0 auto', width: '100%' },
-  card: { background: '#0e1d32', borderRadius: '20px', padding: '2.5rem', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.3)' },
-  imageBox: { width: '100%', height: '220px', borderRadius: '14px', overflow: 'hidden', border: '1px solid #1e293b', marginBottom: '1.5rem', backgroundColor: '#070f1e', display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  tokohImg: { width: '100%', height: '100%', objectFit: 'contain' },
-  cardTitle: { fontSize: '1.3rem', color: '#ffffff', fontWeight: '800', marginBottom: '0.75rem', textAlign: 'center' },
-  cardText: { color: '#94a3b8', fontSize: '0.95rem', lineHeight: '1.7', marginBottom: '2rem', textAlign: 'center', flexGrow: 1 },
-  btnWrapper: { textAlign: 'center' },
-  btnRed: { background: '#c2410c', color: '#ffffff', border: 'none', padding: '0.85rem 2rem', borderRadius: '10px', fontWeight: '700', cursor: 'pointer', fontSize: '0.95rem', width: '100%', transition: 'background 0.2s', boxShadow: '0 4px 12px rgba(194, 65, 12, 0.3)' },
+  contentGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '2.5rem', maxWidth: '1200px', margin: '0 auto', width: '100%' },
+  card: { borderRadius: '20px', padding: '2.5rem', textAlign: 'left', display: 'flex', flexDirection: 'column', boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)' },
+  imageBox: { width: '100%', height: '240px', borderRadius: '14px', overflow: 'hidden', border: '1px solid #1e3a5f', marginBottom: '1.25rem', backgroundColor: '#070f1e', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  tokohImg: { width: '100%', height: '100%', objectFit: 'cover' },
+  cardBadge: { fontSize: '0.72rem', fontWeight: '700', padding: '0.3rem 0.75rem', borderRadius: '20px', backgroundColor: 'rgba(249, 115, 22, 0.1)', color: '#fb923c', border: '1px solid rgba(249, 115, 22, 0.2)', alignSelf: 'flex-start', marginBottom: '0.75rem' },
+  cardTitle: { fontSize: '1.3rem', color: '#ffffff', fontWeight: '800', marginBottom: '0.75rem' },
+  cardText: { color: '#94a3b8', fontSize: '0.95rem', lineHeight: '1.7', marginBottom: '2rem', flexGrow: 1 },
+  btnWrapper: { textAlign: 'left' },
+  btnRed: { background: '#c2410c', color: '#ffffff', border: 'none', padding: '0.85rem 1.75rem', borderRadius: '10px', fontWeight: '700', cursor: 'pointer', fontSize: '0.95rem', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', transition: 'all 0.2s ease', boxShadow: '0 4px 15px rgba(194, 65, 12, 0.3)' },
 
-  detailContainer: { padding: '6rem 4rem', maxWidth: '1200px', margin: '0 auto', width: '100%', boxSizing: 'border-box', backgroundColor: '#070f1e', minHeight: 'calc(100vh - 80px)' },
-  backButton: { background: 'none', border: 'none', color: '#c2410c', fontWeight: '700', fontSize: '1rem', cursor: 'pointer', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' },
-  detailContentBox: { background: '#0e1d32', padding: '3.5rem', borderRadius: '20px', border: '1px solid #1e293b', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)', textAlign: 'center' },
-  detailTitle: { fontSize: '2.2rem', color: '#ffffff', fontWeight: '800', marginBottom: '2rem', textTransform: 'uppercase' },
-  detailImageBox: { width: '100%', maxWidth: '400px', height: '320px', margin: '0 auto 2rem auto', borderRadius: '14px', overflow: 'hidden', background: '#070f1e', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #1e293b' },
-  detailImg: { width: '100%', height: '100%', objectFit: 'contain' },
+  detailContainer: { padding: '5rem 4rem 6rem 4rem', maxWidth: '1200px', margin: '0 auto', width: '100%', boxSizing: 'border-box', backgroundColor: '#070f1e', minHeight: 'calc(100vh - 80px)' },
+  backButton: { background: 'none', border: 'none', color: '#fb923c', fontWeight: '700', fontSize: '0.95rem', cursor: 'pointer', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'opacity 0.2s' },
+  detailContentBox: { background: '#10223b', padding: '3rem', borderRadius: '20px', border: '1px solid #1e3a5f', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)', textAlign: 'left' },
+  detailTitle: { fontSize: '2.2rem', fontWeight: '800', marginBottom: '2rem', textTransform: 'uppercase', lineHeight: '1.2' },
+  detailImageBox: { width: '100%', maxWidth: '380px', height: '320px', margin: '0 0 2rem 0', borderRadius: '14px', overflow: 'hidden', background: '#070f1e', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #1e3a5f' },
+  detailImg: { width: '100%', height: '100%', objectFit: 'cover' },
   detailTextWrapper: { textAlign: 'left' },
-  detailText: { color: '#94a3b8', fontSize: '1.05rem', lineHeight: '1.8', margin: 0, whiteSpace: 'pre-line' }
+  detailText: { color: '#cbd5e1', fontSize: '1rem', lineHeight: '1.8', margin: 0, whiteSpace: 'pre-line' }
 };
