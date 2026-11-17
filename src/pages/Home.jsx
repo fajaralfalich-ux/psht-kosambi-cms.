@@ -138,7 +138,7 @@ export default function Home() {
       title: 'Ajaran & Falsafah',
       desc: 'Memahami nilai kebenaran, keadilan, dan pembentukan karakter manusia berjiwa kesatria.',
       detail: `1. Memayu Hayuning Bawana\nMakna Filosofis: Memayu Hayuning Bawana adalah prinsip luhur Nusantara yang bermakna menjaga, memperindah, merawat, dan menciptakan keharmonisan serta ketenteraman di muka bumi.\n\n2. Berbudi Luhur\nMakna Filosofis: Berbudi luhur adalah puncak integritas moral, akhlak mulia, dan kebersihan jiwa.\n\n3. Setia pada Hati Sanubari\nMakna Filosofis: Kesetiaan mutlak pada suara kebenaran dari dalam hati nurani.\n\n4. Sepiro Gedhening Sengsoro Yen Tinompo Amung Dadi Cobo\nMakna Filosofis: Sebesar apa pun bentuk penderitaan, cobaan, atau musibah, apabila diterima dengan keikhlasan jiwa, semua itu hanya ujian kecil.`,
-      icon: <BookOpen size={28} />,
+      icon: <BookOpen size={26} />,
       color: '#fb923c',
       bg: '#162f4f'
     },
@@ -146,15 +146,15 @@ export default function Home() {
       title: 'Persaudaraan',
       desc: 'Mempererat ikatan antar anggota tanpa membedakan suku, agama, dan latar belakang.',
       detail: `Persaudaraan merupakan dasar utama dalam ajaran Persaudaraan Setia Hati Terate (PSHT), dilandasi rasa kasih sayang, saling menghormati, dan saling membantu dalam kehidupan sehari-hari.`,
-      icon: <Users size={28} />,
+      icon: <Users size={26} />,
       color: '#38bdf8',
       bg: '#162f4f'
     },
     prestasi: {
-      title: 'Pencak Silat Pendekar & Prestasi',
+      title: 'Pencak Silat & Prestasi',
       desc: 'Latihan fisik, teknik bela diri tradisional, serta persiapan kejuaraan Seni & Tanding.',
       detail: `Pencak silat, pendekar, dan prestasi merupakan tiga hal yang saling berkaitan dalam pendidikan PSHT, mengajarkan olahraga, seni, budaya, serta pengendalian diri.`,
-      icon: <Shield size={28} />,
+      icon: <Shield size={26} />,
       color: '#4ade80',
       bg: '#162f4f'
     },
@@ -162,7 +162,7 @@ export default function Home() {
       title: 'Bakti Sosial',
       desc: 'Kegiatan kemasyarakatan, donor darah, dan tanggap bencana sebagai wujud Memayu Hayuning Bawana.',
       detail: `Bakti sosial merupakan bentuk pengamalan ajaran PSHT melalui aksi kemanusiaan nyata di tengah masyarakat.`,
-      icon: <Award size={28} />,
+      icon: <Award size={26} />,
       color: '#f87171',
       bg: '#162f4f'
     }
@@ -173,7 +173,7 @@ export default function Home() {
       <style>{`
         @keyframes floatEnhanced {
           0% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-6px) rotate(0.3deg); }
+          50% { transform: translateY(-5px) rotate(0.2deg); }
           100% { transform: translateY(0px) rotate(0deg); }
         }
         @keyframes pulseGlow {
@@ -182,22 +182,22 @@ export default function Home() {
           100% { box-shadow: 0 8px 20px rgba(30, 58, 95, 0.4); }
         }
         @keyframes fadeInUp {
-          0% { opacity: 0; transform: translateY(16px); }
+          0% { opacity: 0; transform: translateY(14px); }
           100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes fadeInScale {
           0% { opacity: 0; transform: scale(0.96); }
           100% { opacity: 1; transform: scale(1); }
         }
-        .hero-title-anim { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .hero-desc-anim { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
-        .hero-badges-anim { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; }
-        .hero-btns-anim { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
+        .hero-title-anim { animation: fadeInUp 0.5s ease forwards; }
+        .hero-desc-anim { animation: fadeInUp 0.6s ease 0.1s forwards; opacity: 0; }
+        .hero-badges-anim { animation: fadeInUp 0.7s ease 0.2s forwards; opacity: 0; }
+        .hero-btns-anim { animation: fadeInUp 0.8s ease 0.3s forwards; opacity: 0; }
         
         .logo-floating-box {
           animation: floatEnhanced 4s ease-in-out infinite, pulseGlow 4s ease-in-out infinite;
         }
-        .btn-hover-effect { transition: all 0.25s ease; }
+        .btn-hover-effect { transition: all 0.2s ease; }
         .btn-hover-effect:hover {
           transform: translateY(-2px);
           box-shadow: 0 6px 16px rgba(249, 115, 22, 0.35);
@@ -216,7 +216,7 @@ export default function Home() {
           overflow: hidden;
           cursor: pointer;
           background-color: #162f4f;
-          border-radius: 14px;
+          border-radius: 12px;
           border: 1px solid #1e3a5f;
           display: flex;
           flex-direction: column;
@@ -226,7 +226,7 @@ export default function Home() {
         .gallery-card:hover .gallery-overlay { opacity: 1; }
         
         .badge-nav-btn {
-          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.2s ease;
           background: rgba(30, 58, 95, 0.65);
           backdrop-filter: blur(8px);
           border: 1px solid #2b4c7e;
@@ -234,7 +234,7 @@ export default function Home() {
           cursor: pointer;
           display: inline-flex;
           align-items: center;
-          gap: 0.4rem;
+          gap: 0.35rem;
         }
         .badge-nav-btn:hover {
           background: linear-gradient(135deg, #c2410c 0%, #f97316 100%) !important;
@@ -245,14 +245,14 @@ export default function Home() {
 
         .filter-btn { transition: all 0.2s ease; }
         .filter-btn:hover { background-color: #1e3a5f; color: #ffffff; }
-        .modal-enter { animation: fadeInScale 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .modal-enter { animation: fadeInScale 0.2s ease forwards; }
         
-        /* OPTIMASI TAMPILAN MOBILE / HP */
+        /* OPTIMASI TAMPILAN MOBILE / HP AGAR RAPI & COMPACT (TIDAK MEMANJANG KE BAWAH) */
         @media (max-width: 768px) {
           .hero-section { 
-            padding: 2.5rem 1.25rem !important; 
+            padding: 2rem 1rem !important; 
             flex-direction: column-reverse !important; 
-            gap: 1.5rem !important; 
+            gap: 1.25rem !important; 
             text-align: center !important; 
           }
           .hero-content { 
@@ -260,37 +260,37 @@ export default function Home() {
             max-width: 100% !important; 
           }
           .hero-title { 
-            font-size: 1.55rem !important; 
+            font-size: 1.45rem !important; 
             text-align: center !important; 
-            line-height: 1.3 !important; 
-            margin-bottom: 0.85rem !important; 
+            line-height: 1.25 !important; 
+            margin-bottom: 0.6rem !important; 
           }
           .hero-desc { 
-            font-size: 0.88rem !important; 
+            font-size: 0.85rem !important; 
             text-align: center !important; 
-            margin-bottom: 1.25rem !important; 
-            line-height: 1.6 !important; 
+            margin-bottom: 1rem !important; 
+            line-height: 1.5 !important; 
           }
           .hero-badges { 
             justify-content: center !important; 
-            margin-bottom: 1.25rem !important; 
-            gap: 0.5rem !important; 
+            margin-bottom: 1rem !important; 
+            gap: 0.4rem !important; 
           }
           .badge-nav-btn { 
-            padding: 0.45rem 0.85rem !important; 
-            font-size: 0.75rem !important; 
-            border-radius: 20px !important;
+            padding: 0.35rem 0.7rem !important; 
+            font-size: 0.7rem !important; 
+            border-radius: 16px !important;
           }
           .btn-group { 
             justify-content: center !important; 
-            gap: 0.75rem !important; 
+            gap: 0.6rem !important; 
             width: 100% !important;
           }
           .btnPrimary, .btnSecondary { 
-            padding: 0.75rem 1.25rem !important; 
-            font-size: 0.9rem !important; 
+            padding: 0.65rem 1rem !important; 
+            font-size: 0.85rem !important; 
             flex: 1 !important; 
-            max-width: 160px !important;
+            max-width: 140px !important;
             text-align: center !important; 
             justify-content: center !important; 
           }
@@ -299,69 +299,108 @@ export default function Home() {
             width: 100% !important; 
             display: flex !important; 
             justify-content: center !important; 
-            margin-bottom: 0.25rem !important; 
+            margin-bottom: 0.1rem !important; 
           }
           .hero-card-badge { 
-            padding: 1.75rem !important; 
-            border-radius: 24px !important; 
-            max-width: 160px !important; 
+            padding: 1.25rem !important; 
+            border-radius: 20px !important; 
+            max-width: 130px !important; 
             margin: 0 auto !important; 
           }
           .logo-image { 
-            width: 110px !important; 
-            height: 110px !important; 
+            width: 90px !important; 
+            height: 90px !important; 
           }
           
+          /* KARTU NILAI LUHUR: DIBUAT 2 KOLOM (GRID 2x2) DI HP AGAR TIDAK MEMANJANG KE BAWAH */
           .cards-grid { 
-            grid-template-columns: 1fr !important; 
-            gap: 1rem !important; 
+            grid-template-columns: repeat(2, 1fr) !important; 
+            gap: 0.75rem !important; 
           }
           .cardDark { 
-            padding: 1.25rem !important; 
-            border-radius: 14px !important; 
+            padding: 0.9rem !important; 
+            border-radius: 12px !important; 
           }
           .cardIcon { 
-            width: 42px !important; 
-            height: 42px !important; 
-            margin-bottom: 0.75rem !important; 
-            border-radius: 10px !important; 
+            width: 34px !important; 
+            height: 34px !important; 
+            margin-bottom: 0.5rem !important; 
+            border-radius: 8px !important; 
+          }
+          .cardIcon svg {
+            width: 20px !important;
+            height: 20px !important;
           }
           .cardTitleLight { 
-            font-size: 1.05rem !important; 
-            margin-bottom: 0.35rem !important; 
-          }
-          .cardTextLight { 
-            font-size: 0.82rem !important; 
-            line-height: 1.5 !important; 
-            margin-bottom: 0.75rem !important; 
-            display: block !important;
-            -webkit-line-clamp: unset !important;
-          }
-          .cardLinkText { 
-            font-size: 0.8rem !important; 
-          }
-          
-          .gallery-grid-4 { 
-            grid-template-columns: 1fr !important; 
-            gap: 1.25rem !important; 
-          }
-          .section-dark, .section-dark-alt { 
-            padding: 3rem 1.25rem !important; 
-          }
-          .section-title-light { 
-            font-size: 1.45rem !important; 
+            font-size: 0.88rem !important; 
+            margin-bottom: 0.25rem !important; 
             line-height: 1.25 !important;
           }
+          .cardTextLight { 
+            font-size: 0.72rem !important; 
+            line-height: 1.35 !important; 
+            margin-bottom: 0.5rem !important; 
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+          }
+          .cardLinkText { 
+            font-size: 0.72rem !important; 
+          }
+          
+          /* GALERI KEGIATAN: DIBUAT GRID 2 KOLOM KECIL ATAU KOMPAK DI HP */
+          .gallery-grid-4 { 
+            grid-template-columns: repeat(2, 1fr) !important; 
+            gap: 0.75rem !important; 
+          }
+          .galleryMediaWrapper {
+            height: 130px !important;
+          }
+          .galleryMeta {
+            padding: 0.75rem !important;
+          }
+          .galleryCategory {
+            font-size: 0.62rem !important;
+            margin-bottom: 0.15rem !important;
+          }
+          .galleryTitle {
+            font-size: 0.82rem !important;
+            margin-bottom: 0.25rem !important;
+            line-height: 1.25 !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+          }
+          .galleryDesc {
+            display: none !important; /* Disembunyikan di HP agar kartu tetap rapi dan ringkas */
+          }
+          .mediaTypeTag {
+            top: 8px !important;
+            left: 8px !important;
+            padding: 0.15rem 0.5rem !important;
+            font-size: 0.6rem !important;
+          }
+
+          .section-dark, .section-dark-alt { 
+            padding: 2.25rem 1rem !important; 
+          }
+          .section-title-light { 
+            font-size: 1.35rem !important; 
+            line-height: 1.2 !important;
+          }
           .section-descLight { 
-            font-size: 0.88rem !important; 
-            line-height: 1.55 !important;
+            font-size: 0.82rem !important; 
+            line-height: 1.45 !important;
           }
           .sectionHeader { 
-            margin-bottom: 1.75rem !important; 
+            margin-bottom: 1.25rem !important; 
             text-align: center !important;
           }
           .sectionHeader span {
             text-align: center !important;
+            font-size: 0.72rem !important;
           }
           .sectionHeader p {
             max-width: 100% !important;
@@ -370,8 +409,8 @@ export default function Home() {
             flex-direction: column !important; 
             align-items: center !important; 
             text-align: center !important;
-            gap: 1rem !important; 
-            margin-bottom: 2rem !important;
+            gap: 0.75rem !important; 
+            margin-bottom: 1.5rem !important;
           }
           .filterWrapper {
             width: 100% !important;
@@ -381,6 +420,8 @@ export default function Home() {
           .filter-btn {
             flex: 1 !important;
             text-align: center !important;
+            padding: 0.4rem 0.75rem !important;
+            font-size: 0.78rem !important;
           }
         }
       `}</style>
@@ -528,7 +569,7 @@ export default function Home() {
                   className="gallery-card card-hover"
                   onClick={() => handleOpenModal(media)}
                 >
-                  <div style={styles.galleryMediaWrapper}>
+                  <div style={styles.galleryMediaWrapper} className="galleryMediaWrapper">
                     {hasVideos ? (
                       <video muted style={styles.galleryImage}>
                         <source src={media.urls[0]} type="video/mp4" />
@@ -541,23 +582,23 @@ export default function Home() {
                       />
                     ) : (
                       <div style={styles.emptyCardPlaceholder}>
-                        <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Media belum tersedia</p>
+                        <p style={{ color: '#94a3b8', fontSize: '0.8rem' }}>Media belum tersedia</p>
                       </div>
                     )}
 
                     <div className="gallery-overlay" style={styles.galleryOverlay}>
                       <div style={styles.playIconBadge}>
-                        {media.type === 'video' ? <Play size={24} fill="white" /> : <Eye size={24} />}
+                        {media.type === 'video' ? <Play size={20} fill="white" /> : <Eye size={20} />}
                       </div>
                     </div>
-                    <span style={styles.mediaTypeTag}>
+                    <span style={styles.mediaTypeTag} className="mediaTypeTag">
                       {media.type === 'video' ? `🎬 Video (${media.urls ? media.urls.length : 0})` : `📷 Foto (${media.images ? media.images.length : 0})`}
                     </span>
                   </div>
-                  <div style={styles.galleryMeta}>
-                    <span style={styles.galleryCategory}>{media.category}</span>
-                    <h4 style={styles.galleryTitle}>{media.title}</h4>
-                    <p style={styles.galleryDesc}>{media.desc}</p>
+                  <div style={styles.galleryMeta} className="galleryMeta">
+                    <span style={styles.galleryCategory} className="galleryCategory">{media.category}</span>
+                    <h4 style={styles.galleryTitle} className="galleryTitle">{media.title}</h4>
+                    <p style={styles.galleryDesc} className="galleryDesc">{media.desc}</p>
                   </div>
                 </div>
               );
@@ -814,8 +855,8 @@ const styles = {
     transition: 'opacity 0.3s ease'
   },
   playIconBadge: {
-    width: '48px',
-    height: '48px',
+    width: '42px',
+    height: '42px',
     borderRadius: '50%',
     backgroundColor: '#c2410c',
     color: 'white',
