@@ -28,7 +28,6 @@ export default function Home() {
     setActiveFaq(activeFaq === index ? null : index);
   };
 
-  // Fungsi navigasi smooth scroll ke masing-masing section
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -174,120 +173,220 @@ export default function Home() {
       <style>{`
         @keyframes floatEnhanced {
           0% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-8px) rotate(0.5deg); }
+          50% { transform: translateY(-6px) rotate(0.3deg); }
           100% { transform: translateY(0px) rotate(0deg); }
         }
         @keyframes pulseGlow {
-          0% { box-shadow: 0 10px 25px rgba(30, 58, 95, 0.4); }
-          50% { box-shadow: 0 15px 35px rgba(249, 115, 22, 0.2); }
-          100% { box-shadow: 0 10px 25px rgba(30, 58, 95, 0.4); }
+          0% { box-shadow: 0 8px 20px rgba(30, 58, 95, 0.4); }
+          50% { box-shadow: 0 12px 28px rgba(249, 115, 22, 0.2); }
+          100% { box-shadow: 0 8px 20px rgba(30, 58, 95, 0.4); }
         }
         @keyframes fadeInUp {
-          0% { opacity: 0; transform: translateY(20px); }
+          0% { opacity: 0; transform: translateY(16px); }
           100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes fadeInScale {
           0% { opacity: 0; transform: scale(0.96); }
           100% { opacity: 1; transform: scale(1); }
         }
-        .hero-title-anim { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .hero-desc-anim { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
-        .hero-badges-anim { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; }
-        .hero-btns-anim { animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
+        .hero-title-anim { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .hero-desc-anim { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+        .hero-badges-anim { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; }
+        .hero-btns-anim { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
+        
         .logo-floating-box {
           animation: floatEnhanced 4s ease-in-out infinite, pulseGlow 4s ease-in-out infinite;
         }
         .btn-hover-effect { transition: all 0.25s ease; }
         .btn-hover-effect:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+          box-shadow: 0 6px 16px rgba(249, 115, 22, 0.35);
         }
         .card-hover {
-          transition: all 0.3s ease;
+          transition: all 0.25s ease;
           border: 1px solid #1e3a5f;
         }
         .card-hover:hover {
-          transform: translateY(-4px);
+          transform: translateY(-3px);
           border-color: rgba(249, 115, 22, 0.6) !important;
-          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
         }
         .gallery-card {
           transition: all 0.3s ease;
           overflow: hidden;
           cursor: pointer;
           background-color: #162f4f;
-          border-radius: 16px;
+          border-radius: 14px;
           border: 1px solid #1e3a5f;
           display: flex;
           flex-direction: column;
           width: 100%;
         }
-        .gallery-card:hover img, .gallery-card:hover video { transform: scale(1.05); }
+        .gallery-card:hover img, .gallery-card:hover video { transform: scale(1.03); }
         .gallery-card:hover .gallery-overlay { opacity: 1; }
         
         .badge-nav-btn {
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-          background: rgba(30, 58, 95, 0.7);
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          background: rgba(30, 58, 95, 0.65);
           backdrop-filter: blur(8px);
           border: 1px solid #2b4c7e;
           color: #e2e8f0;
           cursor: pointer;
           display: inline-flex;
           align-items: center;
-          gap: 0.45rem;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+          gap: 0.4rem;
         }
         .badge-nav-btn:hover {
           background: linear-gradient(135deg, #c2410c 0%, #f97316 100%) !important;
           color: #ffffff !important;
           border-color: #fb923c !important;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 20px rgba(249, 115, 22, 0.35);
-        }
-        .badge-nav-btn:active {
-          transform: scale(0.96);
+          transform: translateY(-1px);
         }
 
         .filter-btn { transition: all 0.2s ease; }
         .filter-btn:hover { background-color: #1e3a5f; color: #ffffff; }
-        .modal-enter { animation: fadeInScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .modal-enter { animation: fadeInScale 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
+        /* OPTIMASI TAMPILAN MOBILE / HP */
         @media (max-width: 768px) {
-          .hero-section { padding: 2rem 1rem !important; flex-direction: column !important; gap: 1.25rem !important; text-align: left !important; }
-          .hero-content { text-align: left !important; max-width: 100% !important; }
-          .hero-title { font-size: 1.6rem !important; text-align: left !important; line-height: 1.2 !important; margin-bottom: 0.75rem !important; }
-          .hero-desc { font-size: 0.9rem !important; text-align: left !important; margin-bottom: 1rem !important; line-height: 1.5 !important; }
-          .hero-badges { justify-content: flex-start !important; margin-bottom: 1rem !important; gap: 0.4rem !important; }
-          .badge-nav-btn { padding: 0.4rem 0.75rem !important; font-size: 0.72rem !important; }
-          .btn-group { justify-content: flex-start !important; gap: 0.6rem !important; }
-          .btnPrimary, .btnSecondary { padding: 0.65rem 1.25rem !important; font-size: 0.85rem !important; width: 48% !important; text-align: center !important; justify-content: center !important; }
+          .hero-section { 
+            padding: 2.5rem 1.25rem !important; 
+            flex-direction: column-reverse !important; 
+            gap: 1.5rem !important; 
+            text-align: center !important; 
+          }
+          .hero-content { 
+            text-align: center !important; 
+            max-width: 100% !important; 
+          }
+          .hero-title { 
+            font-size: 1.55rem !important; 
+            text-align: center !important; 
+            line-height: 1.3 !important; 
+            margin-bottom: 0.85rem !important; 
+          }
+          .hero-desc { 
+            font-size: 0.88rem !important; 
+            text-align: center !important; 
+            margin-bottom: 1.25rem !important; 
+            line-height: 1.6 !important; 
+          }
+          .hero-badges { 
+            justify-content: center !important; 
+            margin-bottom: 1.25rem !important; 
+            gap: 0.5rem !important; 
+          }
+          .badge-nav-btn { 
+            padding: 0.45rem 0.85rem !important; 
+            font-size: 0.75rem !important; 
+            border-radius: 20px !important;
+          }
+          .btn-group { 
+            justify-content: center !important; 
+            gap: 0.75rem !important; 
+            width: 100% !important;
+          }
+          .btnPrimary, .btnSecondary { 
+            padding: 0.75rem 1.25rem !important; 
+            font-size: 0.9rem !important; 
+            flex: 1 !important; 
+            max-width: 160px !important;
+            text-align: center !important; 
+            justify-content: center !important; 
+          }
           
-          .hero-image-wrapper { width: 100% !important; display: flex !important; justify-content: center !important; margin-bottom: 0.2rem !important; }
-          .hero-card-badge { padding: 1.2rem !important; border-radius: 20px !important; max-width: 140px !important; margin: 0 auto !important; }
-          .logo-image { width: 95px !important; height: 95px !important; }
+          .hero-image-wrapper { 
+            width: 100% !important; 
+            display: flex !important; 
+            justify-content: center !important; 
+            margin-bottom: 0.25rem !important; 
+          }
+          .hero-card-badge { 
+            padding: 1.75rem !important; 
+            border-radius: 24px !important; 
+            max-width: 160px !important; 
+            margin: 0 auto !important; 
+          }
+          .logo-image { 
+            width: 110px !important; 
+            height: 110px !important; 
+          }
           
-          .cards-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
-          .cardDark { padding: 1rem !important; border-radius: 12px !important; }
-          .cardIcon { width: 36px !important; height: 36px !important; margin-bottom: 0.6rem !important; border-radius: 8px !important; }
-          .cardTitleLight { font-size: 0.9rem !important; margin-bottom: 0.25rem !important; }
-          .cardTextLight { font-size: 0.75rem !important; line-height: 1.4 !important; margin-bottom: 0.6rem !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-          .cardLinkText { font-size: 0.75rem !important; }
-          .gallery-grid-4 { grid-template-columns: 1fr !important; gap: 1rem !important; }
-          .section-dark, .section-dark-alt { padding: 2.5rem 1rem !important; }
-          .section-title-light { font-size: 1.35rem !important; }
-          .section-descLight { font-size: 0.85rem !important; }
-          .sectionHeader { margin-bottom: 1.5rem !important; }
-          .gallery-header-flex { flex-direction: column !important; align-items: flex-start !important; gap: 0.85rem !important; }
+          .cards-grid { 
+            grid-template-columns: 1fr !important; 
+            gap: 1rem !important; 
+          }
+          .cardDark { 
+            padding: 1.25rem !important; 
+            border-radius: 14px !important; 
+          }
+          .cardIcon { 
+            width: 42px !important; 
+            height: 42px !important; 
+            margin-bottom: 0.75rem !important; 
+            border-radius: 10px !important; 
+          }
+          .cardTitleLight { 
+            font-size: 1.05rem !important; 
+            margin-bottom: 0.35rem !important; 
+          }
+          .cardTextLight { 
+            font-size: 0.82rem !important; 
+            line-height: 1.5 !important; 
+            margin-bottom: 0.75rem !important; 
+            display: block !important;
+            -webkit-line-clamp: unset !important;
+          }
+          .cardLinkText { 
+            font-size: 0.8rem !important; 
+          }
+          
+          .gallery-grid-4 { 
+            grid-template-columns: 1fr !important; 
+            gap: 1.25rem !important; 
+          }
+          .section-dark, .section-dark-alt { 
+            padding: 3rem 1.25rem !important; 
+          }
+          .section-title-light { 
+            font-size: 1.45rem !important; 
+            line-height: 1.25 !important;
+          }
+          .section-descLight { 
+            font-size: 0.88rem !important; 
+            line-height: 1.55 !important;
+          }
+          .sectionHeader { 
+            margin-bottom: 1.75rem !important; 
+            text-align: center !important;
+          }
+          .sectionHeader span {
+            text-align: center !important;
+          }
+          .sectionHeader p {
+            max-width: 100% !important;
+          }
+          .gallery-header-flex { 
+            flex-direction: column !important; 
+            align-items: center !important; 
+            text-align: center !important;
+            gap: 1rem !important; 
+            margin-bottom: 2rem !important;
+          }
+          .filterWrapper {
+            width: 100% !important;
+            display: flex !important;
+            justify-content: center !important;
+          }
+          .filter-btn {
+            flex: 1 !important;
+            text-align: center !important;
+          }
         }
       `}</style>
 
       {/* 1. HERO SECTION */}
       <header id="beranda" style={styles.hero} className="hero-section">
-        <div style={styles.heroImageWrapper} className="hero-image-wrapper">
-          <div style={styles.heroCardBadge} className="logo-floating-box hero-card-badge">
-            <img src={flowerLogo} alt="Logo Bunga PSHT" style={styles.logoImage} className="logo-image" />
-          </div>
-        </div>
         <div style={styles.heroContent} className="hero-content">
           <h1 style={styles.heroTitle} className="hero-title-anim hero-title">Persaudaraan Setia Hati Terate</h1>
           <p style={styles.heroDesc} className="hero-desc-anim hero-desc">
@@ -347,6 +446,12 @@ export default function Home() {
             </button>
           </div>
         </div>
+
+        <div style={styles.heroImageWrapper} className="hero-image-wrapper">
+          <div style={styles.heroCardBadge} className="logo-floating-box hero-card-badge">
+            <img src={flowerLogo} alt="Logo Bunga PSHT" style={styles.logoImage} className="logo-image" />
+          </div>
+        </div>
       </header>
 
       {/* 2. TENTANG ORGANISASI (NILAI LUHUR) */}
@@ -396,7 +501,7 @@ export default function Home() {
                 Momen kebersamaan, latihan fisik, ujian kenaikan tingkat, hingga kejuaraan pencak silat.
               </p>
             </div>
-            <div style={styles.filterWrapper}>
+            <div style={styles.filterWrapper} className="filterWrapper">
               <button
                 onClick={() => setActiveFilter('photo')}
                 style={{ ...styles.filterBtn, ...(activeFilter === 'photo' ? styles.filterBtnActive : {}) }}
@@ -499,8 +604,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Pastikan komponen Footer utama (di App.jsx) memiliki id="footer" agar tombol navigasi tetap berfungsi lancar */}
 
       {/* MODAL DETAIL KARTU */}
       {selectedCard && (
