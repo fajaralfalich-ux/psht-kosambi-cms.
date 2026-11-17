@@ -43,15 +43,16 @@ export default function Navbar() {
               animation-play-state: paused;
             }
             .menu-item-card {
-              transition: all 0.25s ease-in-out;
-              border: 1px solid transparent;
-              border-radius: 6px;
+              transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+              border: 1px solid #1e3a5f;
+              border-radius: 10px;
+              background: #0e1d32;
             }
             .menu-item-card:hover {
               transform: translateY(-2px);
-              border-color: #94a3b8 !important;
-              background-color: #ffffff !important;
-              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+              border-color: rgba(249, 115, 22, 0.6) !important;
+              background-color: #10223b !important;
+              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             }
 
             /* Responsive Media Queries untuk Navbar */
@@ -137,7 +138,7 @@ export default function Navbar() {
             style={styles.hamburgerBtn}
             aria-label="Buka Menu"
           >
-            <Menu size={24} color="#0f172a" />
+            <Menu size={24} color="#ffffff" />
           </button>
         </div>
       </nav>
@@ -157,7 +158,7 @@ export default function Navbar() {
                 </div>
               </div>
               <button onClick={() => setIsMobileMenuOpen(false)} style={styles.closeIconButton}>
-                <X size={20} color="#334155" />
+                <X size={20} color="#94a3b8" />
               </button>
             </div>
 
@@ -190,7 +191,8 @@ const styles = {
     boxSizing: 'border-box',
     display: 'flex',
     justifyContent: 'center',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    borderBottom: '1px solid #1e3a5f'
   },
   topBarInner: {
     width: '100%',
@@ -212,16 +214,16 @@ const styles = {
     whiteSpace: 'nowrap'
   },
   topDot: {
-    color: '#c2410c',
+    color: '#fb923c',
     fontSize: '0.8rem',
     margin: '0 1rem',
     display: 'inline-block'
   },
   navbar: {
-    backgroundColor: 'rgba(255, 255, 255, 0.96)',
+    backgroundColor: '#070f1e',
     backdropFilter: 'blur(10px)',
-    boxShadow: '0 2px 15px rgba(0, 0, 0, 0.04)',
-    borderBottom: '1px solid #e2e8f0',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
+    borderBottom: '1px solid #1e3a5f',
     position: 'sticky',
     top: 0,
     zIndex: 1000,
@@ -232,8 +234,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '0.5rem 1.5rem',
-    maxWidth: '1500px',
+    padding: '0.75rem 2rem',
+    maxWidth: '1400px',
     margin: '0 auto',
     width: '100%',
     boxSizing: 'border-box'
@@ -241,55 +243,55 @@ const styles = {
   brand: {
     display: 'flex',
     alignItems: 'center',
-    gap: '0.6rem',
+    gap: '0.75rem',
     flexShrink: 0
   },
   logoWrapper: {
-    width: '34px',
-    height: '34px',
+    width: '38px',
+    height: '38px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f8fafc',
-    border: '1px solid #e2e8f0',
-    borderRadius: '8px',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
+    backgroundColor: '#10223b',
+    border: '1px solid #1e3a5f',
+    borderRadius: '10px',
+    boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
   },
   brandLogoImg: {
-    width: '22px',
-    height: '22px',
+    width: '24px',
+    height: '24px',
     objectFit: 'contain'
   },
   brandText: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '0px'
+    gap: '1px'
   },
   brandTitle: {
-    fontSize: '0.88rem',
-    color: '#0f172a',
+    fontSize: '0.95rem',
+    color: '#ffffff',
     fontWeight: '800',
     margin: 0,
     letterSpacing: '-0.2px'
   },
   brandSub: {
-    fontSize: '0.62rem',
-    color: '#64748b',
+    fontSize: '0.7rem',
+    color: '#94a3b8',
     margin: 0,
     fontWeight: '600'
   },
   menuWrapper: {
     display: 'flex',
     alignItems: 'center',
-    border: '1px solid #e2e8f0',
-    borderRadius: '10px',
-    padding: '0.2rem',
-    backgroundColor: '#f8fafc',
-    boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.01)'
+    border: '1px solid #1e3a5f',
+    borderRadius: '12px',
+    padding: '0.25rem',
+    backgroundColor: '#0a1528',
+    boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.2)'
   },
   navMenu: {
     display: 'flex',
-    gap: '0.1rem',
+    gap: '0.25rem',
     alignItems: 'center',
     listStyle: 'none',
     margin: 0,
@@ -297,30 +299,31 @@ const styles = {
   },
   navLink: {
     textDecoration: 'none',
-    color: '#334155',
-    fontSize: '0.75rem',
+    color: '#94a3b8',
+    fontSize: '0.8rem',
     fontWeight: '600',
-    padding: '0.35rem 0.6rem',
-    borderRadius: '6px',
+    padding: '0.45rem 0.85rem',
+    borderRadius: '8px',
     display: 'block',
     whiteSpace: 'nowrap',
     transition: 'color 0.2s ease'
   },
   activeCardWrapper: {
-    backgroundColor: '#ffffff',
-    border: '1px solid #cbd5e1',
-    borderRadius: '6px',
-    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.05)'
+    backgroundColor: '#10223b',
+    border: '1px solid #fb923c',
+    borderRadius: '8px',
+    boxShadow: '0 4px 12px rgba(249, 115, 22, 0.25)'
   },
   activeLink: {
-    color: '#c2410c'
+    color: '#ffffff',
+    fontWeight: '700'
   },
   hamburgerBtn: {
     display: 'none',
-    backgroundColor: '#f8fafc',
-    border: '1px solid #e2e8f0',
+    backgroundColor: '#10223b',
+    border: '1px solid #1e3a5f',
     padding: '0.5rem',
-    borderRadius: '8px',
+    borderRadius: '10px',
     cursor: 'pointer',
     alignItems: 'center',
     justifyContent: 'center'
@@ -328,20 +331,21 @@ const styles = {
   mobileDrawerOverlay: {
     position: 'fixed',
     inset: 0,
-    backgroundColor: 'rgba(15, 23, 42, 0.6)',
-    backdropFilter: 'blur(4px)',
+    backgroundColor: 'rgba(7, 15, 30, 0.75)',
+    backdropFilter: 'blur(6px)',
     zIndex: 2000,
     display: 'flex',
     justifyContent: 'flex-end'
   },
   mobileDrawerContent: {
-    width: '280px',
+    width: '300px',
     height: '100%',
-    backgroundColor: '#ffffff',
-    boxShadow: '-10px 0 30px rgba(0,0,0,0.1)',
+    backgroundColor: '#070f1e',
+    borderLeft: '1px solid #1e3a5f',
+    boxShadow: '-10px 0 30px rgba(0,0,0,0.5)',
     display: 'flex',
     flexDirection: 'column',
-    padding: '1.25rem',
+    padding: '1.5rem',
     boxSizing: 'border-box'
   },
   mobileDrawerHeader: {
@@ -350,13 +354,13 @@ const styles = {
     alignItems: 'center',
     marginBottom: '1.5rem',
     paddingBottom: '1rem',
-    borderBottom: '1px solid #e2e8f0'
+    borderBottom: '1px solid #1e3a5f'
   },
   closeIconButton: {
-    backgroundColor: '#f8fafc',
-    border: '1px solid #e2e8f0',
-    width: '34px',
-    height: '34px',
+    backgroundColor: '#10223b',
+    border: '1px solid #1e3a5f',
+    width: '36px',
+    height: '36px',
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
@@ -366,25 +370,26 @@ const styles = {
   mobileDrawerLinks: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.5rem',
+    gap: '0.75rem',
     flex: 1,
     overflowY: 'auto'
   },
   mobileLink: {
     textDecoration: 'none',
-    color: '#334155',
-    fontSize: '0.9rem',
+    color: '#94a3b8',
+    fontSize: '0.95rem',
     fontWeight: '600',
-    padding: '0.75rem 1rem',
-    borderRadius: '8px',
-    backgroundColor: '#f8fafc',
-    border: '1px solid #e2e8f0',
+    padding: '0.85rem 1rem',
+    borderRadius: '10px',
+    backgroundColor: '#0e1d32',
+    border: '1px solid #1e3a5f',
     transition: 'all 0.2s ease'
   },
   mobileLinkActive: {
-    backgroundColor: '#fff7ed',
-    color: '#c2410c',
-    borderColor: '#fed7aa',
-    fontWeight: '700'
+    backgroundColor: '#10223b',
+    color: '#ffffff',
+    borderColor: '#fb923c',
+    fontWeight: '700',
+    boxShadow: '0 4px 12px rgba(249, 115, 22, 0.2)'
   }
 };
