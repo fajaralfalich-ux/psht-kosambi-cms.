@@ -6,13 +6,29 @@ export default function Footer() {
       <div style={styles.container}>
         {/* Informasi Dua Kolom (Kiri & Kanan) Tanpa Kotak */}
         <div style={styles.twoColumnContainer} className="footer-two-col">
+          
+          {/* Kolom Kiri: Lokasi & Maps */}
           <div style={styles.columnBox}>
             <h4 style={styles.columnTitle}>📍 Lokasi Ranting & Pusat Latihan</h4>
             <p style={styles.columnText}>
               Area Kantor Kecamatan Kosambi & Jl. Raya Salembaran, Kosambi, Kabupaten Tangerang, Banten
             </p>
+            {/* Embed Google Maps */}
+            <div style={styles.mapWrapper}>
+              <iframe
+                title="Peta Lokasi Kantor Kecamatan Kosambi"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.8661858509375!2d106.67895117498993!3d-6.095055993897914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a0256860d4b8d%3A0xf6a72e81d72cfc8!2sKantor%20Kecamatan%20Kosambi!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+                width="100%"
+                height="160"
+                style={{ border: 0, borderRadius: '10px' }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
 
+          {/* Kolom Kanan: Kontak & Email */}
           <div style={styles.columnBox}>
             <h4 style={styles.columnTitle}>📞 Kontak & Layanan Informasi</h4>
             <p style={styles.columnText}>
@@ -22,6 +38,7 @@ export default function Footer() {
               psht.kosambi1922@gmail.com
             </p>
           </div>
+
         </div>
 
         <div style={styles.divider}></div>
@@ -84,7 +101,14 @@ const styles = {
     fontSize: '0.88rem',
     lineHeight: '1.6',
     color: '#cbd5e1',
-    margin: 0
+    marginBottom: '1rem'
+  },
+  mapWrapper: {
+    width: '100%',
+    borderRadius: '10px',
+    overflow: 'hidden',
+    border: '1px solid #1e3a5f',
+    marginTop: '0.5rem'
   },
   divider: {
     width: '100%',
