@@ -5,6 +5,7 @@ export default function Footer() {
   return (
     <footer id="footer" style={styles.footer}>
       <div style={styles.container}>
+        {/* Logo & Identitas Organisasi */}
         <div style={styles.brandBox}>
           <div style={styles.logoWrapper}>
             <img src={flowerLogo} alt="Logo PSHT" style={styles.logo} />
@@ -13,21 +14,41 @@ export default function Footer() {
           <p style={styles.brandSubtitle}>Cabang Kota Tangerang • Pusat Madiun</p>
         </div>
 
-        <div style={styles.contactInfo}>
-          <p style={styles.contactText}>
-            <strong>Lokasi Ranting & Pusat Latihan:</strong><br />
-            Area Kantor Kecamatan Kosambi & Jl. Raya Salembaran, Kosambi, Kabupaten Tangerang, Banten[cite: 5]<br /><br />
-            <strong>Kontak & Layanan Informasi:</strong><br />
-            Hp. 081281746139, 081280537777, 081218036603 &nbsp;|&nbsp; Email : psht.kosambi1922@gmail.com[cite: 4]
-          </p>
+        {/* Informasi Dua Kolom (Kiri & Kanan) */}
+        <div style={styles.twoColumnContainer} className="footer-two-col">
+          <div style={styles.columnBox}>
+            <h4 style={styles.columnTitle}>📍 Lokasi Ranting & Pusat Latihan</h4>
+            <p style={styles.columnText}>
+              Area Kantor Kecamatan Kosambi & Jl. Raya Salembaran, Kosambi, Kabupaten Tangerang, Banten
+            </p>
+          </div>
+
+          <div style={styles.columnBox}>
+            <h4 style={styles.columnTitle}>📞 Kontak & Layanan Informasi</h4>
+            <p style={styles.columnText}>
+              <strong>Hp / WhatsApp:</strong><br />
+              081281746139, 081280537777, 081218036603<br /><br />
+              <strong>Email Resmi:</strong><br />
+              psht.kosambi1922@gmail.com
+            </p>
+          </div>
         </div>
 
         <div style={styles.divider}></div>
 
         <div style={styles.copyright}>
-          <p>© 2026 PSHT Ranting Kosambi · Cabang Kota Tangerang. Hak Cipta Dilindungi[cite: 3].</p>
+          <p>© 2026 PSHT Ranting Kosambi · Cabang Kota Tangerang. Hak Cipta Dilindungi.</p>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .footer-two-col {
+            flex-direction: column !important;
+            gap: 1.5rem !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 }
@@ -43,7 +64,7 @@ const styles = {
     scrollMarginTop: '70px'
   },
   container: {
-    maxWidth: '1200px',
+    maxWidth: '1100px',
     margin: '0 auto',
     display: 'flex',
     flexDirection: 'column',
@@ -54,7 +75,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginBottom: '1.5rem'
+    marginBottom: '2.5rem'
   },
   logoWrapper: {
     width: '64px',
@@ -85,14 +106,32 @@ const styles = {
     fontWeight: '700',
     letterSpacing: '0.5px'
   },
-  contactInfo: {
-    marginBottom: '2rem',
-    maxWidth: '750px'
+  twoColumnContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: '2rem',
+    width: '100%',
+    marginBottom: '2.5rem',
+    textAlign: 'left'
   },
-  contactText: {
-    fontSize: '0.9rem',
-    lineHeight: '1.7',
-    color: '#cbd5e1'
+  columnBox: {
+    flex: 1,
+    backgroundColor: '#10223b',
+    padding: '1.5rem',
+    borderRadius: '14px',
+    border: '1px solid #1e3a5f'
+  },
+  columnTitle: {
+    color: '#ffffff',
+    fontSize: '0.95rem',
+    fontWeight: '700',
+    marginBottom: '0.75rem'
+  },
+  columnText: {
+    fontSize: '0.88rem',
+    lineHeight: '1.6',
+    color: '#cbd5e1',
+    margin: 0
   },
   divider: {
     width: '100%',
