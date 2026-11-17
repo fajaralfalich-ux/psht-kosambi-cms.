@@ -29,7 +29,7 @@ export default function Footer() {
           </div>
 
           {/* Kolom Kanan: Kontak & Email (Digeser ke kanan dengan mengurangi/menghapus margin negatif) */}
-          <div style={{ ...styles.columnBox, marginLeft: '0rem' }} className="footer-right-col">
+          <div style={{ ...styles.columnBox, marginLeft: '00rem' }} className="footer-right-col">
             <h4 style={styles.columnTitle}>📞 Kontak & Layanan Informasi</h4>
             <p style={styles.columnText}>
               <strong>Hp / WhatsApp:</strong><br />
