@@ -500,12 +500,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. FOOTER */}
-      <footer id="footer" style={styles.footer}>
-        <p style={styles.footerText}>
-          © 2026 PSHT Ranting Kosambi · Cabang Kota Tangerang. Hak Cipta Dilindungi.
-        </p>
-      </footer>
+      {/* Pastikan komponen Footer utama (di App.jsx) memiliki id="footer" agar tombol navigasi tetap berfungsi lancar */}
 
       {/* MODAL DETAIL KARTU */}
       {selectedCard && (
@@ -757,19 +752,6 @@ const styles = {
   },
   chevronWrapper: { backgroundColor: '#0f2744', padding: '6px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' },
   accordionBodyDark: { padding: '0 1.5rem 1.25rem 1.5rem', color: '#94a3b8', fontSize: '0.95rem', lineHeight: '1.6' },
-  footer: {
-    backgroundColor: '#06101e',
-    borderTop: '1px solid #1e3a5f',
-    padding: '2.25rem 1rem',
-    textAlign: 'center',
-    width: '100%',
-    boxSizing: 'border-box'
-  },
-  footerText: {
-    color: '#94a3b8',
-    fontSize: '0.85rem',
-    margin: 0
-  },
   modalOverlay: {
     position: 'fixed',
     top: 0,
