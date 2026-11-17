@@ -9,7 +9,7 @@ export default function Footer() {
           
           {/* Kolom Kiri: Lokasi & Maps Presisi Kantor Kecamatan */}
           <div style={styles.columnBox}>
-            <h4 style={styles.columnTitle}>📍 Lokasi Ranting & Pusat Latihan</h4>
+            <h4 style={styles.columnTitle}>📍 Location</h4>
             <p style={styles.columnText}>
               Jl. Raya Salembaran No.38, Salembaran, Kec. Kosambi, Kabupaten Tangerang, Banten 15214
             </p>
@@ -33,7 +33,7 @@ export default function Footer() {
             <h4 style={styles.columnTitle}>📞 Kontak & Layanan Informasi</h4>
             <p style={styles.columnText}>
               <strong>Hp / WhatsApp:</strong><br />
-              081281746139, 081280537777, 081218036603<br /><br />
+              081281746139, 08128053777, 081218036603<br /><br />
               <strong>Email Resmi:</strong><br />
               psht.kosambi1922@gmail.com
             </p>
