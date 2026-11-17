@@ -74,7 +74,7 @@ const styles = {
     scrollMarginTop: '70px'
   },
   container: {
-    maxWidth: '1200px',
+    maxWidth: '1300px',
     margin: '0 auto',
     display: 'flex',
     flexDirection: 'column',
