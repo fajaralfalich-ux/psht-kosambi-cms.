@@ -1,20 +1,10 @@
 import React from 'react';
-import flowerLogo from '/psht1.png';
 
 export default function Footer() {
   return (
     <footer id="footer" style={styles.footer}>
       <div style={styles.container}>
-        {/* Logo & Identitas Organisasi */}
-        <div style={styles.brandBox}>
-          <div style={styles.logoWrapper}>
-            <img src={flowerLogo} alt="Logo PSHT" style={styles.logo} />
-          </div>
-          <h3 style={styles.brandTitle}>PSHT Ranting Kosambi</h3>
-          <p style={styles.brandSubtitle}>Cabang Kota Tangerang • Pusat Madiun</p>
-        </div>
-
-        {/* Informasi Dua Kolom (Kiri & Kanan) */}
+        {/* Informasi Dua Kolom (Kiri & Kanan) Tanpa Kotak */}
         <div style={styles.twoColumnContainer} className="footer-two-col">
           <div style={styles.columnBox}>
             <h4 style={styles.columnTitle}>📍 Lokasi Ranting & Pusat Latihan</h4>
@@ -57,7 +47,7 @@ const styles = {
   footer: {
     backgroundColor: '#070f1e',
     color: '#94a3b8',
-    padding: '4rem 2rem 2rem 2rem',
+    padding: '3rem 2rem 2rem 2rem',
     borderTop: '1px solid #1e3a5f',
     width: '100%',
     boxSizing: 'border-box',
@@ -71,55 +61,18 @@ const styles = {
     alignItems: 'center',
     textAlign: 'center'
   },
-  brandBox: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginBottom: '2.5rem'
-  },
-  logoWrapper: {
-    width: '64px',
-    height: '64px',
-    backgroundColor: '#162f4f',
-    borderRadius: '16px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: '1rem',
-    border: '1px solid #1e3a5f',
-    boxShadow: '0 8px 20px rgba(0,0,0,0.3)'
-  },
-  logo: {
-    width: '40px',
-    height: '40px',
-    objectFit: 'contain'
-  },
-  brandTitle: {
-    color: '#ffffff',
-    fontSize: '1.25rem',
-    fontWeight: '800',
-    marginBottom: '0.25rem'
-  },
-  brandSubtitle: {
-    color: '#fb923c',
-    fontSize: '0.85rem',
-    fontWeight: '700',
-    letterSpacing: '0.5px'
-  },
   twoColumnContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    gap: '2rem',
+    gap: '3rem',
     width: '100%',
     marginBottom: '2.5rem',
     textAlign: 'left'
   },
   columnBox: {
     flex: 1,
-    backgroundColor: '#10223b',
-    padding: '1.5rem',
-    borderRadius: '14px',
-    border: '1px solid #1e3a5f'
+    backgroundColor: 'transparent',
+    padding: '0.5rem'
   },
   columnTitle: {
     color: '#ffffff',
