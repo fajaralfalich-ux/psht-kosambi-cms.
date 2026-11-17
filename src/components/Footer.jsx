@@ -108,7 +108,7 @@ const styles = {
   },
   mapWrapper: {
     width: '100%',
-    maxWidth: '300px', // Diperkecil lagi lebarnya agar lebih proporsional
+    maxWidth: '250px', // Diperkecil lagi lebarnya agar lebih proporsional
     borderRadius: '8px',
     overflow: 'hidden',
     border: '1px solid #1e3a5f',
