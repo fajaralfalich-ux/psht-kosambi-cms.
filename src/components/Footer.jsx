@@ -29,7 +29,7 @@ export default function Footer() {
           </div>
 
           {/* Kolom Kanan: Kontak & Email */}
-          <div style={styles.columnBox}>
+          <div style={{ ...styles.columnBox, paddingLeft: '2rem' }} className="footer-right-col">
             <h4 style={styles.columnTitle}>📞 Kontak & Layanan Informasi</h4>
             <p style={styles.columnText}>
               <strong>Hp / WhatsApp:</strong><br />
@@ -54,6 +54,9 @@ export default function Footer() {
             flex-direction: column !important;
             gap: 1.5rem !important;
           }
+          .footer-right-col {
+            padding-left: 0 !important;
+          }
         }
       `}</style>
     </footer>
@@ -64,32 +67,32 @@ const styles = {
   footer: {
     backgroundColor: '#070f1e',
     color: '#94a3b8',
-    padding: '3rem 2rem 2rem 2rem',
+    padding: '3rem 3rem 2rem 3rem',
     borderTop: '1px solid #1e3a5f',
     width: '100%',
     boxSizing: 'border-box',
     scrollMarginTop: '70px'
   },
   container: {
-    maxWidth: '1100px',
+    maxWidth: '1300px',
     margin: '0 auto',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center'
+    alignItems: 'flex-start',
+    textAlign: 'left'
   },
   twoColumnContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     gap: '3rem',
     width: '100%',
     marginBottom: '2.5rem',
     textAlign: 'left'
   },
   columnBox: {
-    flex: 1,
+    flex: '1',
     backgroundColor: 'transparent',
-    padding: '0.5rem'
+    padding: '0'
   },
   columnTitle: {
     color: '#ffffff',
@@ -118,6 +121,8 @@ const styles = {
   },
   copyright: {
     fontSize: '0.82rem',
-    color: '#64748b'
+    color: '#64748b',
+    textAlign: 'left',
+    width: '100%'
   }
 };
