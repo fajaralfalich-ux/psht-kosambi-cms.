@@ -12,7 +12,8 @@ import {
   Eye,
   ArrowRight,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  MessageCircle
 } from 'lucide-react';
 import flowerLogo from '/psht1.png';
 
@@ -247,7 +248,6 @@ export default function Home() {
         .filter-btn:hover { background-color: #1e3a5f; color: #ffffff; }
         .modal-enter { animation: fadeInScale 0.2s ease forwards; }
         
-        /* OPTIMASI TAMPILAN MOBILE / HP AGAR RAPI & COMPACT (TIDAK MEMANJANG KE BAWAH) */
         @media (max-width: 768px) {
           .hero-section { 
             padding: 2rem 1rem !important; 
@@ -283,14 +283,13 @@ export default function Home() {
           }
           .btn-group { 
             justify-content: center !important; 
-            gap: 0.6rem !important; 
             width: 100% !important;
           }
-          .btnPrimary, .btnSecondary { 
-            padding: 0.65rem 1rem !important; 
-            font-size: 0.85rem !important; 
-            flex: 1 !important; 
-            max-width: 140px !important;
+          .btnWhatsApp { 
+            padding: 0.75rem 1.25rem !important; 
+            font-size: 0.9rem !important; 
+            width: 100% !important; 
+            max-width: 280px !important;
             text-align: center !important; 
             justify-content: center !important; 
           }
@@ -312,7 +311,6 @@ export default function Home() {
             height: 90px !important; 
           }
           
-          /* KARTU NILAI LUHUR: DIBUAT 2 KOLOM (GRID 2x2) DI HP AGAR TIDAK MEMANJANG KE BAWAH */
           .cards-grid { 
             grid-template-columns: repeat(2, 1fr) !important; 
             gap: 0.75rem !important; 
@@ -349,7 +347,6 @@ export default function Home() {
             font-size: 0.72rem !important; 
           }
           
-          /* GALERI KEGIATAN: DIBUAT GRID 2 KOLOM KECIL ATAU KOMPAK DI HP */
           .gallery-grid-4 { 
             grid-template-columns: repeat(2, 1fr) !important; 
             gap: 0.75rem !important; 
@@ -374,7 +371,7 @@ export default function Home() {
             overflow: hidden !important;
           }
           .galleryDesc {
-            display: none !important; /* Disembunyikan di HP agar kartu tetap rapi dan ringkas */
+            display: none !important;
           }
           .mediaTypeTag {
             top: 8px !important;
@@ -478,13 +475,18 @@ export default function Home() {
             </button>
           </div>
 
+          {/* TOMBOL WHATSAPP PENGGANTI DAFTAR & JADWAL */}
           <div style={styles.btnGroup} className="hero-btns-anim btn-group">
-            <button onClick={() => navigate('/pendaftaran')} style={styles.btnPrimary} className="btn-hover-effect btnPrimary">
-              Daftar <ArrowRight size={16} />
-            </button>
-            <button onClick={() => navigate('/kegiatan')} style={styles.btnSecondary} className="btn-hover-effect btnSecondary">
-              Jadwal
-            </button>
+            <a
+              href="https://wa.me/6281234567890?text=Halo%20Admin%20PSHT%20Ranting%20Kosambi,%20saya%20ingin%20bertanya%20mengenai%20pendaftaran%20dan%20informasi%20latihan."
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styles.btnWhatsApp}
+              className="btn-hover-effect btnWhatsApp"
+            >
+              <MessageCircle size={18} />
+              <span>Hubungi Admin WhatsApp</span>
+            </a>
           </div>
         </div>
 
@@ -759,30 +761,18 @@ const styles = {
   heroBadges: { display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '2.25rem' },
   badge: { padding: '0.55rem 1.15rem', borderRadius: '30px', fontSize: '0.85rem', fontWeight: '700' },
   btnGroup: { display: 'flex', gap: '1rem', flexWrap: 'wrap' },
-  btnPrimary: {
-    backgroundColor: '#c2410c',
+  btnWhatsApp: {
+    backgroundColor: '#25D366',
     color: 'white',
-    padding: '0.85rem 1.75rem',
+    padding: '0.85rem 2rem',
     borderRadius: '10px',
-    fontWeight: '600',
-    border: 'none',
-    cursor: 'pointer',
+    fontWeight: '700',
+    textDecoration: 'none',
     display: 'inline-flex',
     alignItems: 'center',
-    gap: '0.5rem',
+    gap: '0.6rem',
     fontSize: '0.95rem',
-    boxShadow: '0 8px 20px rgba(194, 65, 12, 0.3)'
-  },
-  btnSecondary: {
-    backgroundColor: '#162f4f',
-    color: '#ffffff',
-    border: '1px solid #1e3a5f',
-    padding: '0.85rem 1.75rem',
-    borderRadius: '10px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    display: 'inline-block',
-    fontSize: '0.95rem'
+    boxShadow: '0 8px 20px rgba(37, 211, 102, 0.3)'
   },
   heroImageWrapper: { display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 },
   heroCardBadge: {
