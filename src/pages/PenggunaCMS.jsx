@@ -23,12 +23,10 @@ import {
   Menu,
   LogOut
 } from 'lucide-react';
-
 export default function PenggunaCMS() {
-  const [activeMenu, setActiveMenu] = useState('Manajemen Pengguna');
+  const [activeMenu, setActiveMenu] = useState('Log Audit Aktivitas');
   const [darkMode, setDarkMode] = useState(true);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-
   // Perbaikan fungsi Logout: Mengarah langsung ke /admin/login
   const handleLogout = () => {
     if (window.confirm('Apakah Anda yakin ingin keluar dari sistem (Logout)?')) {
@@ -38,7 +36,6 @@ export default function PenggunaCMS() {
       window.location.href = '/admin/login'; 
     }
   };
-
   // 1. DATA USERS (MANAJEMEN PENGGUNA)
   const [users, setUsers] = useState(() => {
     const saved = localStorage.getItem('psht_cms_users');
@@ -55,7 +52,6 @@ export default function PenggunaCMS() {
       }
     ];
   });
-
   // 2. PROFIL ADMIN AKTIF
   const [adminProfile, setAdminProfile] = useState(() => {
     const saved = localStorage.getItem('psht_cms_admin_profile');
@@ -69,7 +65,6 @@ export default function PenggunaCMS() {
       bio: 'Administrator Utama Website Resmi PSHT Ranting Kosambi.'
     };
   });
-
   // 3. DATA SISWA
   const [students, setStudents] = useState(() => {
     const saved = localStorage.getItem('psht_siswa_list');
@@ -88,7 +83,6 @@ export default function PenggunaCMS() {
       }
     ];
   });
-
   // 4. DATA WARGA
   const [citizens, setCitizens] = useState(() => {
     const saved = localStorage.getItem('psht_cms_citizens');
@@ -96,7 +90,6 @@ export default function PenggunaCMS() {
       { id: 'WARGA-2026-001', name: 'Budi Santoso', tingkatWarga: 'Warga Tingkat I', rayon: 'Rayon Kosambi Timur', tahunPengesahan: '2023', noHp: '081311112222' }
     ];
   });
-
   // 5. JADWAL & KEGIATAN
   const [schedules, setSchedules] = useState(() => {
     const saved = localStorage.getItem('psht_cms_schedules');
@@ -104,7 +97,6 @@ export default function PenggunaCMS() {
       { id: 1, judul: 'Latihan Rutin Mingguan', hari: 'Rabu & Sabtu', waktu: '19:30 - 22:00 WIB', lokasi: 'Lapangan Kecamatan Kosambi', pembina: 'Mas Fajar & Pelatih Ranting' }
     ];
   });
-
   // 6. LOG AUDIT AKTIVITAS
   const [auditLogs, setAuditLogs] = useState(() => {
     const saved = localStorage.getItem('psht_cms_logs');
@@ -112,7 +104,6 @@ export default function PenggunaCMS() {
       { id: 1, waktu: '11 Nov 2026, 15:10', aktor: 'Fajar Alfalich', aksi: 'Login Sistem', detail: 'Berhasil masuk ke CMS Ranting Kosambi' }
     ];
   });
-
   // 7. PENGATURAN WEB
   const [webSettings, setWebSettings] = useState(() => {
     const saved = localStorage.getItem('psht_cms_settings');
@@ -124,7 +115,6 @@ export default function PenggunaCMS() {
       pendaftaranBuka: true
     };
   });
-
   // Sync LocalStorage otomatis
   useEffect(() => { localStorage.setItem('psht_cms_users', JSON.stringify(users)); }, [users]);
   useEffect(() => { localStorage.setItem('psht_cms_admin_profile', JSON.stringify(adminProfile)); }, [adminProfile]);
@@ -133,7 +123,6 @@ export default function PenggunaCMS() {
   useEffect(() => { localStorage.setItem('psht_cms_schedules', JSON.stringify(schedules)); }, [schedules]);
   useEffect(() => { localStorage.setItem('psht_cms_logs', JSON.stringify(auditLogs)); }, [auditLogs]);
   useEffect(() => { localStorage.setItem('psht_cms_settings', JSON.stringify(webSettings)); }, [webSettings]);
-
   useEffect(() => {
     const handleStorageChange = () => {
       const updatedStudents = localStorage.getItem('psht_siswa_list');
@@ -144,12 +133,10 @@ export default function PenggunaCMS() {
     window.addEventListener('storage', handleStorageChange);
     return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
-
   const addLog = (aksi, detail) => {
     const now = new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
     setAuditLogs(prev => [{ id: Date.now(), waktu: now, aktor: adminProfile.name, aksi, detail }, ...prev]);
   };
-
   const [searchTerm, setSearchTerm] = useState('');
   const [filterRole, setFilterRole] = useState('Semua role');
   const [filterStatus, setFilterStatus] = useState('Semua status');
@@ -157,33 +144,28 @@ export default function PenggunaCMS() {
   const [modalType, setModalType] = useState('add');
   const [selectedUser, setSelectedUser] = useState(null);
   const [formData, setFormData] = useState({});
-
   const handleOpenAdd = () => {
     setModalType('add');
     setFormData({ name: '', email: '', role: 'Admin Ranting', jabatan: '', status: 'Aktif' });
     setIsModalOpen(true);
   };
-
   const handleOpenEdit = (user) => {
     setModalType('edit');
     setSelectedUser(user);
     setFormData({ name: user.name, email: user.email, role: user.role, jabatan: user.jabatan, status: user.status });
     setIsModalOpen(true);
   };
-
   const handleOpenView = (user) => {
     setModalType('view');
     setSelectedUser(user);
     setIsModalOpen(true);
   };
-
   const handleOpenPassword = (user) => {
     setModalType('password');
     setSelectedUser(user);
     setFormData({ password: '' });
     setIsModalOpen(true);
   };
-
   const handleDelete = (id, isMain) => {
     if (isMain) {
       alert('Akun Super Admin Utama tidak dapat dihapus!');
@@ -194,7 +176,6 @@ export default function PenggunaCMS() {
       addLog('Hapus Pengguna', `Menghapus ID ${id}`);
     }
   };
-
   const handleAddStudentSubmit = (e) => {
     e.preventDefault();
     const newStudent = {
@@ -216,7 +197,6 @@ export default function PenggunaCMS() {
     setIsModalOpen(false);
     setFormData({});
   };
-
   const handleAddCitizenSubmit = (e) => {
     e.preventDefault();
     const nextNum = String(citizens.length + 1).padStart(3, '0');
@@ -233,7 +213,6 @@ export default function PenggunaCMS() {
     setIsModalOpen(false);
     setFormData({});
   };
-
   const exportCSV = (type) => {
     if (type === 'students') {
       const headers = ['Nama Lengkap', 'NIK', 'No HP', 'Tinggi Badan', 'Berat Badan', 'Rayon', 'Alamat', 'Tingkatan', 'Status', 'Tanggal Daftar'];
@@ -245,7 +224,6 @@ export default function PenggunaCMS() {
       downloadCSV(headers, rows, 'Data_Warga_PSHT');
     }
   };
-
   const downloadCSV = (headers, rows, filename) => {
     const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
     const encodedUri = encodeURI(csvContent);
@@ -257,19 +235,16 @@ export default function PenggunaCMS() {
     document.body.removeChild(link);
     addLog('Ekspor Dokumen', `Mengunduh data dokumen ${filename}`);
   };
-
   const printDocument = () => {
     addLog('Cetak Dokumen', 'Mencetak laporan dokumen resmi');
     window.print();
   };
-
   const filteredUsers = users.filter(u => {
     const matchSearch = u.name.toLowerCase().includes(searchTerm.toLowerCase()) || u.email.toLowerCase().includes(searchTerm.toLowerCase()) || u.jabatan.toLowerCase().includes(searchTerm.toLowerCase());
     const matchRole = filterRole === 'Semua role' || u.role === filterRole;
     const matchStatus = filterStatus === 'Semua status' || u.status === filterStatus;
     return matchSearch && matchRole && matchStatus;
   });
-
   const bgMain = darkMode 
     ? 'bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-slate-100' 
     : 'bg-gradient-to-br from-slate-50 via-blue-50/40 to-indigo-50/50 text-slate-800';
@@ -277,7 +252,6 @@ export default function PenggunaCMS() {
   const bgCard = darkMode 
     ? 'bg-slate-900/80 backdrop-blur-md border-slate-800/80 shadow-2xl shadow-black/40' 
     : 'bg-white/90 backdrop-blur-md border-slate-200/80 shadow-xl shadow-blue-900/5';
-
   const menuItems = [
     { name: 'Profil Super Admin', icon: <User size={18} /> },
     { name: 'Manajemen Pengguna', icon: <Users size={18} /> },
@@ -287,7 +261,6 @@ export default function PenggunaCMS() {
     { name: 'Log Audit Aktivitas', icon: <Activity size={18} /> },
     { name: 'Pengaturan Web', icon: <Settings size={18} /> },
   ];
-
   return (
     <div className={`flex h-screen ${bgMain} font-sans antialiased overflow-hidden relative`}>
       
@@ -298,7 +271,6 @@ export default function PenggunaCMS() {
           body { background: white !important; color: black !important; }
         }
       `}</style>
-
       {/* SIDEBAR DESKTOP */}
       <aside className="w-64 bg-gradient-to-b from-[#0a1b30] via-[#081324] to-[#040a12] text-slate-300 hidden md:flex flex-col justify-between p-4 no-print flex-shrink-0 shadow-2xl border-r border-slate-800/60">
         <div>
@@ -328,7 +300,6 @@ export default function PenggunaCMS() {
             ))}
           </nav>
         </div>
-
         <div className="pt-4 border-t border-slate-800">
           <button 
             onClick={handleLogout}
@@ -339,7 +310,6 @@ export default function PenggunaCMS() {
           </button>
         </div>
       </aside>
-
       {/* SIDEBAR MOBILE OVERLAY */}
       {isMobileSidebarOpen && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex md:hidden animate-fade-in" onClick={() => setIsMobileSidebarOpen(false)}>
@@ -385,7 +355,6 @@ export default function PenggunaCMS() {
           </div>
         </div>
       )}
-
       {/* KONTEN UTAMA */}
       <div className="flex-1 flex flex-col overflow-hidden w-full">
         
@@ -417,7 +386,6 @@ export default function PenggunaCMS() {
               <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-orange-600 to-amber-600 text-white font-bold flex items-center justify-center text-xs md:text-sm shadow-lg shadow-orange-900/30 ring-2 ring-orange-400/30 flex-shrink-0">
                 {adminProfile.name.split(' ').map(n => n[0]).join('')}
               </div>
-
               {/* TOMBOL LOGOUT DI HEADER */}
               <button 
                 onClick={handleLogout} 
@@ -429,7 +397,6 @@ export default function PenggunaCMS() {
             </div>
           </div>
         </header>
-
         {/* AREA KONTEN DINAMIS */}
         <main className="flex-1 overflow-y-auto p-4 md:p-8 w-full">
           
@@ -489,7 +456,6 @@ export default function PenggunaCMS() {
               </div>
             </div>
           )}
-
           {/* MANAJEMEN PENGGUNA */}
           {activeMenu === 'Manajemen Pengguna' && (
             <>
@@ -584,7 +550,6 @@ export default function PenggunaCMS() {
               </div>
             </>
           )}
-
           {/* DATA SISWA */}
           {activeMenu === 'Data Siswa' && (
             <>
@@ -655,7 +620,6 @@ export default function PenggunaCMS() {
               </div>
             </>
           )}
-
           {/* DATA WARGA */}
           {activeMenu === 'Data Warga' && (
             <>
@@ -711,7 +675,6 @@ export default function PenggunaCMS() {
               </div>
             </>
           )}
-
           {/* JADWAL & KEGIATAN */}
           {activeMenu === 'Jadwal & Kegiatan' && (
             <>
@@ -742,29 +705,59 @@ export default function PenggunaCMS() {
               </div>
             </>
           )}
-
           {/* LOG AUDIT AKTIVITAS */}
           {activeMenu === 'Log Audit Aktivitas' && (
             <div className={`${bgCard} rounded-3xl border p-6 shadow-2xl`}>
-              <h2 className={`text-base md:text-lg font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'} mb-1`}>Log Audit Sistem</h2>
-              <p className="text-xs text-slate-400 mb-6">Rekaman aktivitas penting yang dilakukan oleh admin dan pengurus dalam sistem CMS.</p>
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                <div>
+                  <h2 className={`text-base md:text-lg font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'} mb-1`}>Log Audit Sistem</h2>
+                  <p className="text-xs text-slate-400">Rekaman aktivitas penting yang dilakukan oleh admin dan pengurus dalam sistem CMS.</p>
+                </div>
+                {auditLogs.length > 0 && (
+                  <button 
+                    onClick={() => {
+                      if (window.confirm('Apakah Anda yakin ingin menghapus seluruh riwayat log aktivitas?')) {
+                        setAuditLogs([]);
+                        localStorage.removeItem('psht_cms_logs');
+                      }
+                    }} 
+                    className="bg-rose-600/20 hover:bg-rose-600/30 border border-rose-500/30 text-rose-400 text-xs font-bold px-4 py-2.5 rounded-xl flex items-center gap-2 transition cursor-pointer"
+                  >
+                    <Trash2 size={15} /> Bersihkan Semua Log
+                  </button>
+                )}
+              </div>
               <div className="space-y-3">
-                {auditLogs.map((log) => (
-                  <div key={log.id} className="p-4 border border-slate-800/80 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs bg-slate-950/40 shadow-inner">
-                    <div>
-                      <div className="flex items-center gap-2.5 mb-1.5 flex-wrap">
-                        <span className="bg-blue-500/20 text-blue-400 border border-blue-500/30 font-bold px-2.5 py-1 rounded-lg">{log.aksi}</span>
-                        <span className="font-semibold text-slate-300">Oleh: {log.aktor}</span>
+                {auditLogs.length > 0 ? (
+                  auditLogs.map((log) => (
+                    <div key={log.id} className="p-4 border border-slate-800/80 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs bg-slate-950/40 shadow-inner">
+                      <div>
+                        <div className="flex items-center gap-2.5 mb-1.5 flex-wrap">
+                          <span className="bg-blue-500/20 text-blue-400 border border-blue-500/30 font-bold px-2.5 py-1 rounded-lg">{log.aksi}</span>
+                          <span className="font-semibold text-slate-300">Oleh: {log.aktor}</span>
+                        </div>
+                        <p className="text-slate-400">{log.detail}</p>
                       </div>
-                      <p className="text-slate-400">{log.detail}</p>
+                      <div className="flex items-center justify-between sm:justify-end gap-4">
+                        <span className="text-slate-500 font-mono text-[11px]">{log.waktu}</span>
+                        <button 
+                          onClick={() => {
+                            setAuditLogs(auditLogs.filter(item => item.id !== log.id));
+                          }} 
+                          title="Hapus log ini"
+                          className="text-slate-500 hover:text-rose-400 p-1.5 rounded-lg hover:bg-rose-950/40 transition cursor-pointer"
+                        >
+                          <Trash2 size={15} />
+                        </button>
+                      </div>
                     </div>
-                    <div className="text-left sm:text-right text-slate-500 font-mono text-[11px]">{log.waktu}</div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <div className="p-8 text-center text-slate-400 text-xs">Belum ada catatan log aktivitas dalam sistem.</div>
+                )}
               </div>
             </div>
           )}
-
           {/* PENGATURAN WEB */}
           {activeMenu === 'Pengaturan Web' && (
             <div className={`${bgCard} rounded-3xl border p-6 md:p-8 max-w-2xl mx-auto shadow-2xl`}>
@@ -803,7 +796,6 @@ export default function PenggunaCMS() {
           )}
         </main>
       </div>
-
       {/* MODAL GLOBAL */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 p-4 overflow-y-auto animate-fade-in">
@@ -856,7 +848,6 @@ export default function PenggunaCMS() {
                 </form>
               </>
             )}
-
             {modalType === 'edit' && selectedUser && (
               <>
                 <h3 className={`text-base md:text-lg font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'} mb-4`}>Edit Pengguna: {selectedUser.name}</h3>
@@ -904,7 +895,6 @@ export default function PenggunaCMS() {
                 </form>
               </>
             )}
-
             {modalType === 'password' && selectedUser && (
               <>
                 <h3 className={`text-base md:text-lg font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'} mb-4`}>Ganti Kata Sandi: {selectedUser.name}</h3>
@@ -925,7 +915,6 @@ export default function PenggunaCMS() {
                 </form>
               </>
             )}
-
             {modalType === 'addStudent' && (
               <>
                 <h3 className={`text-base md:text-lg font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'} mb-4`}>Tambah Siswa Baru Manual</h3>
@@ -980,7 +969,6 @@ export default function PenggunaCMS() {
                 </form>
               </>
             )}
-
             {modalType === 'addCitizen' && (
               <>
                 <h3 className={`text-base md:text-lg font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'} mb-4`}>Tambah Warga Pengesahan</h3>
@@ -1014,7 +1002,6 @@ export default function PenggunaCMS() {
                 </form>
               </>
             )}
-
             {modalType === 'addSchedule' && (
               <>
                 <h3 className={`text-base md:text-lg font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'} mb-4`}>Tambah Jadwal & Kegiatan</h3>
@@ -1054,7 +1041,6 @@ export default function PenggunaCMS() {
                 </form>
               </>
             )}
-
             {modalType === 'view' && selectedUser && (
               <>
                 <h3 className={`text-base md:text-lg font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'} mb-4`}>Detail Pengguna</h3>
