@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Mail, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -8,6 +8,7 @@ export default function Footer() {
         .footer-container {
           background-color: #070f1e;
           border-top: 1px solid #1e3a5f;
+          width: 100%;
         }
         
         /* PENGATURAN RESPONSIF UNTUK HP */
@@ -24,7 +25,7 @@ export default function Footer() {
 
       <div style={styles.innerWrapper} className="footer-inner">
         
-        {/* GRID KONTEN UTAMA (Kiri & Kanan Melebar) */}
+        {/* GRID KONTEN UTAMA (Dibuat maksimal ke sisi paling kiri dan kanan) */}
         <div style={styles.contentGrid} className="footer-content-grid">
           
           {/* KOLOM KIRI: LOKASI & PETA */}
@@ -99,16 +100,17 @@ const styles = {
     backgroundColor: '#070f1e',
   },
   innerWrapper: {
-    maxWidth: '1200px',
+    /* Mengubah max-width menjadi lebih luas agar mentok ke kanan dan kiri secara proporsional */
+    maxWidth: '100%',
     margin: '0 auto',
     width: '100%',
     boxSizing: 'border-box',
-    padding: '4rem 4rem 2rem 4rem',
+    padding: '4rem 5% 2rem 5%',
   },
   contentGrid: {
     display: 'grid',
     gridTemplateColumns: '1.2fr 1fr',
-    gap: '3.5rem',
+    gap: '4rem',
     width: '100%',
     alignItems: 'start',
   },
@@ -116,6 +118,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     textAlign: 'left',
+    width: '100%',
   },
   headerWithIcon: {
     display: 'flex',
@@ -143,12 +146,11 @@ const styles = {
     color: '#94a3b8',
     fontSize: '0.95rem',
     lineHeight: '1.6',
-    marginBottom: '1.25rem',
     margin: '0 0 1.25rem 0',
   },
   mapWrapper: {
     width: '100%',
-    height: '210px',
+    height: '220px',
     borderRadius: '14px',
     overflow: 'hidden',
     border: '1px solid #1e3a5f',
@@ -167,7 +169,6 @@ const styles = {
     color: '#cbd5e1',
     fontSize: '0.9rem',
     fontWeight: '700',
-    marginBottom: '0.35rem',
     margin: '0 0 0.35rem 0',
   },
   contactValue: {
