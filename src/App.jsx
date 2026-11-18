@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Profil from './pages/Profil';
@@ -12,7 +12,19 @@ import Pendaftaran from './pages/Pendaftaran';
 import Footer from './components/Footer';
 import PenggunaCMS from './pages/PenggunaCMS'; 
 import LoginCMS from './pages/LoginCMS'; 
-import RegisterCMS from './pages/RegisterCMS'; // 1. Import komponen Register
+import RegisterCMS from './pages/RegisterCMS'; 
+
+// 🛡️ Komponen Pelindung Rute: Cek apakah user sudah login
+const ProtectedRoute = ({ children }) => {
+  const isLoggedIn = localStorage.getItem('psht_cms_logged_in');
+  
+  // Jika belum login, langsung lempar ke halaman login
+  if (!isLoggedIn || isLoggedIn !== 'true') {
+    return <Navigate to="/admin/login" replace />;
+  }
+
+  return children;
+};
 
 function AppContent() {
   const location = useLocation();
@@ -38,7 +50,16 @@ function AppContent() {
           {/* Rute Auth Admin */}
           <Route path="/admin/login" element={<LoginCMS />} />
           <Route path="/admin/register" element={<RegisterCMS />} />
-          <Route path="/admin" element={<PenggunaCMS />} />
+          
+          {/* Rute Dashboard Admin yang Diproteksi */}
+          <Route 
+            path="/admin" 
+            element={
+              <ProtectedRoute>
+                <PenggunaCMS />
+              </ProtectedRoute>
+            } 
+          />
         </Routes>
       </div>
 
