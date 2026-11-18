@@ -14,9 +14,9 @@ import PenggunaCMS from './pages/PenggunaCMS';
 import LoginCMS from './pages/LoginCMS'; 
 import RegisterCMS from './pages/RegisterCMS'; 
 
-// 🛡️ Komponen Pelindung Rute: Cek apakah user sudah login
+// 🛡️ Komponen Pelindung Rute: Cek apakah user sudah login di sessionStorage
 const ProtectedRoute = ({ children }) => {
-  const isLoggedIn = localStorage.getItem('psht_cms_logged_in');
+  const isLoggedIn = sessionStorage.getItem('psht_cms_logged_in');
   
   // Jika belum login, langsung lempar ke halaman login
   if (!isLoggedIn || isLoggedIn !== 'true') {
@@ -51,7 +51,7 @@ function AppContent() {
           <Route path="/admin/login" element={<LoginCMS />} />
           <Route path="/admin/register" element={<RegisterCMS />} />
           
-          {/* Rute Dashboard Admin yang Diproteksi */}
+          {/* Rute Dashboard Admin yang Diproteksi Ketat */}
           <Route 
             path="/admin" 
             element={

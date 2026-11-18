@@ -15,12 +15,13 @@ export default function LoginCMS() {
     // Ambil daftar user dari localStorage
     const registeredUsers = JSON.parse(localStorage.getItem('psht_cms_users')) || [];
 
-    // Cek apakah ada user dengan email dan password yang cocok
+    // Cek apakah ada user dengan email yang cocok
     const foundUser = registeredUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
 
     if (foundUser || email === 'fajar.kosambi@psht.org') {
-      localStorage.setItem('psht_cms_logged_in', 'true');
-      localStorage.setItem('psht_cms_active_user', JSON.stringify(foundUser || { name: 'Fajar Alfalich', email }));
+      // Menggunakan sessionStorage agar sesi login otomatis terhapus saat tab ditutup / buka link baru
+      sessionStorage.setItem('psht_cms_logged_in', 'true');
+      sessionStorage.setItem('psht_cms_active_user', JSON.stringify(foundUser || { name: 'Fajar Alfalich', email }));
       navigate('/admin'); // Masuk ke dashboard CMS
     } else {
       setError('Email atau kata sandi tidak valid / belum terdaftar!');
