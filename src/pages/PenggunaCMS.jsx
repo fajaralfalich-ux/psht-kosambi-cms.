@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 
 export default function PenggunaCMS() {
-  // 🛡️ PENGECEKAN OTENTIKASI (Redirect otomatis jika belum login / belum punya akun)
+  // 🛡️ PENGECEKAN OTENTIKASI: Redirect otomatis jika belum login / buka langsung link /admin
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('psht_cms_logged_in');
     if (!isLoggedIn || isLoggedIn !== 'true') {
@@ -403,7 +403,7 @@ export default function PenggunaCMS() {
             </button>
             <div className="overflow-hidden">
               <h1 className={`text-base sm:text-lg md:text-xl font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'} truncate tracking-tight`}>{activeMenu}</h1>
-              <p className="hidden md:block text-xs text-slate-500 font-medium">Pusat kontrol dan pengelolaan data website resmi {webSettings.namaRanting}[cite: 5]</p>
+              <p className="hidden md:block text-xs text-slate-500 font-medium">Pusat kontrol dan pengelolaan data website resmi {webSettings.namaRanting}</p>
             </div>
           </div>
           <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
